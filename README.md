@@ -38,7 +38,7 @@
 - 画面遷移図
 
 ## 開発環境
-- OS：Linux(CentOS)
+- OS：Windows
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
