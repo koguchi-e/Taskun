@@ -1,2 +1,14 @@
-<h1>Tasks#new</h1>
-<p>Find me in app/views/tasks/new.html.erb</p>
+<h1>タスク新規投稿フォーム</h1>
+
+<%= form_with model: @task do |f| %>
+  <h4>タスク内容</h4>
+  <%= f.text_field :title %>
+
+  <h4>キーワード</h4>
+  <%= f.text_field :keyword1 %>
+  <%= f.text_field :keyword2 %>
+  <%= f.text_field :keyword3 %>
+  <p></p>
+
+  <%= f.submit "投稿" %>
+<% end %>

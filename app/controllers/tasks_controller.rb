@@ -1,5 +1,14 @@
 class TasksController < ApplicationController
+  # タスクの新規投稿に関するコントローラ
   def new
+    @task = Task.new
+  end
+
+  def create
+    # 12/21ここわからない・調べる
+    task = Task.new(task_params)
+    task.save
+    redirect_to "/top"
   end
 
   def index
@@ -9,9 +18,6 @@ class TasksController < ApplicationController
   end
 
   def edit
-  end
-
-  def create
   end
 
   def update
