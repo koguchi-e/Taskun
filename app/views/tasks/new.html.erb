@@ -1,6 +1,6 @@
 <h1>タスク新規投稿フォーム</h1>
 
-<%= form_with model: @task do |f| %>
+<%= form_with model: @task, local: true do |f| %>
   <h4>タスク内容</h4>
   <%= f.text_field :title %>
 

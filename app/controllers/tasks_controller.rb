@@ -4,11 +4,17 @@ class TasksController < ApplicationController
     @task = Task.new
   end
 
+  # 新規投稿の保存機能
   def create
-    # 12/21ここわからない・調べる
+    Rails.logger.debug params.inspect
+    # task_paramsはラストのストロングパラメータから来ている
+    # 外部から送信されたデータを安全に取り出す役割
     task = Task.new(task_params)
-    task.save
-    redirect_to "/top"
+    if task.save
+      redirect_to task_path(task)
+    else
+      render :new
+    end
   end
 
   def index
@@ -24,5 +30,11 @@ class TasksController < ApplicationController
   end
 
   def destroy
+  end
+
+  private
+  # ストロングパラメータ
+  def task_params
+    params.require(:task).permit(:title, :keyword1, :keyword2, :keyword3)
   end
 end
