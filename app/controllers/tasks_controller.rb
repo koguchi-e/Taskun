@@ -17,7 +17,9 @@ class TasksController < ApplicationController
     end
   end
 
+  # タスク一覧画面
   def index
+    @tasks = Task.all
   end
 
   def show
