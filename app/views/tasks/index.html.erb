@@ -1,5 +1,7 @@
 <h1>投稿一覧</h1>
 
 <% @tasks.each do |item| %>
-    <li><%= item.title %></li>
+    <li>
+        <%= link_to item.title, task_path(item.id) %>
+    </li>
 <% end %>
