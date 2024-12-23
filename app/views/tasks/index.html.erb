@@ -1,5 +1,5 @@
-<div>
-<div></div>
-<h1></h1>
-<p></p>
-<span></span>
+<h1>投稿一覧</h1>
+
+<% @tasks.each do |item| %>
+    <li><%= item.title %></li>
+<% end %>

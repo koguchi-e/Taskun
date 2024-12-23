@@ -9,16 +9,15 @@ class TasksController < ApplicationController
 
   # 新規投稿の保存機能
   def create
-  Rails.logger.debug params.inspect
-  task = current_user.tasks.new(task_params) # current_user から関連付ける
-  if task.save
-    redirect_to task_path(task)
-  else
-    Rails.logger.debug task.errors.full_messages
-    render :new
+    Rails.logger.debug params.inspect
+    task = current_user.tasks.new(task_params) 
+    if task.save
+      redirect_to task_path(task)
+    else
+      Rails.logger.debug task.errors.full_messages
+      render :new
+    end
   end
-end
-
 
   # タスク一覧画面
   def index

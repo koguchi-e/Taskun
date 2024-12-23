@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
+  # ユーザの一覧画面
   def index
+    @users = User.all
   end
 
   def show
