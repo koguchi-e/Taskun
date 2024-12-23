@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_12_22_020440) do
+ActiveRecord::Schema.define(version: 2024_12_23_060248) do
 
   create_table "tasks", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 2024_12_22_020440) do
     t.string "keyword1"
     t.string "keyword2"
     t.string "keyword3"
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -34,4 +36,5 @@ ActiveRecord::Schema.define(version: 2024_12_22_020440) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "tasks", "users"
 end
