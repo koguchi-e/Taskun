@@ -8,7 +8,7 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
-Rails.start()
+// Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 // This file is automatically compiled by Webpack
