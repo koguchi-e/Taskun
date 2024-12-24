@@ -3,3 +3,5 @@
 <h2>タスク名</h2>
 <p><%= @task.title %></p>
 <%= link_to "編集", edit_task_path(@task.id) %>
+<%= link_to "削除", task_path(@task.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+
