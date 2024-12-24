@@ -2,6 +2,12 @@
 
 <% @users.each do |item| %>
     <li>
+        <% if item.image.attached? %>
+            <%= image_tag item.image, size: "50x50" %>
+        <% else %>
+            <%= image_tag "no_image", size: "50x50" %>
+        <% end %>
+
         <%= link_to item.name, user_path(item.id) %>
     </li>
 <% end %>
