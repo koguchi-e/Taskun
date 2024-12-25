@@ -13,7 +13,8 @@ class TasksController < ApplicationController
     # user_idの情報が必須なので、現在ログイン中のユーザーを関連付ける
     @task.user = current_user 
     if @task.save
-      redirect_to task_path(@task.id), notice: 'タスクが作成されました。'
+      @tasks = Task.all
+      render :index, notice: 'タスクが作成されました。'
     else
       render :new, notice: 'タスクの作成に失敗しました。'
     end

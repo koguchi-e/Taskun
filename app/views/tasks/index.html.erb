@@ -2,6 +2,13 @@
 
 <% @tasks.each do |item| %>
     <li>
+        <!-- プロフィール画像の表示  -->
+        <% if item.user.image.attached? %>
+            <%= image_tag item.user.image, size: "50x50", alt: "#{item.user.name}のプロフィール画像" %>
+        <% else %>
+            <%= image_tag "no_image", size: "50x50", alt: "デフォルトプロフィール画像" %>
+        <% end %>
+
         <%= link_to item.title, task_path(item.id) %>
     </li>
 <% end %>
