@@ -14,11 +14,10 @@ class TasksController < ApplicationController
     @task.user = current_user 
     if @task.save
       flash[:notice] = 'タスクが作成されました。'
-      @tasks = Task.all
-      render :index
+      redirect_to tasks_path
     else
       flash[:alert] = 'タスクの作成に失敗しました。'
-      render :new
+      redirect_to new_task_path
     end
   end
 
