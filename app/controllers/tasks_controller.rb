@@ -9,12 +9,12 @@ class TasksController < ApplicationController
 
   # 新規投稿の保存機能
   def create
-    Rails.logger.debug params.inspect
-    task = current_user.tasks.new(task_params) 
-    if task.save
-      redirect_to task_path(task)
+    @task = Task.new(task_params)
+    # user_idの情報が必須なので、現在ログイン中のユーザーを関連付ける
+    @task.user = current_user 
+    if @task.save
+      redirect_to task_path(@task.id), notice: 'タスクが作成されました。'
     else
-      Rails.logger.debug task.errors.full_messages
       render :new
     end
   end
