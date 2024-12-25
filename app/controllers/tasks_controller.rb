@@ -13,10 +13,12 @@ class TasksController < ApplicationController
     # user_idの情報が必須なので、現在ログイン中のユーザーを関連付ける
     @task.user = current_user 
     if @task.save
+      flash[:notice] = 'タスクが作成されました。'
       @tasks = Task.all
-      render :index, notice: 'タスクが作成されました。'
+      render :index
     else
-      render :new, notice: 'タスクの作成に失敗しました。'
+      flash[:alert] = 'タスクの作成に失敗しました。'
+      render :new
     end
   end
 
