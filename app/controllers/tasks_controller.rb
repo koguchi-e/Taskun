@@ -17,7 +17,7 @@ class TasksController < ApplicationController
       redirect_to tasks_path
     else
       flash[:alert] = 'タスクの作成に失敗しました。'
-      redirect_to new_task_path
+      render :new
     end
   end
 

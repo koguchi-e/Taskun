@@ -16,7 +16,7 @@
 
 /* フラッシュメッセージ */
 .flash-message {
-  width: 50%; 
+  width: 30%; 
   border-radius: 5px;
   padding: 16px 24px;
   margin: 16px 0px;
@@ -36,7 +36,7 @@
 
 /* 新規投稿失敗エラーメッセージ */
 .new-error-message {
-  width: 50%; 
+  width: 30%; 
   background-color: #ffd4d1; /* 背景色 */
   color: #930403; /* 文字色 */
   border: solid 1px #930403;
@@ -50,7 +50,12 @@
   color: #930403;
 }
 
+.new-error-message .title {
+  font-size: 20px;
+}
+
 .new-error-message li {
   color: #930403;
+  list-style-type: none; 
   margin-bottom: 8px; /* 各エラー間の余白 */
 }

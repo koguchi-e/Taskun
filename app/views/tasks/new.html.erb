@@ -1,15 +1,16 @@
 <h1>タスク新規投稿フォーム</h1>
 
-<div class="new-error-message">
-  <% if @task.errors.any? %>
-    <b><%= @task.errors.count %>件のエラーが発生しました。</b>
+<% if @task.errors.any? %>
+  <div class="new-error-message">
+    <b class="title"><%= @task.errors.count %>件のエラーが発生しました。</b>
+    <p></p>
     <ul>
       <% @task.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
     </ul>
-  <% end %>
-</div>
+  </div>
+<% end %>
 
 <%= form_with model: @task, local: true do |f| %>
   <h4>タスク内容</h4>
