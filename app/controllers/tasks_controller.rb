@@ -15,7 +15,7 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to task_path(@task.id), notice: 'タスクが作成されました。'
     else
-      render :new
+      render :new, notice: 'タスクの作成に失敗しました。'
     end
   end
 
