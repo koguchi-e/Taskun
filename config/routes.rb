@@ -6,6 +6,10 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
 
+  namespace :admin do
+    get "dashboards", to: "dashboards#index"
+  end
+
   # tasksコントローラのルーティングまとめて書く。
   resources :tasks, only: [:new, :create, :index, :show, :edit, :update, :destroy]  
 

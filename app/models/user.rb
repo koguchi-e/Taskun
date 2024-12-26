@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :tasks, dependent: :destroy
   has_one_attached :image
 
-  validates :name, presence: true
-  validates :email, presence: true
+  validates :email, presence: { message: "メールアドレスを入力してください" }
+  validates :password, presence: { message: "パスワードを入力してください" }
 
 end

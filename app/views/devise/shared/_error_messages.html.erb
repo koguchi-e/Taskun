@@ -1,15 +1,12 @@
 <% if resource.errors.any? %>
-  <div id="error_explanation" data-turbo-cache="false">
-    <h2>
-      <%= I18n.t("errors.messages.not_saved",
-                 count: resource.errors.count,
-                 resource: resource.class.model_name.human.downcase)
-       %>
-    </h2>
+  <div class="new-error-message" id="error_explanation">
+    <b class="title"><%= pluralize(resource.errors.count, '件のエラーが発生しました') %></b>
     <ul>
-      <% resource.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+      <% resource.errors.messages.each do |attribute, messages| %>
+        <li><%= messages.first %></li>
       <% end %>
     </ul>
   </div>
 <% end %>
+
+
