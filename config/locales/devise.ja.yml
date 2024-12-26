@@ -23,6 +23,10 @@ ja:
       locked: "アカウントがロックされています"
       last_attempt: "残り1回のログイン試行が可能です"
       timeout: "セッションがタイムアウトしました。再度ログインしてください"
+      
+      # 管理者用ログインエラーメッセージ
+      admin_not_found_in_database: "メールアドレスまたはパスワードが正しくありません"
+      admin_invalid: "メールアドレスまたはパスワードが正しくありません"
 
     omniauth_callbacks:
       success: "%{kind}アカウントでログインしました。"
@@ -43,5 +47,3 @@ ja:
               blank: "メールアドレスを入力してください"
             password:
               blank: "パスワードを入力してください"
-
-  
