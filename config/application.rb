@@ -33,3 +33,6 @@ module Taskun
     config.i18n.default_locale = :ja
   end
 end
+
+Encoding.default_external = Encoding::UTF_8
+Encoding.default_internal = Encoding::UTF_8

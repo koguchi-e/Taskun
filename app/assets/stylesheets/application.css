@@ -14,6 +14,27 @@
  *= require_self
  */
 
+.form-field {
+  margin-bottom: 1rem;
+  width: 100%;  /* 親要素の幅を調整 */
+  max-width: 400px;  /* 最大幅を設定（300pxでも可） */
+}
+
+.form-input {
+  width: 100%;
+  max-width: 300px;  /* テキストボックスの最大幅 */
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: block; /* ブロック要素として表示 */
+  margin-bottom: 1rem; /* 入力フィールドの下に余白 */
+}
+
+.submit-btn:hover {
+  background-color: #45a049;
+}
+
 /* フラッシュメッセージ */
 .flash-message {
   width: 30%; 

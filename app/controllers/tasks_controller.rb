@@ -12,6 +12,7 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     # user_idの情報が必須なので、現在ログイン中のユーザーを関連付ける
     @task.user = current_user 
+    
     if @task.save
       flash[:notice] = 'タスクが作成されました。'
       redirect_to tasks_path
@@ -35,9 +36,12 @@ class TasksController < ApplicationController
   end
 
   def update
-    task = Task.find(params[:id])
-    task.update(task_params)
-    redirect_to task_path(task.id)
+    @task = Task.find(params[:id])
+    if @task.update(task_params)
+      redirect_to task_path(task.id)
+    else
+      render :edit
+    end
   end
 
   def destroy
