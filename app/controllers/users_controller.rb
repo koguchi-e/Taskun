@@ -6,6 +6,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @tasks = @user.task.page(params[:page])
   end
 
   def edit

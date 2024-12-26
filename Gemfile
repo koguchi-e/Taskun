@@ -57,3 +57,5 @@ gem 'devise'
 if defined?(Rack::MiniProfiler)
   Rack::MiniProfiler.config.enabled = false
 end
+
+gem 'kaminari','~> 1.2.1'
