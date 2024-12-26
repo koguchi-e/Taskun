@@ -23,16 +23,16 @@
 
     <div class="form-field">
         <h4>ユーザ名</h4>
-        <%= f.text_field :name %>
+        <%= f.text_field :name, class: "form-input" %>
     </div>
 
     <div class="form-field">
         <h4>メールアドレス</h4>
-        <%= f.text_field :email %>
+        <%= f.text_field :email, class: "form-input" %>
     </div>
     <br>
 
     <div class="form-field">
-        <%= f.submit "保存" %>
+        <%= f.submit "保存", class: "submit-btn" %>
     </div>
 <% end %>
