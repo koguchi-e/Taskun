@@ -1,13 +1,12 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  # Deviseのモジュールを含む
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  # 依存関係のあるtasksとimage
   has_many :tasks, dependent: :destroy
   has_one_attached :image
 
-  validates :email, presence: { message: "メールアドレスを入力してください" }
-  validates :password, presence: { message: "パスワードを入力してください" }
-
+  validates :email, presence: true, uniqueness: true
+  validates :name, presence: true
 end

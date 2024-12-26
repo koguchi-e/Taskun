@@ -1,15 +1,38 @@
 <h1>ユーザ編集画面</h1>
 
+<% if @user.errors.any? %>
+  <div class="new-error-message">
+    <b class="title"><%= @user.errors.count %>件のエラーが発生しました。</b>
+    <p></p>
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <% if message.include?("名前") %>
+          <li><%= message %></li>
+        <% end %>
+      <% end %>
+      <% if @user.errors[:email].any? %>
+        <li><%= @user.errors[:email].first %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_with model:@user do |f| %>
     <h4>プロフィール画像</h4>
     <%= f.file_field :image, accept: "image/*" %>
 
-    <h4>ユーザ名</h4>
-    <%= f.text_field :name %>
+    <div class="form-field">
+        <h4>ユーザ名</h4>
+        <%= f.text_field :name %>
+    </div>
 
-    <h4>メールアドレス</h4>
-    <%= f.text_field :email %>
+    <div class="form-field">
+        <h4>メールアドレス</h4>
+        <%= f.text_field :email %>
+    </div>
     <br>
 
-    <%= f.submit "保存" %>
+    <div class="form-field">
+        <%= f.submit "保存" %>
+    </div>
 <% end %>
