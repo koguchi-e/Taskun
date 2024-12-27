@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
   # ユーザの一覧画面
   def index
-    @users = User.all
+    @users = User.page(params[:page])
   end
 
   def show
     @user = User.find(params[:id])
-    @tasks = @user.task.page(params[:page])
+    @tasks = @user.tasks.page(params[:page])
   end
 
   def edit

@@ -11,3 +11,5 @@
         <%= link_to item.name, user_path(item.id) %>
     </li>
 <% end %>
+
+<%= paginate @users %>

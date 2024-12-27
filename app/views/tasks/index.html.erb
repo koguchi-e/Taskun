@@ -12,3 +12,4 @@
         <%= link_to item.title, task_path(item.id) %>
     </li>
 <% end %>
+<%= paginate @tasks %>

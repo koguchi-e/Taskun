@@ -10,8 +10,7 @@ class TasksController < ApplicationController
   # 新規投稿の保存機能
   def create
     @task = Task.new(task_params)
-    # user_idの情報が必須なので、現在ログイン中のユーザーを関連付ける
-    @task.user = current_user 
+    @task.user_id = current_user.id
     
     if @task.save
       flash[:notice] = 'タスクが作成されました。'
@@ -24,7 +23,7 @@ class TasksController < ApplicationController
 
   # タスク一覧画面
   def index
-    @tasks = Task.page(paramas[:page])
+    @tasks = Task.page(params[:page])
   end
 
   def show

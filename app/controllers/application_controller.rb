@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_action :authenticate_user!, except: [:top]
 
   # deviseのコントローラは直接修正できないため、
   # 全てのコントローラに対する処理を行える権限を持つ、ApplicationControllerに記述する必要があり。
