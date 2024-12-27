@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
   devise_for :users
+  
   root to: "homes#top"
 
   devise_for :admin,skip: [:registrations, :password], controllers: {
     sessions: "admin/sessions"
   }
+
+  # ログアウトのメソッドをDLETEに変換
+  devise_scope :user do
+    get '/users/sign_out' => 'devise/sessions#destroy'
+  end
 
   namespace :admin do
     get "dashboards", to: "dashboards#index"
