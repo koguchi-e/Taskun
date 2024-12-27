@@ -23,6 +23,12 @@
           </li>
 
           <li class="nav-item">
+            <%= link_to user_path(current_user.id) do %>
+              マイページ
+            <% end %>
+          </li>
+
+          <li class="nav-item">
             <%= link_to tasks_path do %>
               タスク一覧
             <% end %>

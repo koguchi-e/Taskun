@@ -44,4 +44,12 @@
             <%= @task.created_at.strftime('%Y年%m月%d日 %H:%M') %>
         </td>
     </tr>
+    <tr>
+        <td style="text-align:right; vertical-align: top;">
+            <b>更新日時</b>：
+        </td>
+        <td>
+            <%= @task.updated_at.strftime('%Y年%m月%d日 %H:%M') %>
+        </td>
+    </tr>
 </table>

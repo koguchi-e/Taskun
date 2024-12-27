@@ -1,24 +1,43 @@
-<h1>ユーザ詳細画面</h1>
-
-<h4>プロフィール画像</h4>
-<% if @user.image.attached? %>
-    <%= image_tag @user.image, size: "80x80" %>
-<% else %>
-    <%= image_tag "no_image", size: "80x80" %>
-<% end %>
-
-<h4>ユーザ名</h4>
-<p><%= @user.name %></p>
-<h4>メールアドレス</h4>
-<p><%= @user.email %></p>
-
-<%= link_to "編集", edit_user_path(@user.id) %>
+<table>
+<caption><h1>ユーザ詳細画面</h1></caption>
+<body>
+    <tr>
+        <td style="text-align:right; vertical-align: top;">
+            <b>プロフィール画像</b>：
+        </td>
+        <td>
+            <% if @user.image.attached? %>
+                <%= image_tag @user.image, size: "80x80" %>
+            <% else %>
+                <%= image_tag "no_image", size: "80x80" %>
+            <% end %>
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align:right; vertical-align: top;">
+            <b>ユーザ名</b>：
+        </td>
+        <td><%= @user.name %></td>
+    </tr>
+    <tr>
+        <td style="text-align:right; vertical-align: top;">
+            <b>メールアドレス</b>：
+        </td>
+        <td>
+            <%= @user.email %> <br>
+            <%= link_to "編集", edit_user_path(@user.id) %>
+        </td>
+    </tr>
+</body>
+</table>
 
 <!-- 投稿一覧 -->
+<b>投稿したタスク</b>：
 <% @tasks.each do |item| %>
     <ul>
         <li>
-            <%= link_to item.title, task_path(item.id) %>
+            <%= link_to item.title, task_path(item.id) %> 
+            <%= item.updated_at.strftime('%m月%d日 %H:%M') %>
         </li>
     </ul>
 <% end %>
