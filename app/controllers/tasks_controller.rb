@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
 
-  before_action :authenticate_user!
+  before_action :authenticate_user!,:is_matching_login_user, only: [:edit, :update, :destroy]
 
   # タスクの新規投稿に関するコントローラ
   def new
@@ -32,11 +32,6 @@ class TasksController < ApplicationController
 
   def edit
     @task = Task.find(params[:id])
-    # 投稿者本人以外変更不可
-    user = User.find(params[:id])
-    unless user.id == current_user.id
-      redirect_to task_path
-    end
   end
 
   def update
@@ -55,8 +50,17 @@ class TasksController < ApplicationController
   end
 
   private
+
   # ストロングパラメータ
   def task_params
     params.require(:task).permit(:title, :keyword1, :keyword2, :keyword3)
+  end
+
+  # 投稿者本人以外変更不可
+  def is_matching_login_user
+    task = Task.find(params[:id])
+    unless task.user == current_user
+      redirect_to task_path
+    end
   end
 end

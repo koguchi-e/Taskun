@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+
+  before_action :is_matching_login_user, only: [:edit, :update]
+
   # ユーザの一覧画面
   def index
     @users = User.page(params[:page])
@@ -11,11 +14,6 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    # 本人以外変更不可
-    user = User.find(params[:id])
-    unless user.id == current_user.id
-      redirect_to user_path(current_user.id)
-    end
   end
 
   def update
@@ -31,8 +29,17 @@ class UsersController < ApplicationController
   end
 
   private
+
   # ストロングパラメータ
   def user_params
     params.require(:user).permit(:name, :email, :image)
+  end
+
+  # 本人以外変更不可
+  def is_matching_login_user
+    user = User.find(params[:id])
+    unless user.id == current_user.id
+      redirect_to user_path(current_user.id)
+    end
   end
 end
