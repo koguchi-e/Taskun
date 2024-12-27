@@ -24,8 +24,10 @@
             <b>メールアドレス</b>：
         </td>
         <td>
-            <%= @user.email %> <br>
-            <%= link_to "編集", edit_user_path(@user.id) %>
+            <%= @user.email %> 
+            <% if @user == current_user %>
+                <%= link_to "編集", edit_user_path(@user.id) %>
+            <% end %>
         </td>
     </tr>
 </body>
@@ -37,7 +39,7 @@
     <ul>
         <li>
             <%= link_to item.title, task_path(item.id) %> 
-            <%= item.updated_at.strftime('%m月%d日 %H:%M') %>
+            <%= item.updated_at.in_time_zone('Tokyo').strftime('%m月%d日 %H:%M') %>
         </li>
     </ul>
 <% end %>

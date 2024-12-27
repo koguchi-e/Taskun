@@ -32,6 +32,11 @@ class TasksController < ApplicationController
 
   def edit
     @task = Task.find(params[:id])
+    # 投稿者本人以外変更不可
+    user = User.find(params[:id])
+    unless user.id == current_user.id
+      redirect_to task_path
+    end
   end
 
   def update
