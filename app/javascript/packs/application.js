@@ -11,14 +11,8 @@ import "channels"
 import "jquery";
 import "popper.js";
 import "bootstrap";
-import "../stylesheets/application"; 
+import "../stylesheets/application";
 
-
-// Rails.start()
+Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
-// This file is automatically compiled by Webpack
-require('@rails/ujs').start();
-require('turbolinks').start();
-require('@rails/activestorage').start();
-require('channels');

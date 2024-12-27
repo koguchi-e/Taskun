@@ -1,1 +1,55 @@
 @use '~bootstrap/scss/bootstrap';
+
+// #####################################
+
+/* body と html の高さを100%に設定 */
+html, body {
+  height: 100%; /* ページ全体の高さを100%に */
+  margin: 0; /* 余白をリセット */
+}
+
+// #####################################
+
+/* ナビゲーションリンクの文字色を白に設定 */
+.navbar-brand {
+  color: white !important; /* Bookers文字列 */
+}
+
+.navbar-brand a {
+  color: white !important; /* Bookersリンクの色 */
+  text-decoration: none !important; /* 下線を消す */
+}
+
+/* ナビゲーションのリンク */
+.navbar-nav .nav-item a {
+  color: white !important; /* リンクの文字色を白に設定 */
+  text-decoration: none !important; /* 下線を消す */
+}
+
+/* リンク間のスペースを追加 */
+.navbar-nav .nav-item {
+  margin-right: 10px; /* リンクの右側にスペースを追加 */
+}
+
+.navbar-nav .nav-item:last-child {
+  margin-right: 0; /* 最後のリンクに余分なスペースを追加しない */
+}
+
+/* アイコンの色を白に設定 */
+.navbar-brand i,
+.navbar-nav .nav-item i {
+  color: white !important; 
+}
+
+/* ホバー時のリンクの色 */
+.navbar-brand a:hover,
+.navbar-nav .nav-item a:hover {
+  color: gray !important; /* ホバー時の文字色を灰色に設定 */
+  text-decoration: none !important; /* ホバー時も下線を消す */
+}
+
+/* ホバー時のアイコンの色 */
+.navbar-brand a:hover i,
+.navbar-nav .nav-item a:hover i {
+  color: gray !important; /* ホバー時のアイコンの色を灰色に設定 */
+}
