@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :authenticate_user!, except: [:top]
+  before_action :authenticate_user!, except: [:top], unless: :admin_controller?
 
   # deviseのコントローラは直接修正できないため、
   # 全てのコントローラに対する処理を行える権限を持つ、ApplicationControllerに記述する必要があり。
@@ -7,6 +7,12 @@ class ApplicationController < ActionController::Base
   # devise利用の機能（ユーザ登録、ログイン認証など）が使われる前に
   # configure_permitted_parametersメソッドが実行
   before_action :configure_permitted_parameters, if: :devise_controller?
+
+  private
+
+  def admin_controller?
+    self.class.modeule_parent_name == "Admin"
+  end
 
   protected
 

@@ -1,4 +1,5 @@
 @use '~bootstrap/scss/bootstrap';
+@import './custom';
 
 // #####################################
 
@@ -6,6 +7,83 @@
 html, body {
   height: 100%; /* ページ全体の高さを100%に */
   margin: 0; /* 余白をリセット */
+}
+
+// 例: SCSSの内容を記述
+body {
+  background-color: orange;
+}
+
+
+// #####################################
+
+.form-field {
+  margin-bottom: 1rem;
+  width: 100%;  /* 親要素の幅を調整 */
+  max-width: 400px;  /* 最大幅を設定（300pxでも可） */
+}
+
+.form-input {
+  width: 100%;
+  max-width: 300px;  /* テキストボックスの最大幅 */
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: block; /* ブロック要素として表示 */
+  margin-bottom: 1rem; /* 入力フィールドの下に余白 */
+}
+
+.submit-btn:hover {
+  background-color: #45a049;
+}
+
+// #####################################
+
+/* フラッシュメッセージ */
+.flash-message {
+  width: 30%; 
+  border-radius: 5px;
+  padding: 16px 24px;
+  margin: 16px 0px;
+}
+ 
+.flash-message.notice {
+  background-color: #f6ffb3;
+  color: green;
+  border: solid 1px green;
+}
+ 
+.flash-message.alert {
+  background-color: #ffd4d1;
+  color: #930403;
+  border: solid 1px #930403;
+}
+
+/* 新規投稿失敗エラーメッセージ */
+.new-error-message {
+  width: 30%; 
+  background-color: #ffd4d1; /* 背景色 */
+  color: #930403; /* 文字色 */
+  border: solid 1px #930403;
+  padding: 16px; /* 余白 */
+  border-radius: 5px;
+}
+
+.new-error-message ul {
+  margin: 0;
+  padding: 0;
+  color: #930403;
+}
+
+.new-error-message .title {
+  font-size: 20px;
+}
+
+.new-error-message li {
+  color: #930403;
+  list-style-type: none; 
+  margin-bottom: 8px; /* 各エラー間の余白 */
 }
 
 // #####################################
