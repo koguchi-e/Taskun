@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :authenticate_user!, except: [:top], unless: :admin_controller?
+  before_action :authenticate_user!, except: [:top, :about], unless: :admin_controller?
 
   # deviseのコントローラは直接修正できないため、
   # 全てのコントローラに対する処理を行える権限を持つ、ApplicationControllerに記述する必要があり。
@@ -11,7 +11,8 @@ class ApplicationController < ActionController::Base
   private
 
   def admin_controller?
-    self.class.modeule_parent_name == "Admin"
+    self.class.
+    module_parent_name == "Admin"
   end
 
   protected

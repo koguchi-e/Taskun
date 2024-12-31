@@ -5,6 +5,7 @@ class TasksController < ApplicationController
   # タスクの新規投稿に関するコントローラ
   def new
     @task = Task.new
+    @new_task = Task.new
   end
 
   # 新規投稿の保存機能
