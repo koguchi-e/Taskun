@@ -1,29 +1,24 @@
 class ApplicationController < ActionController::Base
-  before_action :authenticate_user!, except: [:top, :about], unless: :admin_controller?
-
-  # deviseのコントローラは直接修正できないため、
-  # 全てのコントローラに対する処理を行える権限を持つ、ApplicationControllerに記述する必要があり。
-
-  # devise利用の機能（ユーザ登録、ログイン認証など）が使われる前に
-  # configure_permitted_parametersメソッドが実行
-  before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :configure_authentication
 
   private
 
+  # 管理者用コントローラかどうかで、適切な認証メソッドを呼び出す
+  def configure_authentication
+    if admin_controller?
+      authenticate_admin!
+    else
+      authenticate_user! unless action_is_public?
+    end
+  end
+
+  # 現在のコントローラーがAdmin名前空間の下にあるかどうかを判定
   def admin_controller?
-    self.class.
-    module_parent_name == "Admin"
+    self.class.module_parent_name == "Admin"
   end
 
-  protected
-
-  # 名前の情報も保存できるようにする
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
-  end
-
-  # ログイン後のリダイレクト先を変更
-  def after_sign_in_path_for(resource)
-    tasks_path  
+  # homes#topアクションが認証が不要かどうかを判定
+  def action_is_public?
+    controller_name == "homes" && action_name == "top"
   end
 end
