@@ -36,6 +36,24 @@ class Public::SessionsController < Devise::SessionsController
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
 
+  private
+
+  # アクティブユーザかどうか判断するメソッド
+  def user_state
+    # 入力されたメアドから、アカウントを取得
+    user = User.find_by(email: params[:custmer][:email])
+    # アカウントが取得できなかった場合、このメソッドを終了
+    return if user.nil?
+    # 取得したPWと入力したPWが一致しなかった場合、このメソッドを終了
+    return unless usr.valid_password?(params[:customer][:password])
+
+    if is_active == true
+      retrun 
+    else
+      redirect_to sign_up
+    end
+  end
+
   protected
 
   # 名前の情報も保存できるようにする
