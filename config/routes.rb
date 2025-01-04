@@ -18,7 +18,9 @@ Rails.application.routes.draw do
   ################################################################
 
   scope module: :public do
-    devise_for :users
+    devise_for :users, controllers: {
+      registrations: 'public/registrations'
+    }
     root to: "homes#top"
     get 'about', to: 'homes#about', as: 'about'
 

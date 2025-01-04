@@ -1,5 +1,4 @@
 @use '~bootstrap/scss/bootstrap';
-@import './custom';
 
 // #####################################
 
@@ -8,12 +7,6 @@ html, body {
   height: 100%; /* ページ全体の高さを100%に */
   margin: 0; /* 余白をリセット */
 }
-
-// 例: SCSSの内容を記述
-body {
-  background-color: orange;
-}
-
 
 // #####################################
 
