@@ -83,11 +83,15 @@ html, body {
 
 /* ナビゲーションリンクの文字色を白に設定 */
 .navbar-brand {
-  color: white !important; /* Bookers文字列 */
+  color: white !important; /* 文字列 */
+}
+
+.navbar {
+  background-color: #223a70; /* ナビゲーションの背景を紺色 */
 }
 
 .navbar-brand a {
-  color: white !important; /* Bookersリンクの色 */
+  color: white !important; /* リンクの色 */
   text-decoration: none !important; /* 下線を消す */
 }
 
