@@ -40,17 +40,16 @@ class Public::SessionsController < Devise::SessionsController
 
   # アクティブユーザかどうか判断するメソッド
   def user_state
-    # 入力されたメアドから、アカウントを取得
+    # 処理内容１：入力されたメアドから、アカウントを取得
     user = User.find_by(email: params[:custmer][:email])
     # アカウントが取得できなかった場合、このメソッドを終了
     return if user.nil?
     # 取得したPWと入力したPWが一致しなかった場合、このメソッドを終了
     return unless usr.valid_password?(params[:customer][:password])
 
-    if is_active == true
-      retrun 
-    else
-      redirect_to sign_up
+    # 【処理内容4】
+    unless user.is_active
+      redirect_to new_user_registration_path, alert: "退会済みのアカウントです。再度ご登録ください。"
     end
   end
 

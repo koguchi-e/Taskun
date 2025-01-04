@@ -25,14 +25,24 @@
     end
   end
 
-  def destroy
+  def withdraw
+    @user = User.find(params[:id])
+    if @user == current_user
+      # 退会状態に更新
+      @user.update(is_active: false)
+      # セッションをリセットしてログアウト
+      reset_session
+      redirect_to new_user_registration_path, notice: "退会処理が完了しました。ご利用ありがとうございました。"
+    else
+      redirect_to user_path(@user), alert: "不正な操作です。"
+    end
   end
 
   private
 
   # ストロングパラメータ
   def user_params
-    params.require(:user).permit(:name, :email, :image)
+    params.require(:user).permit(:name, :email, :image, :is_active)
   end
 
   # 本人以外変更不可

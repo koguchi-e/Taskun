@@ -26,6 +26,12 @@ Rails.application.routes.draw do
     resources :tasks, only: [:new, :create, :index, :show, :edit, :update, :destroy]
 
     # usersコントローラのルーティングまとめて書く。
-    resources :users, only: [:index, :show, :edit, :update, :destroy]
+    resources :users, only: [:index, :show, :edit, :update] do
+      # withdrawアクション（退会処理）
+      member do
+        patch :withdraw # PATCHリクエストで退会処理を実行
+      end
+    end
+
   end
 end
