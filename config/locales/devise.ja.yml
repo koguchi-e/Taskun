@@ -35,8 +35,8 @@ ja:
     errors:
       messages:
         not_saved:
-          one: "%{resource}の保存に失敗しました: 1件のエラーがあります"
-          other: "%{resource}の保存に失敗しました: %{count}件のエラーがあります"
+          one: "%{resource}の保存に失敗しました: 1件のエラーがあります。"
+          other: "%{resource}の保存に失敗しました: %{count}件のエラーがあります。"
           
   activerecord:
     errors:
@@ -44,6 +44,8 @@ ja:
         user:
           attributes:
             email:
-              blank: "メールアドレスを入力してください"
+              blank: "メールアドレスを入力してください。"
             password:
-              blank: "パスワードを入力してください"
+              blank: "パスワードを入力してください。"
+            name:
+              blank: "名前を入力してください。"

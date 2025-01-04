@@ -1,6 +1,6 @@
 <% if resource.errors.any? %>
   <div class="new-error-message" id="error_explanation">
-    <b class="title"><%= pluralize(resource.errors.count, '件のエラーが発生しました') %></b>
+    <b class="title"><%= pluralize(resource.errors.count, '件のエラーが発生しました。') %></b>
     <ul>
       <% resource.errors.messages.each do |attribute, messages| %>
         <li><%= messages.first %></li>

@@ -1,5 +1,5 @@
-<table>
 <caption><h1>ユーザ詳細画面</h1></caption>
+<table>
 <body>
     <tr>
         <td style="text-align:right; vertical-align: top;">
@@ -29,19 +29,26 @@
                 <%= link_to "編集", edit_user_path(@user.id) %>
                 <%= link_to "退会", withdraw_user_path(@user), method: :patch, data: { confirm: "本当に退会しますか？" } %>
             <% end %>
+            <p></p>
+        </td>
+    </tr>
+    <!-- 投稿一覧 -->
+    <tr>
+        <td style="text-align:right; vertical-align: top;">
+            <b>投稿したタスク</b>：
+        </td>
+        <td>
+            <% @tasks.each do |item| %>
+                <ul>
+                    <li class="task-index">
+                        <%= link_to item.title, task_path(item.id) %> 
+                        <%= item.updated_at.in_time_zone('Tokyo').strftime('%m月%d日 %H:%M') %>
+                    </li>
+                </ul>
+            <% end %>
+            <%= paginate @tasks %>
         </td>
     </tr>
 </body>
 </table>
 
-<!-- 投稿一覧 -->
-<b>投稿したタスク</b>：
-<% @tasks.each do |item| %>
-    <ul>
-        <li>
-            <%= link_to item.title, task_path(item.id) %> 
-            <%= item.updated_at.in_time_zone('Tokyo').strftime('%m月%d日 %H:%M') %>
-        </li>
-    </ul>
-<% end %>
-<%= paginate @tasks %>

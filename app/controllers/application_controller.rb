@@ -17,8 +17,8 @@ class ApplicationController < ActionController::Base
     self.class.module_parent_name == "Admin"
   end
 
-  # homes#topアクションが認証が不要かどうかを判定
+  # homes#topアクションとhomes#aboutアクションが認証が不要かどうかを判定
   def action_is_public?
-    controller_name == "homes" && action_name == "top"
+    controller_name == "homes" && (action_name == "top" || action_name == "about")
   end
 end

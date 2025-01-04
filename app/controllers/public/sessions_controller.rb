@@ -11,7 +11,7 @@ class Public::SessionsController < Devise::SessionsController
 
   # ログアウト後のリダイレクト先
   def after_sign_out_path_for(resource)
-    homes_path
+    root_path
   end
 
   # GET /resource/sign_in
