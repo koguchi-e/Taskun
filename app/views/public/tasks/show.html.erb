@@ -9,9 +9,10 @@
             <%= @task.title %>
             <br>
             <% if @task.user == current_user %>
-                <%= link_to "編集", edit_task_path(@task.id) %>
+                <%= link_to "編集", edit_task_path(@task.id) %> | 
                 <%= link_to "削除", task_path(@task.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
             <% end %>
+            <p></p>
         </td>
     </tr>
     <tr>

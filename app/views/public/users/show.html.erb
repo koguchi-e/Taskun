@@ -24,9 +24,9 @@
             <b>メールアドレス</b>：
         </td>
         <td>
-            <%= @user.email %> 
+            <%= @user.email %> <br>
             <% if @user == current_user %>
-                <%= link_to "編集", edit_user_path(@user.id) %>
+                <%= link_to "編集", edit_user_path(@user.id) %> | 
                 <%= link_to "退会", withdraw_user_path(@user), method: :patch, data: { confirm: "本当に退会しますか？" } %>
             <% end %>
             <p></p>
@@ -41,7 +41,7 @@
             <% @tasks.each do |item| %>
                 <ul>
                     <li class="task-index">
-                        <%= link_to item.title, task_path(item.id) %> 
+                        <%= link_to item.title, task_path(item.id) %>　
                         <%= item.updated_at.in_time_zone('Tokyo').strftime('%m月%d日 %H:%M') %>
                     </li>
                 </ul>

@@ -44,8 +44,8 @@ ja:
         user:
           attributes:
             email:
-              blank: "メールアドレスを入力してください。"
+              blank: "メールアドレス を入力してください。"
             password:
-              blank: "パスワードを入力してください。"
+              blank: "パスワード を入力してください。"
             name:
-              blank: "名前を入力してください。"
+              blank: "名前 を入力してください。"
