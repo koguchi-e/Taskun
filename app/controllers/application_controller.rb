@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :configure_authentication
+  before_action :set_new_task
 
   private
 
@@ -20,5 +21,10 @@ class ApplicationController < ActionController::Base
   # homes#topアクションとhomes#aboutアクションが認証が不要かどうかを判定
   def action_is_public?
     controller_name == "homes" && (action_name == "top" || action_name == "about")
+  end
+
+  #  @new_task をすべてのページで利用可能にする
+  def set_new_task
+    @new_task = Task.new if user_signed_in?
   end
 end
