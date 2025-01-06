@@ -84,38 +84,39 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-4">
+          <% unless controller_path == "public/homes" && (action_name == "top" || action_name == "about") %>
+            <!-- 作成画面 -->
+            <% if user_signed_in? && @new_task.present? %>
+              <h4>新規タスク作成</h4>
+              <!-- 新規投稿のエラーメッセージ -->
+              <% if @new_task.errors.any? %>
+                <div class="error-messages">
+                  <h3><%= @new_task.errors.count %>件のエラーがあります。</h3>
+                  <ul>
+                    <% @new_task.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              <% end %>
+              <!-- 投稿フォーム -->
+              <%= form_with model: @new_task, local: true do |f| %>
+                <div class="form-field">
+                  <h4>タスク内容</h4>
+                  <%= f.text_field :title, class: "form-input" %>
+                </div>
 
-          <!-- 作成画面 -->
-          <% if user_signed_in? && @new_task.present? %>
-            <h2>新規タスク作成</h2>
-            <!-- 新規投稿のエラーメッセージ  -->
-            <% if @new_task.errors.any? %>
-              <div class="error-messages">
-                <h3><%= @new_task.errors.count %>件のエラーがあります。</h3>
-                <ul>
-                  <% @new_task.errors.full_messages.each do |message| %>
-                    <li><%= message %></li>
-                  <% end %>
-                </ul>
-              </div>
-            <% end %>
-            <!-- 投稿フォーム -->
-            <%= form_with model: @new_task, local: true do |f| %>
-              <div class="form-field">
-                <h4>タスク内容</h4>
-                <%= f.text_field :title, class: "form-input" %>
-              </div>
+                <div class="form-field">
+                  <h4>キーワード</h4>
+                  <%= f.text_field :keyword1, class: "form-input" %>
+                  <%= f.text_field :keyword2, class: "form-input" %>
+                  <%= f.text_field :keyword3, class: "form-input" %>
+                </div>
 
-              <div class="form-field">
-                <h4>キーワード</h4>
-                <%= f.text_field :keyword1, class: "form-input" %>
-                <%= f.text_field :keyword2, class: "form-input" %>
-                <%= f.text_field :keyword3, class: "form-input" %>
-              </div>
-
-              <div class="form-field">
-                <%= f.submit "投稿", class: "submit-btn" %>
-              </div>
+                <div class="form-field">
+                  <%= f.submit "投稿", class: "submit-btn" %>
+                </div>
+              <% end %>
             <% end %>
           <% end %>
         </div>
