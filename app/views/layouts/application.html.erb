@@ -90,7 +90,7 @@
               <h4>新規タスク作成</h4>
               <!-- 新規投稿のエラーメッセージ -->
               <% if @new_task.errors.any? %>
-                <div class="error-messages">
+                <div class="new-error-message">
                   <h3><%= @new_task.errors.count %>件のエラーがあります。</h3>
                   <ul>
                     <% @new_task.errors.full_messages.each do |message| %>

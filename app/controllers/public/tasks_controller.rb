@@ -15,10 +15,12 @@
     
     if @task.save
       flash[:notice] = 'タスクが作成されました。'
-      redirect_to tasks_path
+      redirect_to task_path(@task.id)
     else
       flash.now[:alert] = 'タスクの作成に失敗しました。'
-      render :new
+      @new_task = @task  
+      @tasks = Task.page(params[:page])  # ページネーション用
+      render :index
     end
   end
 
