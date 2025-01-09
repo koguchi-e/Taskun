@@ -127,3 +127,29 @@ html, body {
 .navbar-nav .nav-item a:hover i {
   color: gray !important; /* ホバー時のアイコンの色を灰色に設定 */
 }
+
+// #####################################
+
+// kaminariレイアウト変更
+.pagination {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+}
+
+.pagination .current {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.pagination .page,
+.pagination .first-page,
+.pagination .last-page {
+  text-decoration: none;
+}
+
+.pagination .page:hover {
+  text-decoration: underline;
+}

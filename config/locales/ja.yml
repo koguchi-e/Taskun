@@ -18,4 +18,9 @@ ja:
         invalid: "%{attribute}が不正です"
         too_long: "%{attribute}は%{count}文字以内で入力してください"
         too_short: "%{attribute}は%{count}文字以上で入力してください"
+
+  views:
+    pagination:
+      previous: "<<"   # Previous を << に変更
+      next: ">>"       # Next を >> に変更
   
