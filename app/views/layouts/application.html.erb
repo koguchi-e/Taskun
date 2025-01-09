@@ -79,6 +79,7 @@
     <% if flash[:alert] %>
       <div class="flash-message alert"><%= flash[:alert] %></div>
     <% end %>
+    <p></p>
 
     <!-- ここからサイドバー -->
     <div class="container">
@@ -88,10 +89,11 @@
             <!-- 作成画面 -->
             <% if user_signed_in? && @new_task.present? %>
               <h4>新規タスク作成</h4>
+              <p></p>
               <!-- 新規投稿のエラーメッセージ -->
               <% if @new_task.errors.any? %>
                 <div class="new-error-message">
-                  <h3><%= @new_task.errors.count %>件のエラーがあります。</h3>
+                  <b><%= @new_task.errors.count %>件のエラーがあります。</b>
                   <ul>
                     <% @new_task.errors.full_messages.each do |message| %>
                       <li><%= message %></li>
@@ -132,6 +134,7 @@
     <footer>
       <!-- フッター -->
       <div class='footer'>
+        <hr>
         <p>Taskun.</p>
       </div>
     </footer>
