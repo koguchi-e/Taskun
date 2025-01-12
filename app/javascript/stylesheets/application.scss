@@ -37,8 +37,9 @@ html, body {
 .flash-message {
   width: 30%; 
   border-radius: 5px;
-  padding: 16px 24px;
-  margin: 16px 0px;
+  padding-top: 10px;
+  padding: 5px 24px;
+  margin: 5px 0px;
 }
  
 .flash-message.notice {
@@ -53,14 +54,17 @@ html, body {
   border: solid 1px #930403;
 }
 
+// #####################################
+
 /* 新規投稿失敗エラーメッセージ */
 .new-error-message {
-  width: 30%; 
-  background-color: #ffd4d1; /* 背景色 */
-  color: #930403; /* 文字色 */
+  background-color: #ffd4d1;
+  color: #930403;
   border: solid 1px #930403;
-  padding: 16px; /* 余白 */
   border-radius: 5px;
+  padding-top: 10px;
+  padding: 10px;
+  margin: 5px 0px;
 }
 
 .new-error-message ul {
@@ -69,14 +73,9 @@ html, body {
   color: #930403;
 }
 
-.new-error-message .title {
-  font-size: 20px;
-}
-
 .new-error-message li {
   color: #930403;
   list-style-type: none; 
-  margin-bottom: 8px; /* 各エラー間の余白 */
 }
 
 // #####################################
@@ -127,4 +126,34 @@ html, body {
 .navbar-brand a:hover i,
 .navbar-nav .nav-item a:hover i {
   color: gray !important; /* ホバー時のアイコンの色を灰色に設定 */
+}
+
+.footer {
+  text-align: center;
+}
+
+// #####################################
+
+// kaminariレイアウト変更
+.pagination {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+}
+
+.pagination .current {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.pagination .page,
+.pagination .first-page,
+.pagination .last-page {
+  text-decoration: none;
+}
+
+.pagination .page:hover {
+  text-decoration: underline;
 }

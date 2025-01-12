@@ -43,13 +43,10 @@ ja:
       models:
         user:
           attributes:
-            name:
-              blank: "名前 を入力してください。"
             email:
               blank: "メールアドレス を入力してください。"
               taken: "入力されたメールアドレスは登録済です。"
             password:
               blank: "パスワード を入力してください。"
-              too_short: "パスワード は6文字以上で入力してください。"
-            password_confirmation:
-              confirmation: "パスワードが一致していません。"
+            name:
+              blank: "名前 を入力してください。"
