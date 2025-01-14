@@ -38,11 +38,11 @@
             <b>投稿したタスク</b>：
         </td>
         <td>
-            <% @tasks.each do |item| %>
+            <% @tasks.each do |task| %>
                 <ul>
                     <li class="task-index">
-                        <%= link_to item.title, task_path(item.id) %>　
-                        <%= item.updated_at.in_time_zone('Tokyo').strftime('%m月%d日 %H:%M') %>
+                        <%= link_to task.title, task_path(task.id) %>　
+                        <%= task.updated_at.in_time_zone('Tokyo').strftime('%m月%d日 %H:%M') %>
                     </li>
                 </ul>
             <% end %>
