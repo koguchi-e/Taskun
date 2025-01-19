@@ -1,16 +1,16 @@
 <h4>ユーザ一覧</h4>
 
-<% @users.each do |item| %>
+<% @users.each do |user| %>
     <li>
-        <%= link_to user_path(item.id) do %>
-            <% if item.image.attached? %>
-                <%= image_tag item.image, size: "50x50" %>
+        <%= link_to user_path(user.id) do %>
+            <% if user.image.attached? %>
+                <%= image_tag user.image, size: "50x50" %>
             <% else %>
                 <%= image_tag "no_image", size: "50x50" %>
             <% end %>
         <% end %>
 
-        <%= link_to item.name, user_path(item.id) %>
+        <%= link_to user.name, user_path(user.id) %>
     </li>
 <% end %>
 
