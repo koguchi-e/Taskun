@@ -7,7 +7,7 @@
             <% if task.user.image.attached? %>
                 <%= image_tag task.user.image, size: "50x50", alt: "#{task.user.name}のプロフィール画像" %>
             <% else %>
-                <%= image_tag "no_image", size: "50x50", alt: "デフォルトプロフィール画像" %>
+                <%= image_tag "no_image.jpg", size: "50x50", alt: "デフォルトプロフィール画像" %>
             <% end %>
         <% end %>
 
