@@ -60,9 +60,11 @@ end
 
 gem 'kaminari','~> 1.2.1'
 
+gem 'dotenv-rails'
+group :production do
+  gem 'mysql2'
+end
+
 gem "net-smtp"
 gem "net-pop"
 gem "net-imap"
-
-gem 'dotenv-rails'
-gem 'mysql2', '~> 0.5.3'
