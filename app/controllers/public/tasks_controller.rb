@@ -1,5 +1,4 @@
 ﻿class Public::TasksController < ApplicationController
-
   before_action :authenticate_user!,:is_matching_login_user, only: [:edit, :update, :destroy]
 
   # タスクの新規投稿に関するコントローラ
@@ -67,4 +66,3 @@
     end
   end
 end
-

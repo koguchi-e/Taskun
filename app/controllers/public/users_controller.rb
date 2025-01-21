@@ -1,5 +1,4 @@
 ﻿class Public::UsersController < ApplicationController
-
   before_action :is_matching_login_user, only: [:edit, :update]
 
   # ユーザの一覧画面
@@ -53,4 +52,3 @@
     end
   end
 end
-
