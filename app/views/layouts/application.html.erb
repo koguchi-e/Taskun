@@ -72,6 +72,23 @@
     </header>
     <!-- ナビゲーション終わり  -->
 
+    <!-- 検索機能 -->
+    <%= form_with url: search_path, method: :get, local: true do |f| %>
+      <%= f.text_field :query, placeholder: "検索ワードを入力" %>
+      <%= f.submit "検索" %>
+    <% end %>
+
+    <% if @results.present? %>
+      <h1>検索結果</h1>
+      <ul>
+        <% @results.each do |result| %>
+          <li><%= result.name %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>該当する結果が見つかりませんでした。</p>
+    <% end %>
+
     <!-- フラッシュメッセージ  -->
     <% if flash[:notice] %>
       <div class="flash-message notice"><%= flash[:notice] %></div>
@@ -123,15 +140,6 @@
           <% end %>
         </div>
         <!-- サイドバーここまで -->
-
-        <!-- 検索機能 -->
-        <%= form_with url: #url名, method: :get do |f| %>
-            <%= f.text_field #プロパティ名 %>
-
-          :
-          :
-
-          <% end %>
 
         <!-- メインコンテンツ -->
         <div class="col-lg-8">

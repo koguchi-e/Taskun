@@ -5,7 +5,6 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
 
-  # ログアウトのメソッドをDLETEに変換
   devise_scope :user do
     get '/users/sign_out' => 'devise/sessions#destroy'
   end
@@ -24,16 +23,17 @@ Rails.application.routes.draw do
     root to: "homes#top"
     get 'about', to: 'homes#about', as: 'about'
 
-    # tasksコントローラのルーティングまとめて書く。
+    get 'search', to: 'tasks#search'
+
+    # tasksコントローラのルーティング
     resources :tasks, only: [:new, :create, :index, :show, :edit, :update, :destroy]
 
-    # usersコントローラのルーティングまとめて書く。
+    # usersコントローラのルーティング
     resources :users, only: [:index, :show, :edit, :update] do
       # withdrawアクション（退会処理）
       member do
         patch :withdraw # PATCHリクエストで退会処理を実行
       end
     end
-
   end
 end
