@@ -124,6 +124,15 @@
         </div>
         <!-- サイドバーここまで -->
 
+        <!-- 検索機能 -->
+        <%= form_with url: #url名, method: :get do |f| %>
+            <%= f.text_field #プロパティ名 %>
+
+          :
+          :
+
+          <% end %>
+
         <!-- メインコンテンツ -->
         <div class="col-lg-8">
           <%= yield %>
