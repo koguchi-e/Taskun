@@ -78,17 +78,6 @@
       <%= f.submit "検索" %>
     <% end %>
 
-    <% if @results.present? %>
-      <h1>検索結果</h1>
-      <ul>
-        <% @results.each do |result| %>
-          <li><%= result.name %></li>
-        <% end %>
-      </ul>
-    <% else %>
-      <p>該当する結果が見つかりませんでした。</p>
-    <% end %>
-
     <!-- フラッシュメッセージ  -->
     <% if flash[:notice] %>
       <div class="flash-message notice"><%= flash[:notice] %></div>

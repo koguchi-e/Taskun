@@ -1,0 +1,12 @@
+<h1>検索結果</h1>
+<% if @results.present? %>
+  <ul>
+    <% @results.each do |result| %>
+      <li>
+        <%= link_to result.title, task_path(result.id) %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>該当する結果が見つかりませんでした。</p>
+<% end %>
