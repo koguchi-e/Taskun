@@ -6,7 +6,6 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
     <script src="https://kit.fontawesome.com/38dc52f0f7.js" crossorigin="anonymous"></script>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -82,57 +81,76 @@
     <p></p>
 
     <!-- ここからサイドバー -->
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-4">
-          <% unless controller_path == "public/homes" && (action_name == "top" || action_name == "about") %>
-            <!-- 作成画面 -->
-            <% if user_signed_in? && @new_task.present? %>
-              <h4>新規タスク作成</h4>
-              <p></p>
-              <!-- 新規投稿のエラーメッセージ -->
-              <% if @new_task.errors.any? %>
-                <div class="new-error-message">
-                  <b><%= @new_task.errors.count %>件のエラーがあります。</b>
-                  <ul>
-                    <% @new_task.errors.full_messages.each do |message| %>
-                      <li><%= message %></li>
-                    <% end %>
-                  </ul>
-                </div>
-              <% end %>
-              <!-- 投稿フォーム -->
-              <%= form_with model: @new_task, local: true do |f| %>
-                <div class="form-field">
-                  <h4>タスク内容</h4>
-                  <%= f.text_field :title, class: "form-input" %>
-                </div>
+    <% if user_signed_in? %>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4">
+            <% unless controller_path == "public/homes" && (action_name == "top" || action_name == "about") %>
+              <!-- 作成画面 -->
+              <% if user_signed_in? && @new_task.present? %>
+                <h4>新規タスク作成</h4>
+                <p></p>
+                <!-- 新規投稿のエラーメッセージ -->
+                <% if @new_task.errors.any? %>
+                  <div class="new-error-message">
+                    <b><%= @new_task.errors.count %>件のエラーがあります。</b>
+                    <ul>
+                      <% @new_task.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                      <% end %>
+                    </ul>
+                  </div>
+                <% end %>
+                <!-- 投稿フォーム -->
+                <%= form_with model: @new_task, local: true do |f| %>
+                  <div class="form-field">
+                    <h4>タスク内容</h4>
+                    <%= f.text_field :title, class: "form-input" %>
+                  </div>
 
-                <div class="form-field">
-                  <h4>キーワード</h4>
-                  <%= f.text_field :keyword1, class: "form-input" %>
-                  <%= f.text_field :keyword2, class: "form-input" %>
-                  <%= f.text_field :keyword3, class: "form-input" %>
-                </div>
+                  <div class="form-field">
+                    <h4>キーワード</h4>
+                    <%= f.text_field :keyword1, class: "form-input" %>
+                    <%= f.text_field :keyword2, class: "form-input" %>
+                    <%= f.text_field :keyword3, class: "form-input" %>
+                  </div>
 
-                <div class="form-field">
-                  <%= f.submit "投稿", class: "submit-btn" %>
-                </div>
+                  <div class="form-field">
+                    <%= f.submit "投稿", class: "submit-btn" %>
+                  </div>
+                <% end %>
               <% end %>
             <% end %>
-          <% end %>
-        </div>
-        <!-- サイドバーここまで -->
+          </div>
+          <!-- サイドバーここまで -->
 
-        <!-- メインコンテンツ -->
-        <div class="col-lg-8">
-          <%= yield %>
+          <!-- メインコンテンツ -->
+          <div class="col-lg-8">
+            <!-- 検索機能 -->
+            <div align="right">
+              <%= form_with url: search_path, method: :get, local: true do |f| %>
+                <%= f.text_field :query, placeholder: "検索するタスク名を入力" %>
+                <%= f.submit "検索" %>
+              <% end %>
+            </div>
+            <%= yield %>
+          </div>
         </div>
       </div>
-    </div>
+    
+    <!-- ログイン前画面表示 -->
+    <% else %>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+    <% end %>
 
+    <!-- フッター -->
     <footer>
-      <!-- フッター -->
       <div class='footer'>
         <hr>
         <p>Taskun.</p>

@@ -36,6 +36,17 @@
     @task = Task.find(params[:id])
   end
 
+  def search
+    # パラメータから検索ワードを取得
+    query = params[:query]
+
+    # 検索ロジックを実装（例: モデルのwhereメソッドを使用）
+    @results = Task.where("title LIKE ?", "%#{query}%")
+
+    # 検索結果をビューに渡す
+    render :search
+  end
+
   def update
     @task = Task.find(params[:id])
     if @task.update(task_params)
