@@ -14,6 +14,9 @@ Rails.application.routes.draw do
     resources :users, only: [:destroy]
   end
 
+  get 'search', to: 'users#search'
+  get 'search', to: 'tasks#search'
+
   ################################################################
 
   scope module: :public do
