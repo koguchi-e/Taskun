@@ -17,3 +17,5 @@ class Admin::DashboardsController < ApplicationController
 
     render :search
   end
+end
+
