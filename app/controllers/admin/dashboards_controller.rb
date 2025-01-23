@@ -7,12 +7,13 @@ class Admin::DashboardsController < ApplicationController
   end
 
   def search
-    # パラメータから検索ワードを取得
-    query = params[:query]
-    # 検索ロジックを実装（例: モデルのwhereメソッドを使用）
-    @results = User.where("name LIKE ?", "%#{query}%")
-    @results = Task.where("title LIKE ?", "%#{query}%")
-    # 検索結果をビューに渡す
+    if params[:user_query].present?
+      @user_results = User.where("name LIKE ?", "%#{params[:user_query]}%")
+    end
+
+    if params[:task_query].present?
+      @task_results = Task.where("title LIKE ?", "%#{params[:task_query]}%")
+    end
+
     render :search
   end
-end

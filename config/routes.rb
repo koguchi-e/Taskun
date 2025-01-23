@@ -12,10 +12,8 @@ Rails.application.routes.draw do
   namespace :admin do
     get "dashboards", to: "dashboards#index"
     resources :users, only: [:destroy]
+    get 'search', to: 'dashboard#search', as: :search
   end
-
-  get 'search', to: 'users#search'
-  get 'search', to: 'tasks#search'
 
   ################################################################
 
