@@ -13,11 +13,24 @@
 <body class="d-flex flex-column vh-100">
   <header class="shadow-sm">
     <nav class="navbar navbar-expand-lg navbar-light">
-      <% if admin_signed_in? %>
-        <div class="text-right">
-          <%= link_to '管理者からログアウト', destroy_admin_session_path, method: :delete %>
+      <div class="container">
+        <li class="navbar-brand p-3">
+          <%= link_to "Taskun", root_path %>
+        </li>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav ml-auto">
+            <% if admin_signed_in? %>
+              <li class="nav-item">
+                <%= link_to destroy_admin_session_path, method: :delete do %>
+                  <i class="fa-solid fa-right-from-bracket"></i>
+                  管理者からログアウト 
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+
         </div>
-      <% end %>
+      </div>
     </nav>
   </header>
 
