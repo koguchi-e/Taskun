@@ -1,23 +1,27 @@
 <h1>検索結果</h1>
 
-<h2>ユーザ検索結果</h2>
-<% if @user_results.present? %>
-  <ul>
-    <% @user_results.each do |user| %>
-      <li><%= user.name %></li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>該当するユーザは見つかりませんでした。</p>
+<% if params[:user_query].present? %>
+  <h2>ユーザ検索結果</h2>
+  <% if @user_results.present? %>
+    <ul>
+      <% @user_results.each do |user| %>
+        <li><%= user.name %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>該当するユーザは見つかりませんでした。</p>
+  <% end %>
 <% end %>
 
-<h2>タスク検索結果</h2>
-<% if @task_results.present? %>
-  <ul>
-    <% @task_results.each do |task| %>
-      <li><%= task.title %></li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>該当するタスクは見つかりませんでした。</p>
+<% if params[:task_query].present? %>
+  <h2>タスク検索結果</h2>
+  <% if @task_results.present? %>
+    <ul>
+      <% @task_results.each do |task| %>
+        <li><%= task.title %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>該当するタスクは見つかりませんでした。</p>
+  <% end %>
 <% end %>
