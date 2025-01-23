@@ -1,11 +1,7 @@
-<h4>管理者画面（全ユーザ一覧）</h4>
+<p></p>
 
-<%= form_with url: admin_dashboards_search_path, method: :get, local: true do |f| %>
-  <%= f.text_field :user_query, placeholder: "検索するユーザ名を入力" %>
-  <%= f.submit "ユーザ検索" %>
-  <%= f.text_field :task_query, placeholder: "検索するタスク名を入力" %>
-  <%= f.submit "タスク検索" %>
-<% end %>
+<h4>管理者画面（全ユーザ一覧）</h4>
+<p></p>
 
 <ul>
     <% @users.each do |user| %>

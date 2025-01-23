@@ -1,18 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Admin - Meshiterro</title>
+  <title>管理者用・Taskun</title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <script src="https://kit.fontawesome.com/38dc52f0f7.js" crossorigin="anonymous"></script>
   <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
-<body>
-  <% if admin_signed_in? %>
-    <div class="text-right">
-      <%= link_to '管理者からログアウト', destroy_admin_session_path, method: :delete %>
+
+<body class="d-flex flex-column vh-100">
+  <header class="shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <% if admin_signed_in? %>
+        <div class="text-right">
+          <%= link_to '管理者からログアウト', destroy_admin_session_path, method: :delete %>
+        </div>
+      <% end %>
+    </nav>
+  </header>
+
+  <% if user_signed_in? %>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <div align="right">
+            <p></p>
+            <%= form_with url: admin_dashboards_search_path, method: :get, local: true do |f| %>
+              <%= f.text_field :user_query, placeholder: "検索するユーザ名を入力" %>
+              <%= f.submit "ユーザ検索" %>
+              <%= f.text_field :task_query, placeholder: "検索するタスク名を入力" %>
+              <%= f.submit "タスク検索" %>
+              <% end %>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <%= yield %>
+        </div>
+      </div>
     </div>
   <% end %>
-  <%= yield %>
+
+  <footer>
+    <div class='footer'>
+      <hr>
+      <p>Taskun.</p>
+    </div>
+  </footer>
 </body>
 </html>
