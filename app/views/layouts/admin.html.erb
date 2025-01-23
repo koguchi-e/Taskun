@@ -10,7 +10,7 @@
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 
-<body class="d-flex flex-column vh-100">
+<body class="d-flex flex-column vh-100" style="background-color: #e0ffef;">
   <header class="shadow-sm">
     <nav class="navbar navbar-expand-lg navbar-light">
       <div class="container">
@@ -20,6 +20,11 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav ml-auto">
             <% if admin_signed_in? %>
+                <li class="nav-item">
+                  <%= link_to admin_dashboards_path do %>
+                    <i class="fa-solid fa-users"></i> ユーザ一覧
+                  <% end %>
+                </li>
               <li class="nav-item">
                 <%= link_to destroy_admin_session_path, method: :delete do %>
                   <i class="fa-solid fa-right-from-bracket"></i>
@@ -43,6 +48,7 @@
             <%= form_with url: admin_dashboards_search_path, method: :get, local: true do |f| %>
               <%= f.text_field :user_query, placeholder: "検索するユーザ名を入力" %>
               <%= f.submit "ユーザ検索" %>
+              <p></p>
               <%= f.text_field :task_query, placeholder: "検索するタスク名を入力" %>
               <%= f.submit "タスク検索" %>
               <% end %>

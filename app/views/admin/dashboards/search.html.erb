@@ -1,7 +1,9 @@
-<h1>検索結果</h1>
+<p></p>
 
+<h4>検索結果</h4>
+<p></p>
 <% if params[:user_query].present? %>
-  <h2>ユーザ検索結果</h2>
+  <b>ユーザ検索結果</b>
   <% if @user_results.present? %>
     <ul>
       <% @user_results.each do |user| %>
@@ -12,9 +14,10 @@
     <p>該当するユーザは見つかりませんでした。</p>
   <% end %>
 <% end %>
+<p></p>
 
 <% if params[:task_query].present? %>
-  <h2>タスク検索結果</h2>
+  <b>タスク検索結果</b>
   <% if @task_results.present? %>
     <ul>
       <% @task_results.each do |task| %>
