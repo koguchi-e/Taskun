@@ -1,10 +1,4 @@
-<h2>管理者にログイン</h2>
-
-<% if flash[:alert] %>
-  <div class="flash-message alert">
-    <%= flash[:alert] %>
-  </div>
-<% end %>
+<h4>管理者にログイン</h4>
 
 <%= form_with model: @admin, url: session_path(resource_name), local: true do |f| %>
   <div class="field">
