@@ -38,27 +38,38 @@
     </nav>
   </header>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-4">
-        <% if user_signed_in? %>
-          <div align="right">
-            <p></p>
-            <%= form_with url: admin_dashboards_search_path, method: :get, local: true do |f| %>
-              <%= f.text_field :user_query, placeholder: "検索するユーザ名を入力" %>
-              <%= f.submit "ユーザ検索" %>
-              <p></p>
-              <%= f.text_field :task_query, placeholder: "検索するタスク名を入力" %>
-              <%= f.submit "タスク検索" %>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-      <div class="col-lg-8">
-        <%= yield %>
+  <% if flash[:alert] %>
+    <div class="flash-message alert">
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
+
+  <% if admin_signed_in? %>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <p></p>
+          <h4>ユーザ・タスク検索</h4>
+          <%= form_with url: admin_dashboards_search_path, method: :get, local: true do |f| %>
+            <%= f.text_field :user_query, value: @user_query, placeholder: "ユーザ名", class: "form-input" %>
+            <%= f.text_field :task_query, value: @task_query, placeholder: "タスク名", class: "form-input" %>
+            <%= f.submit "検索", class: "submit-btn" %>
+          <% end %>
+        </div>
+        <div class="col-lg-8">
+          <%= yield %>
+        </div>
       </div>
     </div>
-  </div>
+  <% else %>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  <% end %>
 
   <footer>
     <div class='footer'>

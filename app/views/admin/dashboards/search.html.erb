@@ -1,0 +1,57 @@
+<p></p>
+
+<h4>検索結果</h4>
+<p></p>
+
+<% if @user_results.present? %>
+  <b>ユーザ検索結果</b>
+  <% if @user_results.present? %>
+    <div class="index-results">
+      <% @user_results.each do |user| %>
+        <div class="index-card">
+          <div class="index-header">
+            <% if user.image.attached? %>
+              <%= image_tag user.image, class: "profile-image", alt: "#{user.name}のプロフィール画像" %>
+            <% else %>
+              <%= image_tag "no_image.jpg", class: "profile-image", alt: "デフォルトプロフィール画像" %>
+            <% end %>
+            <%= user.name %> ( <%= user.email %> )
+            <%= link_to "削除", admin_user_path(user), method: :delete, data: { confirm: "本当に削除しますか？"} %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+<% else %>
+    <p>該当するタスクは見つかりませんでした。</p>
+  <% end %>
+<% end %>
+<p></p>
+
+<% if @task_results.present? %>
+  <b>タスク検索結果</b>
+  <% if @task_results.present? %>
+    <div class="index-results">
+      <% @task_results.each do |task| %>
+        <div class="index-card">
+          <div class="index-header">
+            <i class="fa-solid fa-circle-check"></i>
+            <% if task.user.image.attached? %>
+              <%= image_tag task.user.image, class: "profile-image", alt: "#{task.user.name}のプロフィール画像" %>
+            <% else %>
+              <%= image_tag "no_image.jpg", class: "profile-image", alt: "デフォルトプロフィール画像" %>
+            <% end %>
+            <div class="index-info">
+              <%= task.user.name %> / 
+              <%= task.created_at.in_time_zone('Tokyo').strftime('%Y年%m月%d日 %H:%M') %>
+              <br>
+              <b><%= task.title %></b>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p>該当するタスクは見つかりませんでした。</p>
+  <% end %>
+<% end %>
+
