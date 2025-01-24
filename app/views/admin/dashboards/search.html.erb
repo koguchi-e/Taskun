@@ -15,7 +15,8 @@
             <% else %>
               <%= image_tag "no_image.jpg", class: "profile-image", alt: "デフォルトプロフィール画像" %>
             <% end %>
-            <%= user.name %>
+            <%= user.name %> ( <%= user.email %> )
+            <%= link_to "削除", admin_user_path(user), method: :delete, data: { confirm: "本当に削除しますか？"} %>
           </div>
         </div>
       <% end %>
@@ -33,7 +34,7 @@
       <% @task_results.each do |task| %>
         <div class="index-card">
           <div class="index-header">
-            <i class="fa-regular fa-circle-check"></i>
+            <i class="fa-solid fa-circle-check"></i>
             <% if task.user.image.attached? %>
               <%= image_tag task.user.image, class: "profile-image", alt: "#{task.user.name}のプロフィール画像" %>
             <% else %>
