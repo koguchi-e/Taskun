@@ -51,10 +51,9 @@
           <p></p>
           <h4>ユーザ・タスク検索</h4>
           <%= form_with url: admin_dashboards_search_path, method: :get, local: true do |f| %>
-            <%= f.text_field :user_query, placeholder: "ユーザ名" %>
-            <%= f.text_field :task_query, placeholder: "タスク名" %>
-            <br>
-            <%= f.submit "検索" %>
+            <%= f.text_field :user_query, value: @user_query, placeholder: "ユーザ名", class: "form-input" %>
+            <%= f.text_field :task_query, value: @task_query, placeholder: "タスク名", class: "form-input" %>
+            <%= f.submit "検索", class: "submit-btn" %>
           <% end %>
         </div>
         <div class="col-lg-8">

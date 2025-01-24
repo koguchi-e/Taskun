@@ -3,7 +3,7 @@
 <h4>検索結果</h4>
 <p></p>
 
-<% if params[:user_query].present? %>
+<% if @user_results.present? %>
   <b>ユーザ検索結果</b>
   <% if @user_results.present? %>
     <div class="index-results">
@@ -26,7 +26,7 @@
 <% end %>
 <p></p>
 
-<% if params[:task_query].present? %>
+<% if @task_results.present? %>
   <b>タスク検索結果</b>
   <% if @task_results.present? %>
     <div class="index-results">
