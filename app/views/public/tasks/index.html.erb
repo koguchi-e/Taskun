@@ -1,8 +1,11 @@
-<h4>タスク一覧</h4>
+<div class="main-title">
+    <h4>タスク一覧</h4>
+</div>
 
 <% @tasks.each do |task| %>
     <li>
         <!-- プロフィール画像の表示  -->
+        <i class="fa-regular fa-circle-check"></i>
         <%= link_to user_path(task.user.id) do %>
             <% if task.user.image.attached? %>
                 <%= image_tag task.user.image, size: "50x50", alt: "#{task.user.name}のプロフィール画像" %>
@@ -10,7 +13,6 @@
                 <%= image_tag "no_image.jpg", size: "50x50", alt: "デフォルトプロフィール画像" %>
             <% end %>
         <% end %>
-
         <%= link_to task.title, task_path(task.id) %>
     </li>
 <% end %>

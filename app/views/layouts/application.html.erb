@@ -86,9 +86,22 @@
         <div class="row">
           <div class="col-lg-4">
             <% unless controller_path == "public/homes" && (action_name == "top" || action_name == "about") %>
+              <!-- 検索機能 -->
+              <div class="main-title">
+                <h4>検索</h4>
+              </div>
+              <%= form_with url: search_path, method: :get, local: true do |f| %>
+                <%= f.text_field :query, placeholder: "検索するタスク名を入力" %>
+                <%= f.submit "検索" %>
+              <% end %>
+              <p></p>
+              <p></p>
+
               <!-- 作成画面 -->
               <% if user_signed_in? && @new_task.present? %>
-                <h4>新規タスク作成</h4>
+                <div class="main-title">
+                  <h4>新規タスク作成</h4>
+                </div>
                 <p></p>
                 <!-- 新規投稿のエラーメッセージ -->
                 <% if @new_task.errors.any? %>
@@ -104,12 +117,12 @@
                 <!-- 投稿フォーム -->
                 <%= form_with model: @new_task, local: true do |f| %>
                   <div class="form-field">
-                    <h4>タスク内容</h4>
+                    <b>タスク内容</b>
                     <%= f.text_field :title, class: "form-input" %>
                   </div>
 
                   <div class="form-field">
-                    <h4>キーワード</h4>
+                    <b>キーワード</b>
                     <%= f.text_field :keyword1, class: "form-input" %>
                     <%= f.text_field :keyword2, class: "form-input" %>
                     <%= f.text_field :keyword3, class: "form-input" %>
@@ -126,13 +139,6 @@
 
           <!-- メインコンテンツ -->
           <div class="col-lg-8">
-            <!-- 検索機能 -->
-            <div align="right">
-              <%= form_with url: search_path, method: :get, local: true do |f| %>
-                <%= f.text_field :query, placeholder: "検索するタスク名を入力" %>
-                <%= f.submit "検索" %>
-              <% end %>
-            </div>
             <%= yield %>
           </div>
         </div>
