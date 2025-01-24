@@ -174,7 +174,6 @@ html, body {
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .index-header {
@@ -214,11 +213,22 @@ html, body {
 }
 
 i.fa-solid.fa-circle-check {
-  color: #223a70 !important;
+  color: #1a4472 !important;
 }
 
 .submit-btn {
-  border-radius: 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px; 
+  text-decoration: none; 
+  border: 1px solid #ddd;
   color: white;
-  background-color: #223a70;
+  border-color: white;
+  background-color: #1a4472;
+}
+
+.submit-btn:hover {
+  background-color: #358ae6;
+  color: white!important; 
 }
