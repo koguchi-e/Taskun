@@ -3,16 +3,11 @@
 <h4>検索結果</h4>
 <p></p>
 
-<<<<<<< HEAD
 <% if @user_results.present? %>
-=======
-<% if params[:user_query].present? %>
->>>>>>> 7214b33 ([Fix] 管理検索結果画面・SCSS適用)
   <b>ユーザ検索結果</b>
   <% if @user_results.present? %>
     <div class="index-results">
       <% @user_results.each do |user| %>
-<<<<<<< HEAD
         <div class="index-card">
           <div class="index-header">
             <% if user.image.attached? %>
@@ -24,16 +19,6 @@
             <%= link_to "削除", admin_user_path(user), method: :delete, data: { confirm: "本当に削除しますか？"} %>
           </div>
         </div>
-=======
-        <li>
-          <% if user.image.attached? %>
-              <%= image_tag user.image, size: "50x50" %>
-          <% else %>
-              <%= image_tag "no_image.jpg", size: "50x50" %>
-          <% end %>
-          <%= user.name %>
-        </li>
->>>>>>> 54e8ef6 ([Fix] 検索ボタン１つにする、検索結果にアイコンと時刻表示)
       <% end %>
     </div>
 <% else %>
@@ -47,7 +32,6 @@
   <% if @task_results.present? %>
     <div class="index-results">
       <% @task_results.each do |task| %>
-<<<<<<< HEAD
         <div class="index-card">
           <div class="index-header">
             <i class="fa-solid fa-circle-check"></i>
@@ -64,19 +48,6 @@
             </div>
           </div>
         </div>
-=======
-        <li>
-          <% if task.user.image.attached? %>
-              <%= image_tag task.user.image, size: "50x50", alt: "#{task.user.name}のプロフィール画像" %>
-          <% else %>
-              <%= image_tag "no_image.jpg", size: "50x50", alt: "デフォルトプロフィール画像" %>
-          <% end %>
-          <%= task.user.name %> / 
-          <%= task.created_at.in_time_zone('Tokyo').strftime('%Y年%m月%d日 %H:%M') %>
-          <br>
-          <%= task.title %> 
-        </li>
->>>>>>> 54e8ef6 ([Fix] 検索ボタン１つにする、検索結果にアイコンと時刻表示)
       <% end %>
     </div>
   <% else %>
