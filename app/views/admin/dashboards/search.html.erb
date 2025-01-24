@@ -7,7 +7,14 @@
   <% if @user_results.present? %>
     <ul>
       <% @user_results.each do |user| %>
-        <li><%= user.name %></li>
+        <li>
+          <% if user.image.attached? %>
+              <%= image_tag user.image, size: "50x50" %>
+          <% else %>
+              <%= image_tag "no_image.jpg", size: "50x50" %>
+          <% end %>
+          <%= user.name %>
+        </li>
       <% end %>
     </ul>
   <% else %>
@@ -21,7 +28,17 @@
   <% if @task_results.present? %>
     <ul>
       <% @task_results.each do |task| %>
-        <li><%= task.title %></li>
+        <li>
+          <% if task.user.image.attached? %>
+              <%= image_tag task.user.image, size: "50x50", alt: "#{task.user.name}のプロフィール画像" %>
+          <% else %>
+              <%= image_tag "no_image.jpg", size: "50x50", alt: "デフォルトプロフィール画像" %>
+          <% end %>
+          <%= task.user.name %> / 
+          <%= task.created_at.in_time_zone('Tokyo').strftime('%Y年%m月%d日 %H:%M') %>
+          <br>
+          <%= task.title %> 
+        </li>
       <% end %>
     </ul>
   <% else %>
