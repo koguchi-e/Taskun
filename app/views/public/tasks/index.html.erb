@@ -1,19 +1,27 @@
 <div class="main-title">
-    <h4>タスク一覧</h4>
+  <h4><i class="fa-solid fa-check"></i> タスク一覧</h4>
 </div>
 
 <% @tasks.each do |task| %>
-    <li>
-        <!-- プロフィール画像の表示  -->
-        <i class="fa-regular fa-circle-check"></i>
+  <div class="index-results">
+    <div class="index-card">
+      <div class="index-header">
+        <i class="fa-solid fa-circle-check"></i>
         <%= link_to user_path(task.user.id) do %>
-            <% if task.user.image.attached? %>
-                <%= image_tag task.user.image, size: "50x50", alt: "#{task.user.name}のプロフィール画像" %>
-            <% else %>
-                <%= image_tag "no_image.jpg", size: "50x50", alt: "デフォルトプロフィール画像" %>
-            <% end %>
+          <% if task.user.image.attached? %>
+            <%= image_tag task.user.image, class: "profile-image", alt: "#{task.user.name}のプロフィール画像" %>
+          <% else %>
+            <%= image_tag "no_image.jpg", class: "profile-image", alt: "デフォルトプロフィール画像" %>
+          <% end %>
         <% end %>
-        <%= link_to task.title, task_path(task.id) %>
-    </li>
+        <div class="index-info">
+          <%= task.user.name %> / 
+          <%= task.created_at.in_time_zone('Tokyo').strftime('%m月%d日 %H:%M') %>
+          <br>
+          <b><%= link_to task.title, task_path(task.id) %></b>
+        </div>
+      </div>
+    </div>
+  </div>
 <% end %>
 <%= paginate @tasks %>

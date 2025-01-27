@@ -1,5 +1,5 @@
 <div class="main-title">
-  <h4>タスク編集画面</h4>
+  <h4><i class="fa-solid fa-check"></i> タスク編集画面</h4>
 </div>
 
 <% if @task.errors.any? %>
@@ -14,20 +14,26 @@
   </div>
 <% end %>
 
-<%= form_with model:@task do |f| %>
-  <div class="form-field">
-    <h4>タスク内容</h4>
-    <%= f.text_field :title, class: "form-input" %>
-  </div>
+<div class="index-results">
+  <div class="index-card">
+    <div class="index-header">
+      <%= form_with model:@task do |f| %>
+        <div class="form-field">
+          <b>タスク内容</b>
+          <%= f.text_field :title, class: "form-input" %>
+        </div>
 
-  <div class="form-field">
-    <h4>キーワード</h4>
-    <%= f.text_field :keyword1, class: "form-input" %>
-    <%= f.text_field :keyword2, class: "form-input" %>
-    <%= f.text_field :keyword3, class: "form-input" %>
-  </div>
+        <div class="form-field">
+          <b>キーワード</b>
+          <%= f.text_field :keyword1, class: "form-input" %>
+          <%= f.text_field :keyword2, class: "form-input" %>
+          <%= f.text_field :keyword3, class: "form-input" %>
+        </div>
 
-  <div class="form-field">
-    <%= f.submit "投稿", class: "submit-btn" %>
+        <div class="form-field">
+          <%= f.submit "投稿", class: "submit-btn" %>
+        </div>
+      <% end %>
+    </div>
   </div>
-<% end %>
+</div>

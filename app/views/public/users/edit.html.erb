@@ -1,5 +1,5 @@
 <div class="main-title">
-  <h4>ユーザ編集画面</h4>
+  <h4><i class="fa-solid fa-user"></i> ユーザ編集画面</h4>
 </div>
 
 <% if @user.errors.any? %>
@@ -19,22 +19,25 @@
   </div>
 <% end %>
 
-<%= form_with model:@user do |f| %>
-    <h4>プロフィール画像</h4>
-    <%= f.file_field :image, accept: "image/*" %>
-
-    <div class="form-field">
-        <h4>ユーザ名</h4>
-        <%= f.text_field :name, class: "form-input" %>
+<div class="index-results">
+  <div class="index-card">
+    <div class="index-header">
+      <%= form_with model:@user do |f| %>
+        <b>プロフィール画像</b>
+        <%= f.file_field :image, accept: "image/*" %>
+        <p></p>
+        <div class="form-field">
+          <b>ユーザ名</b>
+          <%= f.text_field :name, class: "form-input" %>
+        </div>
+        <div class="form-field">
+          <b>メールアドレス</b>
+          <%= f.text_field :email, class: "form-input" %>
+        </div>
+        <div class="form-field">
+          <%= f.submit "保存", class: "submit-btn" %>
+        </div>
+      <% end %>
     </div>
-
-    <div class="form-field">
-        <h4>メールアドレス</h4>
-        <%= f.text_field :email, class: "form-input" %>
-    </div>
-    <br>
-
-    <div class="form-field">
-        <%= f.submit "保存", class: "submit-btn" %>
-    </div>
-<% end %>
+  </div>
+</div>

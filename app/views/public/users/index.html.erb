@@ -1,19 +1,22 @@
 <div class="main-title">
-    <h4>ユーザ一覧</h4>
+  <h4><i class="fa-solid fa-users"></i> ユーザ一覧</h4>
 </div>
 
 <% @users.each do |user| %>
-    <li>
+  <div class="index-results">
+    <div class="index-card">
+      <div class="index-header">
         <%= link_to user_path(user.id) do %>
-            <% if user.image.attached? %>
-                <%= image_tag user.image, size: "50x50" %>
-            <% else %>
-                <%= image_tag "no_image.jpg", size: "50x50" %>
-            <% end %>
+          <% if user.image.attached? %>
+            <%= image_tag user.image, class: "profile-image", alt: "#{user.name}のプロフィール画像" %>
+          <% else %>
+            <%= image_tag "no_image.jpg", class: "profile-image", alt: "デフォルトプロフィール画像" %>
+          <% end %>
         <% end %>
-
         <%= link_to user.name, user_path(user.id) %>
-    </li>
+      </div>
+    </div>
+  </div>
 <% end %>
 
 <%= paginate @users %>

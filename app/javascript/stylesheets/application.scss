@@ -134,11 +134,36 @@ html, body {
 // メインページ
 .main-title {
   background-color: #EBE0F3;
-  width: 250px;
+  width: 100%;
 }
 
 .footer {
   text-align: center;
+}
+
+// #####################################
+
+// 全てのリンク
+a {
+  // color: #1a4472;
+  text-decoration: none; 
+}
+
+/* ホバー時の色 */
+a:hover {
+  // color: #358ae6;
+  text-decoration: none; 
+}
+
+/* リストの前の点を消す */
+ul {
+  list-style-type: none; 
+  padding-left: 0;
+}
+
+/* 必要に応じてリストアイテムのスタイル */
+li {
+  padding-left: 0; 
 }
 
 // #####################################
