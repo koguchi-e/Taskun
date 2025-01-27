@@ -49,8 +49,11 @@
               <ul>
                 <li class="task-index">
                   <i class="fa-solid fa-circle-check"></i>
-                  <%= link_to task.title, task_path(task.id) %>　
-                  <%= task.updated_at.in_time_zone('Tokyo').strftime('%m月%d日 %H:%M') %>
+                  <%= link_to task.title, task_path(task.id) %>
+                  <span class="task-meta">
+                    <%= task.updated_at.in_time_zone('Tokyo').strftime('%m月%d日 %H:%M') %> / 
+                    <%= task.task_comments.count %> コメント
+                  </span>
                 </li>
               </ul>
             <% end %>

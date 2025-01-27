@@ -308,3 +308,52 @@ i.fa-solid.fa-circle-check {
   color: white!important; 
 }
 
+// #####################################
+// ユーザ詳細画面内、タスク一覧
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.task-index {
+  display: flex;
+  align-items: center;
+  gap: 10px; 
+}
+
+.task-meta {
+  margin-left: auto; 
+  font-size: 0.9rem;
+  color: #666;
+}
+
+// #####################################
+// コメント表示
+
+.comment {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.comment-container {
+  display: flex;
+  gap: 10px;
+}
+
+.comment-image {
+  flex-shrink: 0;
+}
+
+.comment-content {
+  flex-grow: 1;
+  max-width: calc(100% - 50px); /* 適切な幅を調整 */
+  word-wrap: break-word; /* コメント内で改行する */
+}
+
+.comment-text {
+  margin: 0 0 5px 0;
+}
+

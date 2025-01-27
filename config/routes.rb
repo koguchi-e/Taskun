@@ -27,7 +27,9 @@ Rails.application.routes.draw do
     get 'search', to: 'tasks#search'
 
     # tasksコントローラのルーティング
-    resources :tasks, only: [:new, :create, :index, :show, :edit, :update, :destroy]
+    resources :tasks, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
+      resources :task_comments, only: [:create, :destroy]
+    end
 
     # usersコントローラのルーティング
     resources :users, only: [:index, :show, :edit, :update] do

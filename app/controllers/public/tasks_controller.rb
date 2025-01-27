@@ -30,6 +30,7 @@
 
   def show
     @task = Task.find(params[:id])
+    @task_comment = TaskComment.new
   end
 
   def edit
