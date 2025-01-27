@@ -8,6 +8,11 @@ class Public::TaskCommentsController < ApplicationController
     redirect_to task_path(task)
   end
 
+  def destroy
+    TaskComment.find(params[:id]).destroy
+    redirect_to task_path(params[:task_id])
+  end
+
   private
 
   def task_comment_params
