@@ -64,3 +64,22 @@
     </div>
   </div>
 </div>
+
+<td>
+        <div>
+        <p>コメント件数：<%= @task.task_comments.count %></p>
+        <% @task.task_comments.each do |task| %>
+          <p><%= image_tag task_comment.user.get_profile_image(50,50) %></p>
+          <%= task_comment.user.name %>
+          <%= task_comment.created_at.in_time_zone('Tokyo').strftime('%m月%d日 %H:%M') %><%= task_comment.comment %>
+        <% end %>
+      </div>
+
+      <div>
+        <%= form_with model:[@task, @task_comment] do |f| %>
+          <%= f.text_area :comment, row: "5", width: "30", placeholder: "コメントを入力" %>
+          <br>
+          <%= f.submit "送信する", class: "submit-btn" %>
+        <% end %>
+      </div>
+      </td>

@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   # 依存関係のあるtasksとimage
   has_many :tasks, dependent: :destroy
+  has_many :task_comments, dependent: :destroy
   has_one_attached :image
 
   validates :email, presence: true, uniqueness: true

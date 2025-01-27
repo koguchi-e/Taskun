@@ -15,10 +15,12 @@
           <% end %>
         <% end %>
         <div class="index-info">
-          <%= task.user.name %> / 
-          <%= task.created_at.in_time_zone('Tokyo').strftime('%m月%d日 %H:%M') %>
-          <br>
-          <b><%= link_to task.title, task_path(task.id) %></b>
+          <span class="task-meta">
+            <%= task.user.name %> / 
+            <%= task.created_at.in_time_zone('Tokyo').strftime('%m月%d日 %H:%M') %> / 
+            <%= task.task_comments.count %> コメント
+          </span>
+          <b><%= link_to task.title, task_path(task.id) %></b> 
         </div>
       </div>
     </div>

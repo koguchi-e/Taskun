@@ -308,3 +308,22 @@ i.fa-solid.fa-circle-check {
   color: white!important; 
 }
 
+// #####################################
+// ユーザ詳細画面内、タスク一覧
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.task-index {
+  display: flex;
+  align-items: center;
+  gap: 10px; 
+}
+
+.task-meta {
+  margin-left: auto; 
+  font-size: 0.9rem;
+  color: #666;
+}
