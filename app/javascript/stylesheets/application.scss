@@ -28,10 +28,6 @@ html, body {
   margin-bottom: 1rem; /* 入力フィールドの下に余白 */
 }
 
-.submit-btn:hover {
-  background-color: #45a049;
-}
-
 // #####################################
 
 /* フラッシュメッセージ */
@@ -249,11 +245,17 @@ i.fa-solid.fa-circle-check {
   color: #1a4472 !important;
 }
 
+// #####################################
+// ボタン設定
+
+// 共通ボタン設定
 .submit-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border-radius: 5px; 
+  padding: 5px 10px;
+  transition: background-color 0.3s;
   text-decoration: none; 
   border: 1px solid #ddd;
   color: white;
@@ -265,3 +267,44 @@ i.fa-solid.fa-circle-check {
   background-color: #358ae6;
   color: white!important; 
 }
+
+// 新規登録ボタン設定
+.submit-btn-registrations {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px; 
+  padding: 10px 10px;
+  transition: background-color 0.3s;
+  text-decoration: none; 
+  border: 1px solid #ddd;
+  color: white;
+  border-color: white;
+  background-color: #a2cc89;
+}
+
+.submit-btn-registrations:hover {
+  background-color: #E6EB94;
+  color: white!important; 
+}
+
+// ログインボタン設定
+.submit-btn-login {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px; 
+  padding: 10px 10px;
+  transition: background-color 0.3s;
+  text-decoration: none; 
+  border: 1px solid #ddd;
+  color: white;
+  border-color: white;
+  background-color: #f88379;
+}
+
+.submit-btn-login:hover {
+  background-color: #ffc1cc;
+  color: white!important; 
+}
+
