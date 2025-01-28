@@ -88,10 +88,10 @@
             <% unless controller_path == "public/homes" && (action_name == "top" || action_name == "about") %>
               <!-- 検索機能 -->
               <div class="main-title">
-                <h4> <i class="fa-solid fa-magnifying-glass"></i> 検索</h4>
+                <h4><i class="fa-solid fa-magnifying-glass"></i>検索</h4>
               </div>
               <%= form_with url: search_path, method: :get, local: true do |f| %>
-                <%= f.text_field :query, placeholder: "検索するタスク名を入力" %>
+                <%= f.text_field :query, placeholder: "検索するタスク名を入力", class: "form-input"  %>
                 <%= f.submit "検索", class: "submit-btn" %>
               <% end %>
               <p></p>
@@ -100,7 +100,7 @@
               <!-- 作成画面 -->
               <% if user_signed_in? && @new_task.present? %>
                 <div class="main-title">
-                  <h4><i class="fa-solid fa-file"></i> 新規タスク作成</h4>
+                  <h4><i class="fa-solid fa-file"></i>新規タスク作成</h4>
                 </div>
                 <p></p>
                 <!-- 新規投稿のエラーメッセージ -->

@@ -1,5 +1,5 @@
 <div class="main-title">
-  <h4><i class="fa-solid fa-check"></i> タスク詳細画面</h4>
+  <h4><i class="fa-solid fa-check"></i>タスク詳細画面</h4>
 </div>
 
 <div class="detail-results">
@@ -80,10 +80,9 @@
         <% end %>
         <!-- コメント投稿フォーム -->
         <%= form_with model:[@task, @task_comment] do |f| %>
-          <%= f.text_area :comment, rows: 3, style: "width: 550px;", placeholder: "コメントを入力" %>
-          <br>
+          <%= f.text_area :comment, placeholder: "コメントを入力", class: "form-input-comment" %>
           <%= button_tag(type: 'submit', class: 'submit-btn') do %>
-            　<i class="fa-solid fa-paper-plane"></i>　
+            <i class="fa-solid fa-paper-plane"></i>
           <% end %>
         <% end %>
       </ul>

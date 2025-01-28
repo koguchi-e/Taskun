@@ -25,7 +25,17 @@ html, body {
   border: 1px solid #ccc;
   border-radius: 4px;
   display: block; /* ブロック要素として表示 */
-  margin-bottom: 1rem; /* 入力フィールドの下に余白 */
+  margin-bottom: 5px;
+}
+
+.form-input-comment {
+  height: 100px;
+  width: 500px; 
+  margin-bottom: 5px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: block; /* ブロック要素として表示 */
 }
 
 // #####################################
@@ -221,6 +231,11 @@ li {
   color: white;
   border-color: white;
   background-color: #1a4472;
+}
+
+.submit-btn, .fa-solid {
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .submit-btn:hover {
