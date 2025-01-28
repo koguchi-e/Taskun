@@ -310,12 +310,7 @@ i.fa-solid.fa-circle-check {
 }
 
 // #####################################
-// ユーザ詳細画面内、タスク一覧
-ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
+// 一覧画面
 
 .task-index {
   display: flex;
@@ -330,7 +325,7 @@ ul {
 }
 
 // #####################################
-// タスク詳細画面
+// タスク・ユーザ詳細画面
 
 .detail-results {
   display: flex;
@@ -345,6 +340,30 @@ ul {
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 1rem;
+}
+
+// ユーザ詳細画面内・タスクリスト
+
+.detail-title {
+  white-space: nowrap;
+}
+
+.tasks-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tasks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0;
 }
 
 // #####################################

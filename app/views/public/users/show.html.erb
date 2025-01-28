@@ -3,65 +3,57 @@
 </div>
 <p></p>
 
-<div class="index-results">
-  <div class="index-card">
-    <div class="index-header">
-      <table>
-      <body>
-        <tr>
-          <td style="text-align:right; vertical-align: top;">
-            <b>プロフィール画像</b>：
-          </td>
-          <td>
-            <% if @user.image.attached? %>
-              <%= image_tag @user.image, size: "80x80" %>
-            <% else %>
-              <%= image_tag "no_image.jpg", size: "80x80" %>
-            <% end %>
-          </td>
-        </tr>
-        <tr>
-          <td style="text-align:right; vertical-align: top;">
-            <b>ユーザ名</b>：
-          </td>
-          <td><%= @user.name %></td>
-        </tr>
-        <tr>
-          <td style="text-align:right; vertical-align: top;">
-            <b>メールアドレス</b>：
-          </td>
-          <td>
-            <%= @user.email %>　
-            <% if @user == current_user %>
-              <%= link_to "編集", edit_user_path(@user.id) %> | 
-              <%= link_to "退会", withdraw_user_path(@user), method: :patch, data: { confirm: "本当に退会しますか？" } %>
-            <% end %>
-            <p></p>
-          </td>
-        </tr>
-        <!-- 投稿一覧 -->
-        <tr>
-          <td style="text-align:right; vertical-align: top;">
-            <b>投稿したタスク</b>：
-          </td>
-          <td>
+<div class="detail-results">
+  <div class="detail-card">
+    <div class="detail-row">
+      <div>
+        <b>ユーザ名</b>：
+        <%= @user.name %>
+      </div>
+      <p></p>
+      <div>
+        <span class="task-meta">
+          <b>プロフィール画像</b>：
+          <% if @user.image.attached? %>
+            <%= image_tag @user.image,  alt: "#{@user.name}のプロフィール画像", class: "profile-image"  %>
+          <% else %>
+            <%= image_tag "no_image.jpg", alt: "デフォルトプロフィール画像", class: "profile-image" %>
+          <% end %>
+          <br>
+          <b>メールアドレス</b>：
+          <%= @user.email %>
+        </span>
+      </div>
+      <p></p>
+      <hr size="10">
+      <!-- 投稿一覧 -->
+      <div class="tasks-section">
+        <span class="detail-title">
+          <b>投稿したタスク</b>：
+        </span>
+        <li class="tasks-list">
+          <div class="task-content">
             <% @tasks.each do |task| %>
-              <ul>
-                <li class="task-index">
-                  <i class="fa-solid fa-circle-check"></i>
-                  <%= link_to task.title, task_path(task.id) %>
-                  <span class="task-meta">
-                    <%= task.updated_at.in_time_zone('Tokyo').strftime('%m月%d日 %H:%M') %> / 
-                    <%= task.task_comments.count %> コメント
-                  </span>
-                </li>
-              </ul>
+              <div class="task-item">
+                <i class="fa-solid fa-circle-check"></i> 
+                <%= link_to task.title, task_path(task.id) %>
+                <span class="task-meta">
+                  <%= task.updated_at.in_time_zone('Tokyo').strftime('%m月%d日 %H:%M') %> /
+                  <%= task.task_comments.count %> コメント
+                </span>
+              </div>
             <% end %>
-            <%= paginate @tasks %>
-          </td>
-        </tr>
-      </body>
-      </table>
+          </div>
+        </li>
+        <%= paginate @tasks %>
+      </div>
+      <p></p>
+      <div align="right">
+        <% if @user == current_user %>
+          <%= link_to "編集", edit_user_path(@user.id) %> | 
+          <%= link_to "退会", withdraw_user_path(@user), method: :patch, data: { confirm: "本当に退会しますか？" } %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
