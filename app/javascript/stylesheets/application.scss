@@ -360,10 +360,29 @@ i.fa-solid.fa-circle-check {
   gap: 0.5rem;
 }
 
+.task-title {
+  width: 100%;
+  max-width: 30ch; /* 30文字分の幅に制限 */
+  word-wrap: break-word; /* 単語が長すぎる場合に折り返し */
+  overflow-wrap: break-word; /* 文字が長すぎる場合に折り返し */
+  white-space: nowrap; /* タイトルを1行に収める */
+  margin-right: 16px; /* タイトルと更新日時・コメントの間にスペースを追加 */
+  flex-shrink: 1; /* タイトルが幅を広げ過ぎないようにする */
+}
+
 .task-item {
   display: flex;
   align-items: center;
-  padding: 0.5rem 0;
+}
+
+.task-item i {
+  margin-right: 8px; /* アイコンとタイトルの間にスペースを追加 */
+}
+
+.task-meta-detail {
+  font-size: 0.875rem; /* コメントのフォントサイズを少し小さく */
+  color: #666; /* 色を薄くして、視覚的に区別する */
+  flex-shrink: 0; /* コメント部分の幅を固定 */
 }
 
 // #####################################
