@@ -2,19 +2,21 @@
   <h4><i class="fa-solid fa-check"></i> タスク詳細画面</h4>
 </div>
 
-<div class="index-results">
-  <div class="index-card">
-    <div class="index-header">
-      <b>タスク名</b>：<br>
+
+
+<div class="detail-results">
+  <div class="detail-card">
+    <div>
+      <b>タスク名</b>：
       <%= @task.title %>
     </div>
-    <div class="index-header">
+    <div>
       <span class="task-meta">
         <b>投稿したユーザ</b>：
         <% if @task.user.image.attached? %>
-          <%= image_tag @task.user.image, size: "40x40", alt: "#{@task.user.name}のプロフィール画像" %>
+          <%= image_tag @task.user.image, alt: "#{@task.user.name}のプロフィール画像", class: "profile-image" %>
         <% else %>
-          <%= image_tag "no_image.jpg", size: "40x40", alt: "デフォルトプロフィール画像" %>
+          <%= image_tag "no_image.jpg", alt: "デフォルトプロフィール画像", class: "profile-image" %>
         <% end %>
         <%= @task.user.name %>
         <br>
@@ -30,7 +32,8 @@
         <%= @task.updated_at.in_time_zone('Tokyo').strftime('%m月%d日 %H:%M') %>
       </span>
     </div>
-    <div class="index-header">
+    <p></p>
+    <div align="right">
       <% if @task.user == current_user %>
         <%= link_to "編集", edit_task_path(@task.id) %> | 
         <%= link_to "削除", task_path(@task.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
@@ -43,7 +46,8 @@
   <div class="index-card">
     <div class="index-header">
       <ul>
-        コメント件数：<%= @task.task_comments.count %>
+        <b>コメント件数：<%= @task.task_comments.count %></b>
+        <hr size="10">
         <p></p>
         <!-- コメント表示 -->
         <% @task.task_comments.each do |task_comment| %>
@@ -51,9 +55,9 @@
             <div class="comment-container">
               <div class="comment-image">
                 <% if task_comment.user.image.attached? %>
-                  <%= image_tag task_comment.user.image, size: "40x40", alt: "#{task_comment.user.name}のプロフィール画像" %>
+                  <%= image_tag task_comment.user.image, alt: "#{task_comment.user.name}のプロフィール画像", class: "profile-image" %>
                 <% else %>
-                  <%= image_tag "no_image.jpg", size: "40x40", alt: "デフォルトプロフィール画像" %>
+                  <%= image_tag "no_image.jpg", alt: "デフォルトプロフィール画像", class: "profile-image" %>
                 <% end %>
               </div>
               <div class="comment-content">
@@ -69,7 +73,7 @@
               <br>
             </div>
           </li>
-          <hr  size="10">
+          <hr size="10">
         <% end %>
         <!-- コメント投稿フォーム -->
         <%= form_with model:[@task, @task_comment] do |f| %>
