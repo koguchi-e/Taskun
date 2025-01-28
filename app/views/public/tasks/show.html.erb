@@ -77,7 +77,7 @@
         <%= form_with model:[@task, @task_comment] do |f| %>
           <%= f.text_area :comment, rows: 3, style: "width: 550px;", placeholder: "コメントを入力" %>
           <br>
-          <%= link_to f.submit, class: "submit-btn" do %>
+          <%= button_tag(type: 'submit', class: 'submit-btn') do %>
             　<i class="fa-solid fa-paper-plane"></i>　
           <% end %>
         <% end %>

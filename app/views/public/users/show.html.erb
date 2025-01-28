@@ -12,7 +12,7 @@
       </div>
       <p></p>
       <div>
-        <span class="task-meta">
+        <span class="task-meta-detail">
           <b>プロフィール画像</b>：
           <% if @user.image.attached? %>
             <%= image_tag @user.image,  alt: "#{@user.name}のプロフィール画像", class: "profile-image"  %>
