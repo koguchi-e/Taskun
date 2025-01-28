@@ -141,13 +141,11 @@ html, body {
 
 // 全てのリンク
 a {
-  // color: #1a4472;
   text-decoration: none; 
 }
 
 /* ホバー時の色 */
 a:hover {
-  // color: #358ae6;
   text-decoration: none; 
 }
 
@@ -186,64 +184,6 @@ li {
 
 .pagination .page:hover {
   text-decoration: underline;
-}
-
-// #####################################
-/* index */
-.index-results {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.index-card {
-  display: flex;
-  flex-direction: column;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 1rem;
-}
-
-.index-header {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.profile-image {
-  width: 40px;
-  height: 40px;
-  object-fit: cover;
-  border-radius: 5px; 
-}
-
-.index-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.user-name {
-  font-weight: bold;
-  font-size: 1rem;
-}
-
-.index-date {
-  font-size: 0.875rem;
-  color: #666;
-}
-
-.index-body {
-  margin-top: 0.5rem;
-}
-
-.index-title {
-  font-size: 1.125rem;
-  color: #333;
-}
-
-i.fa-solid.fa-circle-check {
-  color: #1a4472 !important;
 }
 
 // #####################################
@@ -312,6 +252,70 @@ i.fa-solid.fa-circle-check {
 // #####################################
 // 一覧画面
 
+.index-results {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.index-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.index-header {
+  flex-wrap: wrap; 
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.profile-image {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 5px; 
+}
+
+.index-info {
+  flex: 1; 
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* 左寄せ */
+}
+
+.user-name {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.index-date {
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.index-body {
+  margin-top: 0.5rem;
+}
+
+.index-title {
+  font-size: 1.125rem;
+  color: #333;
+  word-wrap: break-word; /* 長いタスク名を折り返し可能にする */
+  margin-top: 0.5rem; /* タスク名を少し下に配置 */
+}
+
+i.fa-solid.fa-circle-check {
+  color: #1a4472 !important;
+}
+
+// #####################################
+// タスク一覧画面
+
 .task-index {
   display: flex;
   align-items: center;
@@ -319,7 +323,8 @@ i.fa-solid.fa-circle-check {
 }
 
 .task-meta {
-  margin-left: auto; 
+  margin-left: 0; /* autoを削除して左寄せ */
+  text-align: left; /* 念のためテキストも左寄せ */
   font-size: 0.9rem;
   color: #666;
 }
