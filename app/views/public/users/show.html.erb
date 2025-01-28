@@ -31,21 +31,23 @@
         <span class="detail-title">
           <b>投稿したタスク</b>：
         </span>
-<li class="tasks-list">
-  <div class="task-content">
-    <% @tasks.each do |task| %>
-      <div class="task-item">
-        <i class="fa-solid fa-circle-check"></i>
-        <span class="task-title"><%= link_to task.title, task_path(task.id) %></span>
-        <span class="task-meta-detail">
-          <%= task.updated_at.in_time_zone('Tokyo').strftime('%m月%d日 %H:%M') %> / 
-          <%= task.task_comments.count %> コメント
-        </span>
-      </div>
-    <% end %>
-  </div>
-</li>
-
+        <li class="tasks-list">
+          <div class="task-content">
+            <% @tasks.each do |task| %>
+              <div class="task-item">
+                <i class="fa-solid fa-circle-check"></i>
+                <div class="task-title-and-meta">
+                  <span class="task-title"><%= link_to task.title, task_path(task.id) %></span>
+                  <span class="task-meta-detail">
+                    <%= task.updated_at.in_time_zone('Tokyo').strftime('%m月%d日 %H:%M') %> / 
+                    <%= task.task_comments.count %> コメント
+                  </span>
+                </div>
+              </div>
+              <hr size="10">
+            <% end %>
+          </div>
+        </li>
         <%= paginate @tasks %>
       </div>
       <p></p>
