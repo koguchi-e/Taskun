@@ -8,15 +8,18 @@
       <b>タスク名</b>：
       <%= @task.title %>
     </div>
+    <p></p>
     <div>
       <span class="task-meta">
         <b>投稿したユーザ</b>：
-        <% if @task.user.image.attached? %>
-          <%= image_tag @task.user.image, alt: "#{@task.user.name}のプロフィール画像", class: "profile-image" %>
-        <% else %>
-          <%= image_tag "no_image.jpg", alt: "デフォルトプロフィール画像", class: "profile-image" %>
-        <% end %>
-        <%= @task.user.name %>
+          <%= link_to user_path(@task.user) do %>
+            <% if @task.user.image.attached? %>
+              <%= image_tag @task.user.image, alt: "#{@task.user.name}のプロフィール画像", class: "profile-image" %>
+            <% else %>
+              <%= image_tag "no_image.jpg", alt: "デフォルトプロフィール画像", class: "profile-image" %>
+            <% end %>
+            <%= @task.user.name %>
+          <% end %>
         <br>
         <b>キーワード</b>：
         <%= @task.keyword1 %> / 
@@ -52,10 +55,12 @@
           <li class="comment">
             <div class="comment-container">
               <div class="comment-image">
-                <% if task_comment.user.image.attached? %>
-                  <%= image_tag task_comment.user.image, alt: "#{task_comment.user.name}のプロフィール画像", class: "profile-image" %>
-                <% else %>
-                  <%= image_tag "no_image.jpg", alt: "デフォルトプロフィール画像", class: "profile-image" %>
+                <%= link_to user_path(@task.user) do %>
+                  <% if task_comment.user.image.attached? %>
+                    <%= image_tag task_comment.user.image, alt: "#{task_comment.user.name}のプロフィール画像", class: "profile-image" %>
+                  <% else %>
+                    <%= image_tag "no_image.jpg", alt: "デフォルトプロフィール画像", class: "profile-image" %>
+                  <% end %>
                 <% end %>
               </div>
               <div class="comment-content">
