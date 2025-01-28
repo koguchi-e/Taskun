@@ -45,6 +45,7 @@
       <ul>
         コメント件数：<%= @task.task_comments.count %>
         <p></p>
+        <!-- コメント表示 -->
         <% @task.task_comments.each do |task_comment| %>
           <li class="comment">
             <div class="comment-container">
@@ -70,6 +71,7 @@
           </li>
           <hr  size="10">
         <% end %>
+        <!-- コメント投稿フォーム -->
         <%= form_with model:[@task, @task_comment] do |f| %>
           <%= f.text_area :comment, rows: 3, style: "width: 550px;", placeholder: "コメントを入力" %>
           <br>
