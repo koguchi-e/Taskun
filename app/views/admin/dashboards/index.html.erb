@@ -1,18 +1,25 @@
 <p></p>
 
-<h4>管理者画面（全ユーザ一覧）</h4>
+<div class="admin-main-title">
+  <h4> <i class="fa-solid fa-users"></i> 全ユーザ一覧</h4>
+</div>
 <p></p>
 
 <% @users.each do |user| %>
   <div class="index-results">
     <div class="index-card">
       <div class="index-header">
-        <% if user.image.attached? %>
-          <%= image_tag user.image, class: "profile-image", alt: "#{user.name}のプロフィール画像" %>
-        <% else %>
-          <%= image_tag "no_image", class: "profile-image", alt: "デフォルトプロフィール画像" %>
-        <% end %> 
-        <%= user.name %> ( <%= user.email %> )
+        <%= link_to user_path(user) do %>
+          <% if user.image.attached? %>
+            <%= image_tag user.image, class: "profile-image", alt: "#{user.name}のプロフィール画像" %>
+          <% else %>
+            <%= image_tag "no_image", class: "profile-image", alt: "デフォルトプロフィール画像" %>
+          <% end %>
+          <span class="admin-user-name">
+            <%= user.name %>
+          </span>
+        <% end %>
+       ( <%= user.email %> )
         <%= link_to "削除", admin_user_path(user), method: :delete, data: { confirm: "本当に削除しますか？"} %>
       </div>
     </div>
