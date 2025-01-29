@@ -35,7 +35,9 @@
           <div class="task-content">
             <% @tasks.each do |task| %>
               <div class="task-item">
-                <i class="fa-solid fa-circle-check"></i>
+                <span class="user-show-task-icon">
+                  <i class="fa-solid fa-circle-check"></i>
+                </span>
                 <div class="task-title-and-meta">
                   <span class="task-title"><%= link_to task.title, task_path(task.id) %></span>
                   <span class="task-meta-detail">

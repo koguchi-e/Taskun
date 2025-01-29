@@ -9,6 +9,11 @@ html, body {
   margin: 0; /* 余白をリセット */
 }
 
+.top-icon {
+  color: #E8A638!important;
+}
+
+
 // #####################################
 
 /* テキストボックス */
@@ -347,7 +352,7 @@ li {
   margin-top: 0.5rem; /* タスク名を少し下に配置 */
 }
 
-i.fa-solid.fa-circle-check {
+.user-show-task-icon {
   color: #1a4472 !important;
 }
 
