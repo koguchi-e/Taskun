@@ -18,7 +18,7 @@
           <span class="task-meta">
             <%= task.user.name %> / 
             <%= task.created_at.in_time_zone('Tokyo').strftime('%m月%d日 %H:%M') %> / 
-            <%= task.task_comments.count %> コメント
+            <%= task.comments.count %> コメント
           </span>
           <b><%= link_to task.title, task_path(task.id) %></b> 
         </div>
