@@ -11,20 +11,21 @@ html, body {
 
 // #####################################
 
+/* テキストボックス */
 .form-field {
   margin-bottom: 1rem;
-  width: 100%;  /* 親要素の幅を調整 */
-  max-width: 400px;  /* 最大幅を設定（300pxでも可） */
+  width: 100%;  
+  max-width: 400px;  
 }
 
 .form-input {
   width: 100%;
-  max-width: 300px;  /* テキストボックスの最大幅 */
+  max-width: 300px;  
   padding: 0.5rem;
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
-  display: block; /* ブロック要素として表示 */
+  display: block; 
   margin-bottom: 5px;
 }
 
@@ -35,7 +36,7 @@ html, body {
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
-  display: block; /* ブロック要素として表示 */
+  display: block; 
 }
 
 // #####################################
@@ -141,11 +142,11 @@ html, body {
 .main-title {
   background-color: #EBE0F3;
   width: 100%;
-  margin-left: 5px;
 }
 
-.main-title, .fa-solid {
+.main-title i.fa-solid {
   margin-left: 5px;
+  margin-right: 5px;
 }
 
 .admin-main-title {
@@ -154,8 +155,9 @@ html, body {
   width: 100%;
 }
 
-.admin-main-title, .fa-solid {
+.admin-main-title i.fa-solid {
   margin-left: 5px;
+  margin-right: 5px;
 }
 
 .admin-user-name {
@@ -233,8 +235,8 @@ li {
   background-color: #1a4472;
 }
 
-.submit-btn, .fa-solid {
-  margin-left: 10px;
+.submit-btn i.fa-solid {
+  margin-left: 8px;
   margin-right: 10px;
 }
 

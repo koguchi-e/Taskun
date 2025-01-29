@@ -69,7 +69,7 @@
                   <%= task_comment.user.name %>
                   <%= task_comment.created_at.in_time_zone('Tokyo').strftime('%m月%d日 %H:%M') %>
                   <% if task_comment.user == current_user %>
-                    <%= link_to "削除", task_task_comment_path(task_comment.task, task_comment), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+                    <%= link_to "削除", task_comment_path(task_comment.task, task_comment), method: :delete %>
                   <% end %>
                 </span>
               </div>
@@ -80,8 +80,6 @@
         <% end %>
         <!-- コメント投稿フォーム -->
         <%= form_with model: @task_comment, url: task_comments_path(@task), local: true do |f| %>
-
-        
           <%= f.text_area :comment, placeholder: "コメントを入力", class: "form-input-comment" %>
           <%= button_tag(type: 'submit', class: 'submit-btn') do %>
             <i class="fa-solid fa-paper-plane"></i>
