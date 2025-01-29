@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>管理者用・Taskun</title>
+  <link rel="icon" href="<%= asset_path('site-icon.png') %>">
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -15,7 +16,10 @@
     <nav class="navbar navbar-expand-lg navbar-light">
       <div class="container">
         <li class="navbar-brand p-3">
-          <%= link_to "Taskun（通常ページへ）", root_path %>
+          <%= link_to root_path do %>
+              <%= image_tag "site-icon.png", alt: "サイトアイコン", width: 55, height: 55 %>
+              Taskun（通常ページへ）
+          <% end %>
         </li>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav ml-auto">

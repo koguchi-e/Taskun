@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Taskun</title>
+    <link rel="icon" href="<%= asset_path('site-icon.png') %>">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -16,7 +17,10 @@
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
           <li class="navbar-brand p-3">
-            <%= link_to "Taskun", root_path %>
+            <%= link_to root_path do %>
+              <%= image_tag "site-icon.png", alt: "サイトアイコン", width: 55, height: 55 %>
+              Taskun.
+            <% end %>
           </li>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <!-- ログイン中ナビゲーション  -->

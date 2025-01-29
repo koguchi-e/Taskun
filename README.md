@@ -1,5 +1,6 @@
 ## タスくん(Taskun)
-（★スクショ・画像などを掲載予定。）
+<img width="640" height="130" src="app\assets\images\Taskun.png">
+
 
 ## 概要
 ### サイトテーマ
