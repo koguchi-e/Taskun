@@ -39,7 +39,7 @@
                   <i class="fa-solid fa-circle-check"></i>
                 </span>
                 <div class="task-title-and-meta">
-                  <span class="task-title"><%= link_to task.title, task_path(task.id) %></span>
+                  <span class="task-title"><b><%= link_to task.title, task_path(task.id) %></b></span>
                   <span class="task-meta-detail">
                     <%= task.updated_at.in_time_zone('Tokyo').strftime('%m月%d日 %H:%M') %> / 
                     <%= task.comments.count %> コメント
