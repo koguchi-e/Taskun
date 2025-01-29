@@ -46,7 +46,7 @@
 - IDE：Cloud9
 
 ## 使用素材
-（★後ほど掲載予定。）
+- [Canva様](https://www.canva.com/ja_jp/help/using-canva-to-create-products-for-sale/#commercial-use)
 <!-- - 外部サービスの画像素材・音声素材を使用した場合は、必ずサービス名とURLを明記してください。 -->
 <!-- - アプリケーションの実装に使用したgem/bootstrapのリファレンスなどの記載は不要です。 -->
 <!-- - 使用しない場合は、使用素材の項目をREADMEから削除してください。 -->
