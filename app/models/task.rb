@@ -1,6 +1,6 @@
 class Task < ApplicationRecord
   belongs_to :user
-  has_many :task_comments, dependent: :destroy
+  has_many :comments, class_name: "TaskComment", dependent: :destroy
 
   # バリデーション
   validates :title, length: { maximum: 30 }, presence: true
