@@ -1,8 +1,7 @@
 ## :heavy_check_mark: タスくん(Taskun)
-{: align="center"}
-![my image](app\assets\images\Taskun.png)
-<img width="640" height="130" src="app\assets\images\Taskun.png">
-
+<div align="center">
+    <img width="640" height="130" src="app\assets\images\Taskun.png">
+</div>
 
 ## :earth_africa: 概要
 ### :memo: サイトテーマ
