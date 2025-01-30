@@ -45,7 +45,7 @@
 - JSライブラリ：jQuery
 - IDE：Cloud9
 
-## :sparkling_heart: 使用素材
+## :ribbon: 使用素材
 - [Canva様](https://www.canva.com/ja_jp/help/using-canva-to-create-products-for-sale/#commercial-use)
 <!-- - 外部サービスの画像素材・音声素材を使用した場合は、必ずサービス名とURLを明記してください。 -->
 <!-- - アプリケーションの実装に使用したgem/bootstrapのリファレンスなどの記載は不要です。 -->
