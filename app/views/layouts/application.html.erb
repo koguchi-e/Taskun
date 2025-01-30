@@ -89,7 +89,6 @@
     <!-- トップ・アバウト・サインイン・ログインページは、サイドバー不要 -->
     <% if [root_path, about_path].include?(request.path) || 
           ['sessions', 'registrations', 'passwords'].include?(controller_name) && action_name == "new" %>
-      <%= render 'public/shared/error_messages' %>
       <div class="container">
         <div class="row">
           <div class="col-xs-9">

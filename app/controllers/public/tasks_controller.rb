@@ -38,18 +38,16 @@
   end
 
   def search
-    # パラメータから検索ワードを取得
     query = params[:query]
 
     if query.blank?
       flash[:alert] = "検索条件を入力してください。"
+      @results = Task.page(params[:page])
     else
-      # 検索ロジックを実装（例: モデルのwhereメソッドを使用）
-      @results = Task.where("title LIKE ?", "%#{query}%")
-
-      # 検索結果をビューに渡す
-      render :search
+      @results = Task.where("title LIKE ?", "%#{query}%").page(params[:page]) 
     end
+
+    render :search
   end
 
   def update
