@@ -6,7 +6,7 @@
 <p></p>
 
 <% if @user_results.present? %>
-  <b>ユーザ検索結果</b>
+  <span class="task-meta"><b>ユーザ検索結果</b></span>
   <% if @user_results.present? %>
     <div class="index-results">
       <% @user_results.each do |user| %>
@@ -31,7 +31,7 @@
 <p></p>
 
 <% if @task_results.present? %>
-  <b>タスク検索結果</b>
+  <span class="task-meta"><b>タスク検索結果</b></span>
   <% if @task_results.present? %>
     <div class="index-results">
       <% @task_results.each do |task| %>
