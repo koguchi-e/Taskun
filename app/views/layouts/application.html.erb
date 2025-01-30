@@ -87,10 +87,9 @@
     <p></p>
 
     <!-- トップ・アバウト・サインイン・ログインページは、サイドバー不要 -->
-    <% if current_page?(root_path) || current_page?(about_path) || 
-        (controller_name == "sessions" && action_name == "new") || 
-        (controller_name == "registrations" && action_name == "new") || 
-        (controller_name == "passwords" && action_name == "new") %>
+    <% if [root_path, about_path].include?(request.path) || 
+          ['sessions', 'registrations', 'passwords'].include?(controller_name) && action_name == "new" %>
+      <%= render 'public/shared/error_messages' %>
       <div class="container">
         <div class="row">
           <div class="col-xs-9">
@@ -100,10 +99,10 @@
       </div>
     <% else %>
       <!-- ここからサイドバー -->
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-4">
-            <% if user_signed_in? %>
+      <% if user_signed_in? %>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-4">
               <!-- 検索機能 -->
               <div class="main-title">
                 <h4><i class="fa-solid fa-magnifying-glass"></i>検索</h4>
@@ -114,45 +113,45 @@
               <% end %>
               <p></p>
               <p></p>
-            <% end %>
-            <!-- 作成画面 -->
-            <% if user_signed_in? && @new_task.present? %>
-              <div class="main-title">
-                <h4><i class="fa-solid fa-file"></i>新規タスク作成</h4>
-              </div>
-              <p></p>
-              <!-- 新規投稿のエラーメッセージ -->
-              <% if @new_task.errors.any? %>
-                <div class="new-error-message">
-                  <b><%= @new_task.errors.count %>件のエラーがあります。</b>
-                  <ul>
-                    <% @new_task.errors.full_messages.each do |message| %>
-                      <li><%= message %></li>
-                    <% end %>
-                  </ul>
+              <!-- 作成画面 -->
+              <% if user_signed_in? && @new_task.present? %>
+                <div class="main-title">
+                  <h4><i class="fa-solid fa-file"></i>新規タスク作成</h4>
                 </div>
+                <p></p>
+                <!-- 新規投稿のエラーメッセージ -->
+                <% if @new_task.errors.any? %>
+                  <div class="new-error-message">
+                    <b><%= @new_task.errors.count %>件のエラーがあります。</b>
+                    <ul>
+                      <% @new_task.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                      <% end %>
+                    </ul>
+                  </div>
+                <% end %>
+                <!-- 投稿フォーム -->
+                <%= form_with model: @new_task, local: true do |f| %>
+                  <div class="form-field">
+                    <b>タスク名</b>
+                    <%= f.text_field :title, class: "form-input" %>
+                    <b>キーワード</b>
+                    <%= f.text_field :keyword1, class: "form-input" %>
+                    <%= f.text_field :keyword2, class: "form-input" %>
+                    <%= f.text_field :keyword3, class: "form-input" %>
+                    <%= f.submit "投稿", class: "submit-btn" %>
+                  </div>
+                <% end %>
               <% end %>
-              <!-- 投稿フォーム -->
-              <%= form_with model: @new_task, local: true do |f| %>
-                <div class="form-field">
-                  <b>タスク名</b>
-                  <%= f.text_field :title, class: "form-input" %>
-                  <b>キーワード</b>
-                  <%= f.text_field :keyword1, class: "form-input" %>
-                  <%= f.text_field :keyword2, class: "form-input" %>
-                  <%= f.text_field :keyword3, class: "form-input" %>
-                  <%= f.submit "投稿", class: "submit-btn" %>
-                </div>
-              <% end %>
-            <% end %>
-          </div>
-          <!-- サイドバーここまで -->
-          <!-- メインコンテンツ -->
-          <div class="col-lg-8">
-            <%= yield %>
+            </div>
+            <!-- サイドバーここまで -->
+            <!-- メインコンテンツ -->
+            <div class="col-lg-8">
+              <%= yield %>
+            </div>
           </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
     
     <!-- フッター -->
