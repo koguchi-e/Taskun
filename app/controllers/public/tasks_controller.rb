@@ -42,7 +42,7 @@
     query = params[:query]
 
     if query.blank?
-      flash[:alert] = "検索したいタスク名を入力してください。"
+      flash[:alert] = "検索条件を入力してください。"
     else
       # 検索ロジックを実装（例: モデルのwhereメソッドを使用）
       @results = Task.where("title LIKE ?", "%#{query}%")
