@@ -2,9 +2,12 @@
 <p></p>
 タスクを見える化・共有して、やる気を出すコミュニティサイト。
 <p></p>
-<div class="signup-btn">
+
+<div class="auth-buttons">
+  <div class="signup-btn">
     <%= link_to "新規登録", new_user_registration_path, class: "submit-btn-registrations" %>
-</div>
-<div class="login-btn">
+  </div>
+  <div class="login-btn">
     <%= link_to "ログイン", new_user_session_path, class: "submit-btn-login" %>
+  </div>
 </div>

@@ -1,35 +1,37 @@
-<h2>ユーザ新規登録</h2>
+<div class="login-box">
+  <h4>ユーザ新規登録</h4>
 
-<%= form_with model: @user, url: user_registration_path do |f| %>
-  <%= render "public/shared/error_messages", resource: @user %> <!-- resourceを@userに修正 -->
+  <%= form_with model: @user, url: user_registration_path do |f| %>
+    <%= render "public/shared/error_messages", resource: @user %> <!-- resourceを@userに修正 -->
 
-  <div class="field">
-    <%= f.label :名前 %><br>
-    <%= f.text_field :name %>
+    <div class="field">
+      <%= f.label :名前 %><br>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="field">
+      <%= f.label :メールアドレス %><br>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :パスワード %>
+      <% if @minimum_password_length %>
+      <em>(最低 <%= @minimum_password_length %> 文字)</em>
+      <% end %><br>
+      <%= f.password_field :password, autocomplete: "new-password" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :パスワード確認 %><br>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "登録", class: "submit-btn" %>
+    </div>
+  <% end %>
+
+  <p></p>
+  <%= link_to "ログイン", new_session_path(resource_name) %>
   </div>
-
-  <div class="field">
-    <%= f.label :メールアドレス %><br>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :パスワード %>
-    <% if @minimum_password_length %>
-    <em>(最低 <%= @minimum_password_length %> 文字)</em>
-    <% end %><br>
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :パスワード確認 %><br>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "登録", class: "submit-btn" %>
-  </div>
-<% end %>
-
-<p></p>
-<%= link_to "ログイン", new_session_path(resource_name) %>

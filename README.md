@@ -1,4 +1,4 @@
-## :heavy_check_mark: タスくん(Taskun)
+## :heavy_check_mark: たすくん(Taskun)
 <div align="center">
     <img width="640" height="130" src="app\assets\images\Taskun.png">
 </div>

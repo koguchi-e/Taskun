@@ -147,6 +147,24 @@ html, body {
 
 // #####################################
 
+// ログイン・新規登録・パスワード再設定
+/* 全体を中央寄せする */
+.text-center {
+    display: flex;          /* Flexboxを適用 */
+    flex-direction: column;
+    justify-content: center; /* 水平方向の中央配置 */
+    align-items: center;     /* 垂直方向の中央配置（必要に応じて） */
+}
+
+/* フォーム全体のデザイン */
+.login-box {
+    text-align: left;       /* 中のテキストを左寄せ */
+    width: 400px;          /* フォームの幅を適度に調整 */
+    padding: 20px;
+}
+
+// #####################################
+
 // メインページ
 .main-title {
   background-color: #adb8ff;
@@ -261,17 +279,27 @@ li {
 }
 
 // トップページ・アカウント新規登録ボタン設定
-.submit-btn-registrations {
+.auth-buttons {
+  display: flex; /* 横並びにする */
+  gap: 10px; /* ボタン間の余白 */
+  align-items: center;
+  justify-content: center;  
+}
+
+.submit-btn-registrations, .submit-btn-login {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border-radius: 5px; 
-  padding: 10px 10px;
+  padding: 5px 5px;
   transition: background-color 0.3s;
   text-decoration: none; 
   border: 1px solid #ddd;
   color: white;
   border-color: white;
+}
+
+.submit-btn-registrations {
   background-color: #a2cc89;
 }
 
@@ -282,16 +310,6 @@ li {
 
 // ログインボタン設定
 .submit-btn-login {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 5px; 
-  padding: 10px 10px;
-  transition: background-color 0.3s;
-  text-decoration: none; 
-  border: 1px solid #ddd;
-  color: white;
-  border-color: white;
   background-color: #f88379;
 }
 
