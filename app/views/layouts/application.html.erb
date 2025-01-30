@@ -86,8 +86,19 @@
     <% end %>
     <p></p>
 
-    <!-- ここからサイドバー -->
-    <% if user_signed_in? %>
+    <!-- トップ・アバウト・サインイン・ログインページは、サイドバー不要 -->
+    <% if current_page?(root_path) || current_page?(about_path) || 
+        (controller_name == "sessions" && action_name == "new") || 
+        (controller_name == "registrations" && action_name == "new") %>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-9">
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+    <% else %>
+      <!-- ここからサイドバー -->
       <div class="container">
         <div class="row">
           <div class="col-lg-4">
@@ -143,18 +154,8 @@
           </div>
         </div>
       </div>
-    
-    <!-- ログイン前画面表示 -->
-    <% else %>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8">
-            <%= yield %>
-          </div>
-        </div>
-      </div>
     <% end %>
-
+    
     <!-- フッター -->
     <footer>
       <div class='footer'>
