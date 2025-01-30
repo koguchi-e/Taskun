@@ -4,13 +4,33 @@
 <p></p>
 
 <% if @results.present? %>
-  <ul>
-    <% @results.each do |result| %>
-      <li>
-        <%= link_to result.title, task_path(result.id) %>
-      </li>
-    <% end %>
-  </ul>
+  <% @results.each do |result| %>
+    <div class="index-results">
+      <div class="index-card">
+        <div class="index-header">
+          <span class="task-checkbox"><i class="fa-solid fa-circle-check"></i></span>
+          <% if result.user.image.attached? %>
+            <%= image_tag result.user.image, class: "profile-image", alt: "#{result.user.name}のプロフィール画像" %>
+          <% else %>
+            <%= image_tag "no_image.jpg", class: "profile-image", alt: "デフォルトプロフィール画像" %>
+          <% end %>
+          <div class="index-info">
+            <span class="task-meta">
+              <%= result.user.name %> / 
+              <%= result.created_at.in_time_zone('Tokyo').strftime('%m月%d日 %H:%M') %> / 
+              <%= result.comments.count %> コメント
+            </span>
+            <b><%= link_to result.title, task_path(result.id) %></b> 
+          </div>
+      </div>
+    </div>
+  <% end %>
 <% else %>
-  <p>該当する結果が見つかりませんでした。</p>
+  <div class="index-results">
+    <div class="index-card">
+      <div class="index-header">
+        <p>該当するタスクは見つかりませんでした。</p>
+      </div>
+    </div>
+  </div>
 <% end %>

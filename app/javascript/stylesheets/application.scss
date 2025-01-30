@@ -148,7 +148,7 @@ html, body {
 
 // メインページ
 .main-title {
-  background-color: #EBE0F3;
+  background-color: #adb8ff;
   width: 100%;
 }
 
@@ -377,6 +377,10 @@ li {
   text-align: left; /* 念のためテキストも左寄せ */
   font-size: 0.9rem;
   color: #666;
+}
+
+.task-checkbox {
+  color: #747caf;
 }
 
 // #####################################
