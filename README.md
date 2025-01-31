@@ -3,6 +3,8 @@
     <img width="640" height="130" src="app\assets\images\Taskun.png">
 </div>
 
+---
+
 ## :earth_africa: 概要
 ### :memo: サイトテーマ
 タスクを見える化・共有して、やる気を出すコミュニティサイト。
