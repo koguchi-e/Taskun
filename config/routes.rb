@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 
     # tasksコントローラのルーティング
     resources :tasks, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
+      resources :favorite, only: [:create, :destroy], as: "favorites"
       resources :task_comments, only: [:create, :destroy], as: "comments"
     end
 
