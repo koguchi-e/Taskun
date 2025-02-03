@@ -1,2 +1,41 @@
-<h1>Groups#show</h1>
-<p>Find me in app/views/groups/show.html.erb</p>
+<div class="main-title">
+  <h4><i class="fa-solid fa-user-group"></i>グループ詳細画面</h4>
+</div>
+<p></p>
+
+<div class="detail-results">
+  <div class="detail-card">
+    <div class="detail-row">
+        <b>グループ名</b>：
+        <% if @group.image.attached? %>
+          <%= image_tag @group.image,  alt: "#{@group.name}のプロフィール画像", class: "profile-image"  %>
+        <% else %>
+          <%= image_tag "no_image.jpg", alt: "デフォルトプロフィール画像", class: "profile-image" %>
+        <% end %>
+        <%= @group.name %>
+        <br>
+        <br>
+        <span class="task-meta-detail">
+          <b>概要</b>：<br>
+          <%= @group.summary %>
+          <br>
+          <p></p>
+          <b>作成者</b>：
+          <%= link_to user_path(@group.owner.id) do %>
+            <% if @group.owner.image.attached? %>
+              <%= image_tag @group.owner.image,  alt: "#{@group.owner.name}のプロフィール画像", class: "profile-image"  %>
+            <% else %>
+              <%= image_tag "no_image.jpg", alt: "デフォルトプロフィール画像", class: "profile-image" %>
+            <% end %>
+            <b><%= @group.owner.name %></b>
+          <% end %>
+        </span>
+        <div align="right">
+          <% if @group.owner == current_user %>
+            <%= link_to "編集", edit_group_path(@group), class: "edit-link" %>
+          <% end %>
+        </div>
+      <p></p>
+    </div>
+  </div>
+</div>
