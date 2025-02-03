@@ -1,11 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'groups/new'
-  get 'groups/create'
-  get 'groups/index'
-  get 'groups/edit'
-  get 'groups/update'
-  get 'groups/show'
   # 管理者権限のルーティング
   devise_for :admin,skip: [:registrations, :password], controllers: {
     sessions: "admin/sessions"
@@ -45,5 +39,7 @@ Rails.application.routes.draw do
         patch :withdraw # PATCHリクエストで退会処理を実行
       end
     end
+
+    resources :groups, only: [:new, :create, :index, :edit, :update, :show]
   end
 end

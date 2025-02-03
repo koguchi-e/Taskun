@@ -1,0 +1,12 @@
+<div class="main-title">
+  <h4><i class="fa-solid fa-user"></i>グループ作成画面</h4>
+</div>
+<p></p>
+
+<%= form_with model: @group, local: true do |f| %>
+  <div>
+    <%= f.label :name, "グループ名" %>
+    <%= f.text_field :name, class: "form-input" %>
+  </div>
+  <%= f.submit "作成", class: "submit-btn"  %>
+<% end %>
