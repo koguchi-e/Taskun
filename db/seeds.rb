@@ -54,10 +54,14 @@ Task.find_or_create_by!(user: satou, title: 'カリキュラム終わらせる')
   task.keyword3 = "勉強"
 end
 
-3.times do
-  Task.find_or_create_by!(user: test_tarou, title: '勉強する') do |task|
-    task.keyword1 = "テスト"
-    task.keyword2 = "Ruby"
-    task.keyword3 = "勉強"
-  end
+Task.find_or_create_by!(user: test_tarou, title: 'フロントの勉強する') do |task|
+  task.keyword1 = "テスト"
+  task.keyword2 = "Ruby"
+  task.keyword3 = "勉強"
+end
+
+Task.find_or_create_by!(user: test_tarou, title: 'GitHubの勉強する') do |task|
+  task.keyword1 = "テスト"
+  task.keyword2 = "Ruby"
+  task.keyword3 = "勉強"
 end
