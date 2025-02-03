@@ -1,2 +1,30 @@
-<h1>Groups#index</h1>
-<p>Find me in app/views/groups/index.html.erb</p>
+
+<div class="main-title">
+  <h4><i class="fa-solid fa-user-group"></i>グループ一覧画面</h4>
+</div>
+
+<p>
+<%= link_to new_group_path, class: "submit-btn" do %>
+  <i class="fa-solid fa-user-plus"></i>グループを作成
+<% end %>
+</p>
+
+<% @groups.each do |group| %>
+  <div class="detail-results">
+    <div class="detail-card">
+      <div class="group-header">
+        <%= link_to group_path(group) do %>
+          <% if group.image.attached? %>
+            <%= image_tag group.image, class: "profile-image", alt: "#{group.name}の画像" %>
+          <% else %>
+            <%= image_tag "no_image.jpg", class: "profile-image", alt: "デフォルトプロフィール画像" %>
+          <% end %>
+          <b><%= group.name %></b>
+        <% end %>
+        <% if group.owner == current_user %>
+          <%= link_to "編集", edit_group_path(group), class: "edit-link" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -510,3 +510,17 @@ li {
   margin: 0 0 5px 0;
 }
 
+// #####################################
+
+// グループ機能
+.group-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.edit-link {
+  text-decoration: none;
+  margin-left: auto;
+}
+

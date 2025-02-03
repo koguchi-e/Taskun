@@ -4,15 +4,16 @@ class Public::GroupsController < ApplicationController
   end
 
   def create
-  @group = current_user.owned_groups.build(group_params)
-  if @group.save
-    redirec_to groups_path, notice: "グループを作成しました"
-  else
-    render :new
-  end
+    @group = current_user.owned_groups.build(group_params)
+    if @group.save
+      redirect_to groups_path, notice: "グループを作成しました"
+    else
+      render :new
+    end
   end
 
   def index
+    @groups = Group.all
   end
 
   def edit
@@ -22,5 +23,11 @@ class Public::GroupsController < ApplicationController
   end
 
   def show
+  end
+
+  private
+
+  def group_params
+    params.require(:group).permit(:name,:image,:summary)
   end
 end

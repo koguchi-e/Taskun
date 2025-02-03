@@ -1,12 +1,26 @@
 <div class="main-title">
-  <h4><i class="fa-solid fa-user"></i>グループ作成画面</h4>
+  <h4><i class="fa-solid fa-user-group"></i>グループ作成画面</h4>
 </div>
 <p></p>
 
-<%= form_with model: @group, local: true do |f| %>
-  <div>
-    <%= f.label :name, "グループ名" %>
-    <%= f.text_field :name, class: "form-input" %>
+<div class="detail-results">
+  <div class="detail-card">
+    <div>
+      <%= form_with model: @group, local: true do |f| %>
+      <div>
+        <p>
+        <b>グループ名</b>：
+        <%= f.text_field :name, placeholder: "グループ名を入力", class: "form-input" %>
+        </p>
+        <p>
+        <b>画像</b>：<br>
+        <%= f.file_field :image, accept: "image/*" %>
+        </p>
+        <b>概要</b>：
+        <%= f.text_area :summary, placeholder: "グループの概要を入力", class: "form-input-comment" %>
+      </div>
+      <%= f.submit "作成", class: "submit-btn"  %>
+      <% end %>
+    </div>
   </div>
-  <%= f.submit "作成", class: "submit-btn"  %>
-<% end %>
+</div>
