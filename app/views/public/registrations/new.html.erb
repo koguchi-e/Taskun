@@ -3,42 +3,42 @@
     <h4><i class="fa-solid fa-user-plus"></i>ユーザ新規登録</h4>
   </div>
 
-<div class="detail-results">
-  <div class="detail-card">
-    <div>
-      <%= form_with model: @user, url: user_registration_path do |f| %>
-        <%= render "public/shared/error_messages", resource: @user %>
-        <p>
-          <%= f.label :名前 %><br>
-          <%= f.text_field :name, autofocus: true, class: "form-input" %>
-        </p>
+  <div class="detail-results">
+    <div class="detail-card">
+      <div>
+        <%= form_with model: @user, url: user_registration_path do |f| %>
+          <%= render "public/shared/error_messages", resource: @user %>
+          <p>
+            <%= f.label :名前 %><br>
+            <%= f.text_field :name, autofocus: true, class: "form-input" %>
+          </p>
 
-        <p>
-          <%= f.label :メールアドレス %><br>
-          <%= f.email_field :email, autocomplete: "email", class: "form-input" %>
-        </p>
+          <p>
+            <%= f.label :メールアドレス %><br>
+            <%= f.email_field :email, autocomplete: "email", class: "form-input" %>
+          </p>
 
-        <p>
-          <%= f.label :パスワード %>
-          <% if @minimum_password_length %>
-          <em>(最低 <%= @minimum_password_length %> 文字)</em>
-          <% end %><br>
-          <%= f.password_field :password, autocomplete: "new-password", class: "form-input" %>
-        </p>
+          <p>
+            <%= f.label :パスワード %>
+            <% if @minimum_password_length %>
+            <em>(最低 <%= @minimum_password_length %> 文字)</em>
+            <% end %><br>
+            <%= f.password_field :password, autocomplete: "new-password", class: "form-input" %>
+          </p>
 
-        <p>
-          <%= f.label :パスワード確認 %><br>
-          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-input" %>
-        </p>
+          <p>
+            <%= f.label :パスワード確認 %><br>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-input" %>
+          </p>
 
-        <p>
-          <%= f.submit "登録", class: "submit-btn" %>
-        </p>
-      <% end %>
+          <p>
+            <%= f.submit "登録", class: "submit-btn" %>
+          </p>
+        <% end %>
+      </div>
     </div>
   </div>
+  <p>
+  <%= link_to "ログイン", new_session_path(resource_name) %>
+  </p>
 </div>
-
-<p>
-<%= link_to "ログイン", new_session_path(resource_name) %>
-</p>
