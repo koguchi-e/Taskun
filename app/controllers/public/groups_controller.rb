@@ -17,9 +17,17 @@ class Public::GroupsController < ApplicationController
   end
 
   def edit
+    @group = Group.find(params[:id])
+    redirect_to groups_path, alert: "権限がありません" unless @group.owner == current_user
   end
 
   def update
+    @group = Group.find(params[:id])
+    if @group.owner == current_user && @group.update(group_params)
+      redirect_to group_path(@group), notice: "グループを更新しました"
+    else
+      render :edit
+    end
   end
 
   def show
