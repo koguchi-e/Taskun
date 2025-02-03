@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  get 'groups/new'
+  get 'groups/create'
+  get 'groups/index'
+  get 'groups/edit'
+  get 'groups/update'
+  get 'groups/show'
   # 管理者権限のルーティング
   devise_for :admin,skip: [:registrations, :password], controllers: {
     sessions: "admin/sessions"
