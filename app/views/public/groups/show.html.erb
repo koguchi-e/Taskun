@@ -47,7 +47,7 @@
           <% @group.members.each do |member| %>
             <%= link_to user_path(member) do %>
               <% if member.image.attached? %>
-                <%= image_tag member.image,  alt: "#{member.name}のプロフィール画像", class: "profile-image-small"  %>
+                <%= image_tag member.image, alt: "#{member.name}のプロフィール画像", class: "profile-image-small" %>
               <% else %>
                 <%= image_tag "no_image.jpg", alt: "デフォルトプロフィール画像", class: "profile-image-small" %>
               <% end %>

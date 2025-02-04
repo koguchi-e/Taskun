@@ -30,10 +30,10 @@
               <% if user_signed_in? %>
                 <li class="nav-item">
                   <%= link_to user_path(current_user.id) do %>
-                    <i class="fa-solid fa-user"></i> マイページ
+                    <%= image_tag current_user.image, alt: "#{current_user.name}のプロフィール画像", class: "profile-image-small" %>
+                    <%= current_user.name %>
                   <% end %>
                 </li>
-
                 <li class="nav-item">
                   <%= link_to tasks_path do %>
                     <i class="fa-solid fa-list-check"></i> タスク一覧
