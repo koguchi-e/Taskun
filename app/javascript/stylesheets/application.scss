@@ -106,6 +106,13 @@ html, body {
   background-color: #45519D;
 }
 
+.navbar-nav .nav-item .nav-link {
+  display: flex;
+  align-items: center;
+  color: white !important;
+  text-decoration: none !important;
+}
+
 .navbar-brand a {
   color: white !important; /* リンクの色 */
   text-decoration: none !important; /* 下線を消す */
