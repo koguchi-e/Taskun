@@ -23,9 +23,17 @@ class Public::GroupsController < ApplicationController
 
   def update
     @group = Group.find(params[:id])
-    if @group.owner == current_user && @group.update(group_params)
-      redirect_to group_path(@group), notice: "グループを更新しました"
+    
+    if @group.owner == current_user
+      if @group.update(group_params)
+        flash[:notice] = "グループを更新しました"
+        redirect_to group_path(@group)
+      else
+        flash[:alert] = "更新に失敗しました"
+        render :edit
+      end
     else
+      flash[:alert] = "権限がありません"
       redirect_to group_path(@group)
     end
   end
@@ -53,11 +61,16 @@ class Public::GroupsController < ApplicationController
   end
 
   def destroy
-    @group = Group.find(params[:id])
-    if @group.owner == current_user && @group.destroy
-      flash[:notice] = "グループを削除しました"
-      redirect_to groups_path
+    if @group.owner == current_user
+      if @group.destroy(group_params)
+        flash[:notice] = "グループを削除しました"
+        redirect_to groups_path
+      else
+        flash[:alert] = "削除に失敗しました"
+        render :edit
+      end
     else
+      flash[:alert] = "権限がありません"
       redirect_to group_path(@group)
     end
   end

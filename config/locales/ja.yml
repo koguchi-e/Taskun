@@ -15,6 +15,7 @@ ja:
       group:
         name: "グループ名"
         image: "画像"
+        summary: "概要"
     errors:
       messages:
         blank: " を入力してください。"

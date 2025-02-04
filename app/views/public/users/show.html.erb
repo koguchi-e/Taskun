@@ -29,9 +29,9 @@
             <% @owned_groups.each do |group| %>
               <%= link_to group_path(group) do %>
                 <% if group.image.attached? %>
-                  <%= image_tag group.image,  alt: "#{group.name}のプロフィール画像", class: "profile-image"  %>
+                  <%= image_tag group.image,  alt: "#{group.name}のプロフィール画像", class: "profile-image-small"  %>
                 <% else %>
-                  <%= image_tag "no_group_image.png", class: "profile-image", alt: "#{group.name}の画像" %>
+                  <%= image_tag "no_group_image.png", class: "profile-image-small", alt: "#{group.name}の画像" %>
                 <% end %>
               <% end %>
             <% end %>
@@ -41,9 +41,9 @@
             <% @joined_groups.each do |group| %>
               <%= link_to group_path(group) do %>
                 <% if group.image.attached? %>
-                  <%= image_tag group.image,  alt: "#{group.name}のプロフィール画像", class: "profile-image"  %>
+                  <%= image_tag group.image,  alt: "#{group.name}のプロフィール画像", class: "profile-image-small"  %>
                 <% else %>
-                  <%= image_tag "no_group_image.png", class: "profile-image", alt: "#{group.name}の画像" %>
+                  <%= image_tag "no_group_image.png", class: "profile-image-small", alt: "#{group.name}の画像" %>
                 <% end %>
               <% end %>
             <% end %>

@@ -491,16 +491,14 @@ li {
   white-space: nowrap; /* 日付とコメントが改行しないように */
   font-size: 0.875rem; /* コメントのフォントサイズを少し小さく */
   color: #666; /* 色を薄くして、視覚的に区別する */
+  flex-basis: 100%; /* 日付部分を改行させる */
+  margin-top: 5px; /* 日付部分とタイトル部分の間に少し隙間を開ける */
+  max-width: 100%;
 }
 
 .task-title-and-meta span {
   word-wrap: break-word; /* タスク名が長い場合、折り返す */
   flex-basis: 100%; /* タイトルと日付を折り返しながらスペースを広げる */
-}
-
-.task-meta-detail {
-  flex-basis: 100%; /* 日付部分を改行させる */
-  margin-top: 5px; /* 日付部分とタイトル部分の間に少し隙間を開ける */
 }
 
 // #####################################
