@@ -20,6 +20,8 @@
         <b>グループ名</b>：
         <% if @group.image.attached? %>
           <%= image_tag @group.image,  alt: "#{@group.name}のプロフィール画像", class: "profile-image"  %>
+        <% else %>
+          <%= image_tag "no_group_image.png", class: "profile-image", alt: "#{@group.name}の画像" %>
         <% end %>
         <%= @group.name %>
         <br>
@@ -43,18 +45,17 @@
           <p></p>
           <p>
           <b>メンバー一覧</b>：
-          <ul>
+          <div class="group-list">
             <% @group.members.each do |member| %>
-              <li>
+              <%= link_to group_path(@group) do %>
                 <% if member.image.attached? %>
                   <%= image_tag member.image,  alt: "#{member.name}のプロフィール画像", class: "profile-image-small"  %>
                 <% else %>
                   <%= image_tag "no_image.jpg", alt: "デフォルトプロフィール画像", class: "profile-image-small" %>
                 <% end %>
-                <%= member.name %>
-              </li>
+              <% end %>
             <% end %>
-          </ul>
+          </div>
           </p>
         </span>
         <div align="right">

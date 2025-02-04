@@ -14,6 +14,8 @@
         <%= link_to group_path(group) do %>
           <% if group.image.attached? %>
             <%= image_tag group.image, class: "profile-image", alt: "#{group.name}の画像" %>
+          <% else %>
+            <%= image_tag "no_group_image.png", class: "profile-image", alt: "#{group.name}の画像" %>
           <% end %>
           <b><%= group.name %></b>
         <% end %>

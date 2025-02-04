@@ -28,7 +28,11 @@
           <div class="group-list">
             <% @owned_groups.each do |group| %>
               <%= link_to group_path(group) do %>
-                <%= image_tag group.image, alt: group.name, class: "profile-image-small" %>
+                <% if group.image.attached? %>
+                  <%= image_tag group.image,  alt: "#{group.name}のプロフィール画像", class: "profile-image"  %>
+                <% else %>
+                  <%= image_tag "no_group_image.png", class: "profile-image", alt: "#{group.name}の画像" %>
+                <% end %>
               <% end %>
             <% end %>
           </div>
@@ -36,7 +40,11 @@
           <div class="group-list">
             <% @joined_groups.each do |group| %>
               <%= link_to group_path(group) do %>
-                <%= image_tag group.image, alt: group.name, class: "profile-image-small" %>
+                <% if group.image.attached? %>
+                  <%= image_tag group.image,  alt: "#{group.name}のプロフィール画像", class: "profile-image"  %>
+                <% else %>
+                  <%= image_tag "no_group_image.png", class: "profile-image", alt: "#{group.name}の画像" %>
+                <% end %>
               <% end %>
             <% end %>
           </div>
