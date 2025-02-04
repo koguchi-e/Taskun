@@ -8,17 +8,22 @@
 </p>
 
 <% @groups.each do |group| %>
-  <div class="detail-results">
-    <div class="detail-card">
-      <div class="group-header">
+  <div class="index-results">
+    <div class="index-card">
+      <div class="index-header">
         <%= link_to group_path(group) do %>
           <% if group.image.attached? %>
             <%= image_tag group.image, class: "profile-image", alt: "#{group.name}の画像" %>
           <% else %>
             <%= image_tag "no_group_image.png", class: "profile-image", alt: "#{group.name}の画像" %>
           <% end %>
-          <b><%= group.name %></b>
         <% end %>
+        <div class="index-info">
+          <span class="task-meta">
+            <i class="fa-solid fa-user"></i> <%= group.members.count %> 人
+          </span>
+          <b><%= link_to group.name, group_path(group) %></b>
+        </div>
         <% if group.owner == current_user %>
           <%= link_to "編集", edit_group_path(group), class: "edit-link" %>
         <% end %>
