@@ -34,6 +34,24 @@ class Public::GroupsController < ApplicationController
     @group = Group.find(params[:id])
   end
 
+  def join
+    @group = Group.find(params[:id])
+    unless @group.memebers.include?(current_user)
+      @group.memebers << current_user
+      flash[:notice] = "グループに参加しました！"
+    end
+    redirect_to group_path(@group)
+  end
+
+  def leave
+    @group = Group.find(params[:id])
+    unless @group.memebers.include?(current_user)
+      @group.memebers.delete(current_user)
+      flash[:notice] = "グループを退会しました！"
+    end
+    redirect_to group_path(@group)
+  end
+
   private
 
   def group_params
