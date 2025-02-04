@@ -40,7 +40,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :groups, only: [:new, :create, :index, :edit, :update, :show] do
+    resources :groups, only: [:new, :create, :index, :edit, :update, :show, :destroy] do
       member do
         post "join", to: "groups#join"
         delete "leave", to: "groups#leave"

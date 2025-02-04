@@ -26,7 +26,7 @@ class Public::GroupsController < ApplicationController
     if @group.owner == current_user && @group.update(group_params)
       redirect_to group_path(@group), notice: "グループを更新しました"
     else
-      render :edit
+      redirect_to group_path(@group)
     end
   end
 
@@ -50,6 +50,16 @@ class Public::GroupsController < ApplicationController
       flash[:notice] = "グループを退会しました！"
     end
     redirect_to group_path(@group)
+  end
+
+  def destroy
+    @group = Group.find(params[:id])
+    if @group.owner == current_user && @group.destroy
+      flash[:notice] = "グループを削除しました"
+      redirect_to groups_path
+    else
+      redirect_to group_path(@group)
+    end
   end
 
   private

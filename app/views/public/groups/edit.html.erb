@@ -32,6 +32,10 @@
         </div>
         <%= f.submit "更新", class: "submit-btn"  %>
       <% end %>
+
+      <hr>
+      <p></p>
+      <%= button_to "グループを削除", group_path(@group), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "submit-btn" %>
     </div>
   </div>
 </div>

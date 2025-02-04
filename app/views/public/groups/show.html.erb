@@ -60,7 +60,8 @@
         </span>
         <div align="right">
           <% if @group.owner == current_user %>
-            <%= link_to "編集", edit_group_path(@group), class: "edit-link" %>
+            <%= link_to "編集", edit_group_path(@group), class: "edit-link" %> | 
+            <%= link_to "削除", group_path(@group), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "edit-link" %>
           <% end %>
         </div>
       <p></p>
