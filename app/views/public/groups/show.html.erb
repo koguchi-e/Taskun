@@ -1,0 +1,68 @@
+<div class="main-title">
+  <h4><i class="fa-solid fa-user-group"></i>グループ詳細画面</h4>
+</div>
+
+<p>
+<% unless @group.owner == current_user || @group.members.include?(current_user) %>
+  <%= link_to 'このグループに参加', join_group_path(@group), method: :post, class: "submit-btn-group" %>
+<% end %>
+
+<% if @group.members.include?(current_user) %>
+  <%= link_to "グループを退会", leave_group_path(@group), method: :delete, class: "submit-btn-group" %>
+<% end %>
+
+<%= link_to 'グループ一覧', groups_path, class: "submit-btn-group" %>
+</p>
+
+<div class="detail-results">
+  <div class="detail-card">
+    <div class="detail-row">
+      <b>グループ名</b>：
+      <% if @group.image.attached? %>
+        <%= image_tag @group.image,  alt: "#{@group.name}のプロフィール画像", class: "profile-image"  %>
+      <% else %>
+        <%= image_tag "no_group_image.png", class: "profile-image", alt: "#{@group.name}の画像" %>
+      <% end %>
+      <%= @group.name %>
+      <p></p>
+      <b>概要</b>：<%= @group.summary %>
+      <p></p>
+      <hr>
+      <span class="task-meta-detail">
+        <b>作成者</b>：
+        <%= link_to user_path(@group.owner.id) do %>
+          <% if @group.owner.image.attached? %>
+            <%= image_tag @group.owner.image,  alt: "#{@group.owner.name}のプロフィール画像", class: "profile-image-small" %>
+          <% else %>
+            <%= image_tag "no_image.jpg", alt: "デフォルトプロフィール画像", class: "profile-image-small" %>
+          <% end %>
+          <b><%= @group.owner.name %></b>
+        <% end %>
+        <hr>
+        <b>メンバー数</b>：<b><%= @group.members.count %> 人</b>
+        <p></p>
+        <p>
+        <b>メンバー一覧</b>：
+        <div class="group-list">
+          <% @group.members.each do |member| %>
+            <%= link_to user_path(member) do %>
+              <% if member.image.attached? %>
+                <%= image_tag member.image,  alt: "#{member.name}のプロフィール画像", class: "profile-image-small"  %>
+              <% else %>
+                <%= image_tag "no_image.jpg", alt: "デフォルトプロフィール画像", class: "profile-image-small" %>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+        </p>
+      </span>
+      <div align="right">
+        <% if @group.owner == current_user %>
+          <%= link_to "編集", edit_group_path(@group), class: "edit-link" %> | 
+          <%= link_to "削除", group_path(@group), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "edit-link" %>
+        <% end %>
+      </div>
+      <p></p>
+    </div>
+  </div>
+</div>

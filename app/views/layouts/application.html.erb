@@ -109,7 +109,7 @@
                 <h4><i class="fa-solid fa-magnifying-glass"></i>検索</h4>
               </div>
               <%= form_with url: search_path, method: :get, local: true do |f| %>
-                <%= f.text_field :query, placeholder: "検索するタスク名を入力", class: "form-input"  %>
+                <%= f.text_field :query, placeholder: "検索するタスク名を入力", class: "form-input" %>
                 <%= f.submit "検索", class: "submit-btn" %>
               <% end %>
               <p></p>
@@ -135,9 +135,9 @@
                 <%= form_with model: @new_task, local: true do |f| %>
                   <div class="form-field">
                     <b>タスク名</b>
-                    <%= f.text_field :title, class: "form-input" %>
+                    <%= f.text_field :title, placeholder: "タスク名を入力", class: "form-input" %>
                     <b>キーワード</b>
-                    <%= f.text_field :keyword1, class: "form-input" %>
+                    <%= f.text_field :keyword1, placeholder: "キーワードを入力", class: "form-input" %>
                     <%= f.text_field :keyword2, class: "form-input" %>
                     <%= f.text_field :keyword3, class: "form-input" %>
                     <%= f.submit "投稿", class: "submit-btn" %>

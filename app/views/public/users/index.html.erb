@@ -2,6 +2,11 @@
   <h4><i class="fa-solid fa-users"></i>ユーザ一覧</h4>
 </div>
 
+<p>
+<%= link_to 'グループを作成', new_group_path, class: "submit-btn-group" %>
+<%= link_to 'グループ一覧', groups_path, class: "submit-btn-group" %>
+</p>
+
 <% @users.each do |user| %>
   <div class="index-results">
     <div class="index-card">

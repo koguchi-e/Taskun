@@ -6,7 +6,9 @@
   <div class="index-results">
     <div class="index-card">
       <div class="index-header">
-        <span class="task-checkbox"><i class="fa-solid fa-circle-check"></i></span>
+        <span class="task-checkbox">
+          <i class="fa-solid fa-circle-check"></i>
+        </span>
         <%= link_to user_path(task.user.id) do %>
           <% if task.user.image.attached? %>
             <%= image_tag task.user.image, class: "profile-image", alt: "#{task.user.name}のプロフィール画像" %>

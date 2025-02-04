@@ -23,9 +23,10 @@
   <div class="index-card">
     <div class="index-header">
       <%= form_with model:@user do |f| %>
-        <b>プロフィール画像</b>
+        <p>
+        <b>プロフィール画像</b><br>
         <%= f.file_field :image, accept: "image/*" %>
-        <p></p>
+        </p>
         <div class="form-field">
           <b>ユーザ名</b>
           <%= f.text_field :name, class: "form-input" %>

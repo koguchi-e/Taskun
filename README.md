@@ -51,7 +51,7 @@
 - 画面遷移図
 
 ## :airplane: 開発環境
-- OS：Windows
+- OS：Linux,Windows
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery

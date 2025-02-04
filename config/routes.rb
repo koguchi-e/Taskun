@@ -39,5 +39,12 @@ Rails.application.routes.draw do
         patch :withdraw # PATCHリクエストで退会処理を実行
       end
     end
+
+    resources :groups, only: [:new, :create, :index, :edit, :update, :show, :destroy] do
+      member do
+        post "join", to: "groups#join"
+        delete "leave", to: "groups#leave"
+      end
+    end
   end
 end

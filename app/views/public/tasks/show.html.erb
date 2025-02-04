@@ -29,16 +29,16 @@
           </p>
         <% end %>
       </span>
+      <hr size="10">
     </div>
-    <p></p>
     <div>
       <span class="task-meta">
         <b>投稿したユーザ</b>：
           <%= link_to user_path(@task.user) do %>
             <% if @task.user.image.attached? %>
-              <%= image_tag @task.user.image, alt: "#{@task.user.name}のプロフィール画像", class: "profile-image" %>
+              <%= image_tag @task.user.image, alt: "#{@task.user.name}のプロフィール画像", class: "profile-image-small" %>
             <% else %>
-              <%= image_tag "no_image.jpg", alt: "デフォルトプロフィール画像", class: "profile-image" %>
+              <%= image_tag "no_image.jpg", alt: "デフォルトプロフィール画像", class: "profile-image-small" %>
             <% end %>
             <%= @task.user.name %>
           <% end %>
@@ -55,7 +55,6 @@
         <%= @task.updated_at.in_time_zone('Tokyo').strftime('%m月%d日 %H:%M') %>
       </span>
     </div>
-    <p></p>
     <div align="right">
       <% if @task.user == current_user %>
         <%= link_to "編集", edit_task_path(@task.id) %> | 

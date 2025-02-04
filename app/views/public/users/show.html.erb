@@ -8,20 +8,46 @@
     <div class="detail-row">
       <div>
         <b>ユーザ名</b>：
+        <% if @user.image.attached? %>
+          <%= image_tag @user.image,  alt: "#{@user.name}のプロフィール画像", class: "profile-image"  %>
+        <% else %>
+          <%= image_tag "no_image.jpg", alt: "デフォルトプロフィール画像", class: "profile-image" %>
+        <% end %>
         <%= @user.name %>
       </div>
+      <hr>
       <p></p>
       <div>
         <span class="task-meta-detail">
-          <b>プロフィール画像</b>：
-          <% if @user.image.attached? %>
-            <%= image_tag @user.image,  alt: "#{@user.name}のプロフィール画像", class: "profile-image"  %>
-          <% else %>
-            <%= image_tag "no_image.jpg", alt: "デフォルトプロフィール画像", class: "profile-image" %>
-          <% end %>
-          <br>
           <b>メールアドレス</b>：
           <%= @user.email %>
+          <p></p>
+          
+          <b>所属グループ</b>：<br>
+          （管理）<br>
+          <div class="group-list">
+            <% @owned_groups.each do |group| %>
+              <%= link_to group_path(group) do %>
+                <% if group.image.attached? %>
+                  <%= image_tag group.image,  alt: "#{group.name}のプロフィール画像", class: "profile-image-small"  %>
+                <% else %>
+                  <%= image_tag "no_group_image.png", class: "profile-image-small", alt: "#{group.name}の画像" %>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+          （メンバー）<br>
+          <div class="group-list">
+            <% @joined_groups.each do |group| %>
+              <%= link_to group_path(group) do %>
+                <% if group.image.attached? %>
+                  <%= image_tag group.image,  alt: "#{group.name}のプロフィール画像", class: "profile-image-small"  %>
+                <% else %>
+                  <%= image_tag "no_group_image.png", class: "profile-image-small", alt: "#{group.name}の画像" %>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
         </span>
       </div>
       <p></p>

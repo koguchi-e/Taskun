@@ -1,0 +1,41 @@
+<div class="main-title">
+  <h4><i class="fa-solid fa-user-group"></i>グループ編集画面</h4>
+</div>
+<p></p>
+
+<% if @group.errors.any? %>
+  <div class="new-error-message">
+    <b class="title"><%= @group.errors.count %>件のエラーが発生しました。</b>
+    <ul>
+      <% @group.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="detail-results">
+  <div class="detail-card">
+    <div>
+      <%= form_with model: @group, local: true do |f| %>
+        <div>
+          <p>
+          <b>グループ名</b>：
+          <%= f.text_field :name, placeholder: "グループ名を入力", class: "form-input" %>
+          </p>
+          <p>
+          <b>画像</b>：<br>
+          <%= f.file_field :image, accept: "image/*" %>
+          </p>
+          <b>概要</b>：
+          <%= f.text_area :summary, placeholder: "グループの概要を入力", class: "form-input-comment" %>
+        </div>
+        <%= f.submit "更新", class: "submit-btn"  %>
+      <% end %>
+
+      <hr>
+      <p></p>
+      <%= button_to "グループを削除", group_path(@group), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "submit-btn" %>
+    </div>
+  </div>
+</div>
