@@ -255,6 +255,21 @@ li {
 
 // 共通ボタン設定
 .submit-btn {
+  display: flex;
+  margin-left: auto;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px; 
+  padding: 5px 10px;
+  transition: background-color 0.3s;
+  text-decoration: none; 
+  border: 1px solid #ddd;
+  color: white;
+  border-color: white;
+  background-color: #45519D;
+}
+
+.submit-btn-group {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -273,7 +288,7 @@ li {
   margin-right: 10px;
 }
 
-.submit-btn:hover {
+.submit-btn:hover,.submit-btn-group:hover {
   background-color: #6376f7;
   color: white!important; 
 }
@@ -351,6 +366,13 @@ li {
   border-radius: 5px; 
 }
 
+.profile-image-small {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  border-radius: 5px; 
+}
+
 .index-info {
   flex: 1; 
   display: flex;
@@ -421,6 +443,7 @@ li {
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 1rem;
+  max-width: 100%;
 }
 
 // ユーザ詳細画面内・タスクリスト
@@ -524,3 +547,9 @@ li {
   margin-left: auto;
 }
 
+.group-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  max-width: 100%; /* 画像が親要素の幅を超えないようにする */
+}

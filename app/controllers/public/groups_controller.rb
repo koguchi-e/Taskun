@@ -6,14 +6,14 @@ class Public::GroupsController < ApplicationController
   def create
     @group = current_user.owned_groups.build(group_params)
     if @group.save
-      redirect_to groups_path, notice: "グループを作成しました"
+      redirect_to group_path(@group), notice: "グループを作成しました"
     else
       render :new
     end
   end
 
   def index
-    @groups = Group.all
+    @groups = Group.page(params[:page])
   end
 
   def edit
@@ -36,8 +36,8 @@ class Public::GroupsController < ApplicationController
 
   def join
     @group = Group.find(params[:id])
-    unless @group.memebers.include?(current_user)
-      @group.memebers << current_user
+    unless @group.members.include?(current_user)
+      @group.members << current_user
       flash[:notice] = "グループに参加しました！"
     end
     redirect_to group_path(@group)
@@ -45,8 +45,8 @@ class Public::GroupsController < ApplicationController
 
   def leave
     @group = Group.find(params[:id])
-    unless @group.memebers.include?(current_user)
-      @group.memebers.delete(current_user)
+    if @group.members.include?(current_user)
+      @group.members.delete(current_user)
       flash[:notice] = "グループを退会しました！"
     end
     redirect_to group_path(@group)

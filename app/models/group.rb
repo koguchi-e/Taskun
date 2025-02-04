@@ -6,5 +6,6 @@ class Group < ApplicationRecord
     has_one_attached :image
 
     validates :name, length: { maximum: 30 }, presence: true
+    validates :image, presence: true
     validates :summary, length: { maximum: 100 }
 end

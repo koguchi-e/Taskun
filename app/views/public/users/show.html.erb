@@ -8,23 +8,38 @@
     <div class="detail-row">
       <div>
         <b>ユーザ名</b>：
+        <% if @user.image.attached? %>
+          <%= image_tag @user.image,  alt: "#{@user.name}のプロフィール画像", class: "profile-image"  %>
+        <% else %>
+          <%= image_tag "no_image.jpg", alt: "デフォルトプロフィール画像", class: "profile-image" %>
+        <% end %>
         <%= @user.name %>
       </div>
+      <hr>
       <p></p>
       <div>
         <span class="task-meta-detail">
-          <b>プロフィール画像</b>：
-          <% if @user.image.attached? %>
-            <%= image_tag @user.image,  alt: "#{@user.name}のプロフィール画像", class: "profile-image"  %>
-          <% else %>
-            <%= image_tag "no_image.jpg", alt: "デフォルトプロフィール画像", class: "profile-image" %>
-          <% end %>
-          <br>
           <b>メールアドレス</b>：
           <%= @user.email %>
-          <br>
-          <b>所属グループ</b>：
+          <p></p>
           
+          <b>所属グループ</b>：<br>
+          （管理）<br>
+          <div class="group-list">
+            <% @owned_groups.each do |group| %>
+              <%= link_to group_path(group) do %>
+                <%= image_tag group.image, alt: group.name, class: "profile-image-small" %>
+              <% end %>
+            <% end %>
+          </div>
+          （メンバー）<br>
+          <div class="group-list">
+            <% @joined_groups.each do |group| %>
+              <%= link_to group_path(group) do %>
+                <%= image_tag group.image, alt: group.name, class: "profile-image-small" %>
+              <% end %>
+            <% end %>
+          </div>
         </span>
       </div>
       <p></p>
