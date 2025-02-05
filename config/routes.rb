@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+  namespace :admin do
+    get 'tasks/index'
+    get 'tasks/destroy'
+  end
+  namespace :admin do
+    get 'comments/index'
+    get 'comments/destroy'
+  end
   # 管理者権限のルーティング
   devise_for :admin,skip: [:registrations, :password], controllers: {
     sessions: "admin/sessions"
