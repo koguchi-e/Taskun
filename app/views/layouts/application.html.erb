@@ -30,7 +30,11 @@
               <% if user_signed_in? %>
                 <li class="nav-item">
                   <%= link_to user_path(current_user.id) do %>
-                    <%= image_tag current_user.image, alt: "#{current_user.name}のプロフィール画像", class: "profile-image-small" %>
+                    <% if current_user.image.attached? %>
+                      <%= image_tag current_user.image, alt: "#{current_user.name}のプロフィール画像", class: "profile-image-small" %>
+                    <% else %>
+                      <%= image_tag "no_image.jpg", alt: "デフォルトプロフィール画像", class: "profile-image-small" %>
+                    <% end %>
                     <%= current_user.name %>
                   <% end %>
                 </li>
