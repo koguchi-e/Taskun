@@ -7,7 +7,6 @@ class Admin::DashboardsController < ApplicationController
   end
 
   def search
-
     @user_query = params[:user_query]
     @task_query = params[:task_query]
 

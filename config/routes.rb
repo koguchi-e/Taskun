@@ -1,13 +1,5 @@
 Rails.application.routes.draw do
 
-  namespace :admin do
-    get 'tasks/index'
-    get 'tasks/destroy'
-  end
-  namespace :admin do
-    get 'comments/index'
-    get 'comments/destroy'
-  end
   # 管理者権限のルーティング
   devise_for :admin,skip: [:registrations, :password], controllers: {
     sessions: "admin/sessions"
@@ -18,21 +10,26 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    get "dashboards", to: "dashboards#index"
     resources :users, only: [:destroy]
-    get 'dashboards/search', to: 'dashboards#search'
+    resources :dashboards, only: [:index] do
+      collection do
+        get :search
+      end
+    end
+    resources :comments, only: [:index, :destroy]
+    resources :tasks, only: [:index, :destroy]
   end
 
   ################################################################
 
   scope module: :public do
+    root to: "homes#top"
+    get 'about', to: 'homes#about', as: 'about'
+    get 'search', to: 'tasks#search'
+
     devise_for :users, controllers: {
       registrations: 'public/registrations'
     }
-    root to: "homes#top"
-    get 'about', to: 'homes#about', as: 'about'
-
-    get 'search', to: 'tasks#search'
 
     # tasksコントローラのルーティング
     resources :tasks, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
