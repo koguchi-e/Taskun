@@ -42,9 +42,12 @@
 
     if query.blank?
       flash[:alert] = "検索条件を入力してください。"
-      @results = Task.page(params[:page])
+      @results = Task.page(params[:page])  # 検索なしの場合は全件
     else
-      @results = Task.where("title LIKE ?", "%#{query}%").page(params[:page]) 
+      @results = Task.where(
+        "title LIKE :query OR keyword1 LIKE :query OR keyword2 LIKE :query OR keyword3 LIKE :query",
+        query: "%#{ActiveRecord::Base.sanitize_sql_like(query)}%"
+      ).page(params[:page])  # 検索結果をページネーション
     end
 
     render :search

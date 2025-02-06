@@ -69,8 +69,11 @@
             <h4><i class="fa-solid fa-magnifying-glass"></i>検索</h4>
           </div>
           <%= form_with url: search_admin_dashboards_path, method: :get, local: true do |f| %>
+            <b>ユーザ名</b>
             <%= f.text_field :user_query, value: @user_query, placeholder: "ユーザ名", class: "form-input" %>
+            <b>タスク名</b>
             <%= f.text_field :task_query, value: @task_query, placeholder: "タスク名", class: "form-input" %>
+            <b>コメント</b>
             <%= f.text_field :comment_query, value: @comment_query, placeholder: "コメント", class: "form-input" %>
             <%= f.submit "検索", class: "submit-btn" %>
           <% end %>
