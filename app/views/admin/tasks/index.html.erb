@@ -1,24 +1,37 @@
-<h1>投稿一覧（管理者）</h1>
+<p></p>
 
-<table>
-  <tr>
-    <th>ID</th>
-    <th>タイトル</th>
-    <th>投稿者</th>
-    <th>内容</th>
-    <th>投稿日</th>
-    <th>操作</th>
-  </tr>
-  <% @tasks.each do |task| %>
-    <tr>
-      <td><%= task.id %></td>
-      <td><%= task.title %></td>
-      <td><%= task.user.name %></td>
-      <td><%= task.created_at.strftime("%Y-%m-%d %H:%M") %></td>
-      <td>
+<div class="admin-main-title">
+  <h4><i class="fa-solid fa-check"></i>タスク一覧</h4>
+</div>
+<p></p>
+
+<% @tasks.each do |task| %>
+  <div class="index-results">
+    <div class="index-card">
+      <div class="index-header">
+        <span class="task-checkbox">
+          <i class="fa-solid fa-circle-check"></i>
+        </span>
+        <%= task.id %>
+        <%= link_to user_path(task.user.id) do %>
+          <% if task.user.image.attached? %>
+            <%= image_tag task.user.image, class: "profile-image", alt: "#{task.user.name}のプロフィール画像" %>
+          <% else %>
+            <%= image_tag "no_image.jpg", class: "profile-image", alt: "デフォルトプロフィール画像" %>
+          <% end %>
+        <% end %>
+        <div class="index-info">
+          <span class="task-meta">
+            <%= task.user.name %> / 
+            <%= task.created_at.in_time_zone('Tokyo').strftime('%m月%d日 %H:%M') %> / 
+            <i class="fa-regular fa-comment"></i> <%= task.comments.count %> /
+            <i class="fa-solid fa-fire"></i> <%= task.favorites.count %> 
+          </span>
+          <b><%= link_to task.title, task_path(task.id) %></b>
+        </div>
         <%= link_to '削除', admin_task_path(task), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "delete-button" %>
-      </td>
-    </tr>
-  <% end %>
-</table>
+      </div>
+    </div>
+  </div>
+<% end %>
 <%= paginate @tasks %>
