@@ -1,3 +1,6 @@
+<% unless (controller_path == "public/homes" && ["top", "about"].include?(action_name)) || 
+          ["sessions", "registrations", "passwords"].include?(controller_name) %>
+          
 <!DOCTYPE html>
 <html>
   <head>
@@ -21,60 +24,39 @@
               <span class="top-icon">
                 <%= image_tag "site-icon.png", alt: "サイトアイコン", width: 40, height: 40 %>
                 Taskun.
-              <span>
+              </span>
             <% end %>
           </li>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <!-- ログイン中ナビゲーション  -->
             <ul class="navbar-nav ml-auto">
-              <% if user_signed_in? %>
-                <li class="nav-item">
-                  <%= link_to user_path(current_user.id) do %>
-                    <% if current_user.image.attached? %>
-                      <%= image_tag current_user.image, alt: "#{current_user.name}のプロフィール画像", class: "profile-image-small" %>
-                    <% else %>
-                      <%= image_tag "no_image.jpg", alt: "デフォルトプロフィール画像", class: "profile-image-small" %>
-                    <% end %>
-                    <%= current_user.name %>
+              <li class="nav-item">
+                <%= link_to user_path(current_user.id) do %>
+                  <% if current_user.image.attached? %>
+                    <%= image_tag current_user.image, alt: "#{current_user.name}のプロフィール画像", class: "profile-image-small" %>
+                  <% else %>
+                    <%= image_tag "no_image.jpg", alt: "デフォルトプロフィール画像", class: "profile-image-small" %>
                   <% end %>
-                </li>
+                  <%= current_user.name %>
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to tasks_path do %>
+                  <i class="fa-solid fa-list-check"></i> タスク一覧
+                <% end %>
+              </li>
+              
+              <li class="nav-item">
+                <%= link_to users_path do %>
+                  <i class="fa-solid fa-users"></i> ユーザ一覧
+                <% end %>
+              </li>
 
-                <li class="nav-item">
-                  <%= link_to tasks_path do %>
-                    <i class="fa-solid fa-list-check"></i> タスク一覧
-                  <% end %>
-                </li>
-                
-                <li class="nav-item">
-                  <%= link_to users_path do %>
-                    <i class="fa-solid fa-users"></i> ユーザ一覧
-                  <% end %>
-                </li>
-
-                <li class="nav-item">
-                  <%= link_to destroy_user_session_path, method: :delete do %>
-                    <i class="fa-solid fa-right-from-bracket"></i> ログアウト
-                  <% end %>
-                </li>
-
-              <!-- ログイン前ナビゲーション  -->
-              <% else %>
-                <li class="nav-item">
-                  <%= link_to about_path do %>
-                    <i class="fa-solid fa-list"></i> Taskunとは？
-                  <% end %>
-                </li>
-                <li class="nav-item">
-                  <%= link_to new_user_registration_path do %>
-                    <i class="fa-solid fa-user-plus"></i> 新規登録
-                  <% end %>
-                </li>
-                <li class="nav-item">
-                  <%= link_to new_user_session_path do %>
-                    <i class="fa-solid fa-right-to-bracket"></i> ログイン
-                  <% end %>
-                </li>
-              <% end %>
+              <li class="nav-item">
+                <%= link_to destroy_user_session_path, method: :delete do %>
+                  <i class="fa-solid fa-right-from-bracket"></i> ログアウト
+                <% end %>
+              </li>
             </ul>
           </div>
         </div>
@@ -91,73 +73,59 @@
     <% end %>
     <p></p>
 
-    <!-- トップ・アバウト・サインイン・ログインページは、サイドバー不要 -->
-    <% if [root_path, about_path].include?(request.path) || 
-          ['sessions', 'registrations', 'passwords'].include?(controller_name) && action_name == "new" %>
-      <% if current_page?(about_path) %>
-        <div class="container">
-          <div class="row">
-            <div class="col-xs-9"><%= yield %></div>
-          </div>
-        </div>
-      <% else %>
-        <div class="text-center"><%= yield %></div>
-      <% end %>
-    <% else %>
-      <!-- ここからサイドバー -->
-      <% if user_signed_in? %>
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-4">
-              <!-- 検索機能 -->
+    <!-- ここからサイドバー -->
+    <% if user_signed_in? %>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4">
+            <!-- 検索機能 -->
+            <div class="main-title">
+              <h4><i class="fa-solid fa-magnifying-glass"></i>検索</h4>
+            </div>
+            <%= form_with url: search_path, method: :get, local: true do |f| %>
+              <%= f.text_field :query, placeholder: "検索するタスク名を入力", class: "form-input" %>
+              <%= f.submit "検索", class: "submit-btn" %>
+            <% end %>
+            <p></p>
+            <p></p>
+            <!-- 作成画面 -->
+            <% if user_signed_in? && @new_task.present? %>
               <div class="main-title">
-                <h4><i class="fa-solid fa-magnifying-glass"></i>検索</h4>
+                <h4><i class="fa-solid fa-file"></i>新規タスク作成</h4>
               </div>
-              <%= form_with url: search_path, method: :get, local: true do |f| %>
-                <%= f.text_field :query, placeholder: "検索するタスク名を入力", class: "form-input" %>
-                <%= f.submit "検索", class: "submit-btn" %>
-              <% end %>
               <p></p>
-              <p></p>
-              <!-- 作成画面 -->
-              <% if user_signed_in? && @new_task.present? %>
-                <div class="main-title">
-                  <h4><i class="fa-solid fa-file"></i>新規タスク作成</h4>
+              <!-- 新規投稿のエラーメッセージ -->
+              <% if @new_task.errors.any? %>
+                <div class="new-error-message">
+                  <b><%= @new_task.errors.count %>件のエラーがあります。</b>
+                  <ul>
+                    <% @new_task.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                    <% end %>
+                  </ul>
                 </div>
-                <p></p>
-                <!-- 新規投稿のエラーメッセージ -->
-                <% if @new_task.errors.any? %>
-                  <div class="new-error-message">
-                    <b><%= @new_task.errors.count %>件のエラーがあります。</b>
-                    <ul>
-                      <% @new_task.errors.full_messages.each do |message| %>
-                        <li><%= message %></li>
-                      <% end %>
-                    </ul>
-                  </div>
-                <% end %>
-                <!-- 投稿フォーム -->
-                <%= form_with model: @new_task, local: true do |f| %>
-                  <div class="form-field">
-                    <b>タスク名</b>
-                    <%= f.text_field :title, placeholder: "タスク名を入力", class: "form-input" %>
-                    <b>キーワード</b>
-                    <%= f.text_field :keyword1, placeholder: "キーワードを入力", class: "form-input" %>
-                    <%= f.text_field :keyword2, class: "form-input" %>
-                    <%= f.text_field :keyword3, class: "form-input" %>
-                    <%= f.submit "投稿", class: "submit-btn" %>
-                  </div>
-                <% end %>
               <% end %>
-            </div>
-            <!-- サイドバーここまで -->
-            <!-- メインコンテンツ -->
-            <div class="col-lg-8">
-              <%= yield %>
-            </div>
+              <!-- 投稿フォーム -->
+              <%= form_with model: @new_task, local: true do |f| %>
+                <div class="form-field">
+                  <b>タスク名</b>
+                  <%= f.text_field :title, placeholder: "タスク名を入力", class: "form-input" %>
+                  <b>キーワード</b>
+                  <%= f.text_field :keyword1, placeholder: "キーワードを入力", class: "form-input" %>
+                  <%= f.text_field :keyword2, class: "form-input" %>
+                  <%= f.text_field :keyword3, class: "form-input" %>
+                  <%= f.submit "投稿", class: "submit-btn" %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <!-- サイドバーここまで -->
+          <!-- メインコンテンツ -->
+          <div class="col-lg-8">
+            <%= yield %>
           </div>
         </div>
-      <% end %>
+      </div>
     <% end %>
     
     <!-- フッター -->
@@ -170,3 +138,4 @@
     </footer>
   </body>
 </html>
+<% end %>

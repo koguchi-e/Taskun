@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Taskun</title>
+    <link rel="icon" href="<%= asset_path('site-icon.png') %>">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="https://kit.fontawesome.com/38dc52f0f7.js" crossorigin="anonymous"></script>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body class="d-flex flex-column vh-100">
+    <header class="shadow-sm">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+          <li class="navbar-brand p-3">
+            <%= link_to root_path do %>
+              <span class="top-icon">
+                <%= image_tag "site-icon.png", alt: "サイトアイコン", width: 40, height: 40 %>
+                Taskun.
+              </span>
+            <% end %>
+          </li>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+              <!-- ログイン前ナビゲーション  -->
+              <li class="nav-item">
+                <%= link_to about_path do %>
+                  <i class="fa-solid fa-list"></i> Taskunとは？
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to new_user_registration_path do %>
+                  <i class="fa-solid fa-user-plus"></i> 新規登録
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to new_user_session_path do %>
+                  <i class="fa-solid fa-right-to-bracket"></i> ログイン
+                <% end %>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+      <!-- ナビゲーション終わり  -->
+
+    <!-- フラッシュメッセージ  -->
+    <% if flash[:notice] %>
+      <div class="flash-message notice"><%= flash[:notice] %></div>
+    <% end %>
+    <% if flash[:alert] %>
+      <div class="flash-message alert"><%= flash[:alert] %></div>
+    <% end %>
+    <p></p>
+
+    <!-- トップ・アバウト・サインイン・ログインページは、サイドバーのメインコンテンツ-->
+    <% if current_page?(about_path) %>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-9">
+              <%= yield %>
+          </div>
+        </div>
+      </div>
+    <% else %>
+      <div class="text-center">
+        <%= yield %>
+      </div>
+    <% end %>
+    <!-- フッター -->
+    <footer>
+      <div class='footer'>
+        <hr>
+        Taskun.<br>
+        お問い合わせは、<a href="mailto:koguchi.e915@gmail.com"><b><i class="fa-regular fa-envelope"></i>こちら</b></a>まで。</p>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   before_action :configure_authentication
   before_action :set_new_task
 
+  layout :set_layout
+
   private
 
   # 管理者用コントローラかどうかで、適切な認証メソッドを呼び出す
@@ -26,5 +28,13 @@ class ApplicationController < ActionController::Base
   #  @new_task をすべてのページで利用可能にする
   def set_new_task
     @new_task = Task.new if user_signed_in?
+  end
+
+  def set_layout
+    if controller_path.match?(/public\/homes|public\/sessions|public\/registrations|public\/passwords/)
+      "public"
+    else
+      "application"
+    end
   end
 end

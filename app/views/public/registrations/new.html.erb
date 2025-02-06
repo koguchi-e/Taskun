@@ -3,11 +3,12 @@
     <h4><i class="fa-solid fa-user-plus"></i>ユーザ新規登録</h4>
   </div>
 
+  <%= render "public/shared/error_messages", resource: @user %>
+
   <div class="detail-results">
     <div class="detail-card">
       <div>
         <%= form_with model: @user, url: user_registration_path do |f| %>
-          <%= render "public/shared/error_messages", resource: @user %>
           <p>
             <%= f.label :名前 %><br>
             <%= f.text_field :name, autofocus: true, class: "form-input" %>

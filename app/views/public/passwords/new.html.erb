@@ -3,11 +3,12 @@
     <h4><i class="fa-solid fa-key"></i>パスワードの再設定</h4>
   </div>
 
+  <%= render "public/shared/error_messages", resource: resource %>
+
   <div class="detail-results">
     <div class="detail-card">
       <div>
         <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-          <%= render "public/shared/error_messages", resource: resource %>
           <p>
             <%= f.label :メールアドレス %><br>
             <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-input" %>
