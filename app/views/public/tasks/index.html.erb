@@ -3,7 +3,7 @@
 </div>
 
 <% @tasks.each do |task| %>
-  <div class="index-results">
+<div class="index-results">
     <div class="index-card">
       <div class="index-header">
         <span class="task-checkbox">
@@ -27,6 +27,6 @@
         </div>
       </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</div>
 <%= paginate @tasks %>

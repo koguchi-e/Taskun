@@ -7,6 +7,18 @@
 html, body {
   height: 100%; /* ページ全体の高さを100%に */
   margin: 0; /* 余白をリセット */
+  flex-direction: column;
+}
+
+.container {
+  flex: 1; /* 残りのスペースを埋める */
+}
+
+footer {
+  text-align: center;
+  color: gray;
+  font-size: 12px;
+  margin-top: auto; /* コンテンツの下に配置 */
 }
 
 .top-icon {
@@ -198,12 +210,6 @@ html, body {
 
 .admin-user-name {
   margin-left: 5px;
-}
-
-.footer {
-  text-align: center;
-  color: gray;
-  font-size: 12px;
 }
 
 // #####################################
