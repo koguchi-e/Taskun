@@ -9,6 +9,7 @@
   <div class="index-results">
     <div class="index-card">
       <div class="index-header">
+        <%= user.id %>
         <%= link_to user_path(user) do %>
           <% if user.image.attached? %>
             <%= image_tag user.image, class: "profile-image", alt: "#{user.name}のプロフィール画像" %>
@@ -20,7 +21,7 @@
           </span>
         <% end %>
        ( <%= user.email %> )
-        <%= link_to "削除", admin_user_path(user), method: :delete, data: { confirm: "本当に削除しますか？"} %>
+        <%= link_to "削除", admin_user_path(user), method: :delete, data: { confirm: "本当にユーザを削除しますか？"} %>
       </div>
     </div>
   </div>

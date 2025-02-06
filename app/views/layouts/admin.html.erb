@@ -26,11 +26,21 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav ml-auto">
             <% if admin_signed_in? %>
-                <li class="nav-item">
-                  <%= link_to admin_dashboards_path do %>
-                    <i class="fa-solid fa-users"></i> ユーザ一覧
-                  <% end %>
-                </li>
+              <li class="nav-item">
+                <%= link_to admin_tasks_path do %>
+                  <i class="fa-solid fa-list-check"></i> タスク一覧
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to admin_dashboards_path do %>
+                  <i class="fa-solid fa-users"></i> ユーザ一覧
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to admin_comments_path do %>
+                  <i class="fa-regular fa-comment"></i> コメント一覧
+                <% end %>
+              </li>
               <li class="nav-item">
                 <%= link_to destroy_admin_session_path, method: :delete do %>
                   <i class="fa-solid fa-right-from-bracket"></i>
@@ -58,9 +68,10 @@
           <div class="admin-main-title">
             <h4><i class="fa-solid fa-magnifying-glass"></i>検索</h4>
           </div>
-          <%= form_with url: admin_dashboards_search_path, method: :get, local: true do |f| %>
+          <%= form_with url: search_admin_dashboards_path, method: :get, local: true do |f| %>
             <%= f.text_field :user_query, value: @user_query, placeholder: "ユーザ名", class: "form-input" %>
             <%= f.text_field :task_query, value: @task_query, placeholder: "タスク名", class: "form-input" %>
+            <%= f.text_field :comment_query, value: @comment_query, placeholder: "コメント", class: "form-input" %>
             <%= f.submit "検索", class: "submit-btn" %>
           <% end %>
         </div>

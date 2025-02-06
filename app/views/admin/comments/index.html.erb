@@ -1,0 +1,33 @@
+<p></p>
+
+<div class="admin-main-title">
+  <h4> <i class="fa-regular fa-comment"></i>コメント一覧</h4>
+</div>
+<p></p>
+
+<% @comments.each do |comment| %>
+<div class="index-results">
+    <div class="index-card">
+      <div class="index-header">
+        <%= comment.id %>
+        <% if comment.user.image.attached? %>
+          <%= image_tag comment.user.image, class: "profile-image", alt: "#{comment.user.name}のプロフィール画像" %>
+        <% else %>
+          <%= image_tag "no_image.jpg", class: "profile-image", alt: "デフォルトプロフィール画像" %>
+        <% end %>
+        <div class="index-info">
+          <span class="task-meta">
+            <%= comment.user.name %> /
+            <%= comment.created_at.in_time_zone('Tokyo').strftime('%m月%d日 %H:%M') %>
+          </span>
+          <b><%= link_to comment.comment, task_path(comment.task.id) %></b>
+          <span class="task-meta">
+          ( <i class="fa-solid fa-circle-check"></i> <%= comment.task.title %> )
+          </span>
+        </div>
+        <%= link_to '削除', admin_comment_path(comment), method: :delete, data: { confirm: '本当にコメントを削除しますか？' }, class: "delete-button" %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<%= paginate @comments %>
