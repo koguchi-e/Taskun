@@ -44,10 +44,21 @@
       flash[:alert] = "検索条件を入力してください。"
       @results = Task.page(params[:page])  # 検索なしの場合は全件
     else
-      @results = Task.where(
-        "title LIKE :query OR keyword1 LIKE :query OR keyword2 LIKE :query OR keyword3 LIKE :query",
-        query: "%#{ActiveRecord::Base.sanitize_sql_like(query)}%"
-      ).page(params[:page])  # 検索結果をページネーション
+      keywords = query.split(',').map(&:strip)  # カンマ区切りで配列化 & 空白除去
+
+      query_conditions = keywords.map.with_index do |word, index|
+        "(title LIKE :word#{index} OR COALESCE(keyword1, '') LIKE :word#{index} OR COALESCE(keyword2, '') LIKE :word#{index} OR COALESCE(keyword3, '') LIKE :word#{index})"
+      end.join(" AND ")  # 「OR」から「AND」に変更
+
+      query_params = keywords.map.with_index { |word, index| ["word#{index}".to_sym, "%#{ActiveRecord::Base.sanitize_sql_like(word)}%"] }.to_h
+
+      Rails.logger.debug "検索クエリ: #{query}"
+      Rails.logger.debug "検索条件: #{query_conditions}"
+      Rails.logger.debug "検索パラメータ: #{query_params}"
+
+      @results = Task.where(query_conditions, query_params).page(params[:page])
+
+      Rails.logger.debug "検索結果: #{@results.inspect}"
     end
 
     render :search
