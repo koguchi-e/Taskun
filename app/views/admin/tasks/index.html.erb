@@ -29,7 +29,7 @@
           </span>
           <b><%= link_to task.title, task_path(task.id) %></b>
         </div>
-        <%= link_to '削除', admin_task_path(task), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "delete-button" %>
+        <%= link_to '削除', admin_task_path(task), method: :delete, data: { confirm: '本当にタスクを削除しますか？' }, class: "delete-button" %>
       </div>
     </div>
   </div>

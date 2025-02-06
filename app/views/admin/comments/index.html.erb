@@ -25,7 +25,7 @@
           ( <i class="fa-solid fa-circle-check"></i> <%= comment.task.title %> )
           </span>
         </div>
-        <%= link_to '削除', admin_comment_path(comment), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "delete-button" %>
+        <%= link_to '削除', admin_comment_path(comment), method: :delete, data: { confirm: '本当にコメントを削除しますか？' }, class: "delete-button" %>
       </div>
     </div>
   </div>
