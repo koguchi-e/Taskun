@@ -9,9 +9,17 @@
         <div class="index-results">
           <div class="index-card">
             <div class="index-header">
-              <span class="task-checkbox">
-                <i class="fa-solid fa-circle-check"></i>
-              </span>
+
+              <% if task.user == current_user %>
+                <span class="task-checkbox" data-task-id="<%= task.id %>">
+                  <i class="fa-solid fa-circle-check <%= 'completed-icon' if task.completed %>"></i>
+                </span>
+              <% else %>
+                <span class="task-checkbox">
+                  <i class="fa-solid fa-circle-check"></i>
+                </span>
+              <% end %>
+
               <%= link_to user_path(task.user.id) do %>
                 <% if task.user.image.attached? %>
                   <%= image_tag task.user.image, class: "profile-image", alt: "#{task.user.name}のプロフィール画像" %>
@@ -19,6 +27,7 @@
                   <%= image_tag "no_image.jpg", class: "profile-image", alt: "デフォルトプロフィール画像" %>
                 <% end %>
               <% end %>
+
               <div class="index-info">
                 <span class="task-meta">
                   <%= task.user.name %> / 
@@ -26,7 +35,9 @@
                   <i class="fa-regular fa-comment"></i> <%= task.comments.count %> /
                   <i class="fa-solid fa-fire"></i> <%= task.favorites.count %> 
                 </span>
-                <b><%= link_to task.title, task_path(task.id) %></b>
+                <b class="<%= 'completed-text' if task.completed %>">
+                  <%= link_to task.title, task_path(task.id) %>
+                </b>
               </div>
             </div>
           </div>

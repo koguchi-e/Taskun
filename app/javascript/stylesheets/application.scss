@@ -565,3 +565,19 @@ li {
   gap: 5px;
   max-width: 100%; /* 画像が親要素の幅を超えないようにする */
 }
+
+// #####################################
+
+/* 完了機能 */
+.completed-task {
+  opacity: 0.7;
+}
+
+.completed-text {
+  text-decoration: line-through;
+  color: gray;
+}
+
+.completed-icon {
+  color: gray;
+}
