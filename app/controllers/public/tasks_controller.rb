@@ -42,12 +42,12 @@
 
     if query.blank?
       flash[:alert] = "検索条件を入力してください。"
-      @results = Task.page(params[:page])  # 検索なしの場合は全件
+      @results = Task.includes(:user).page(params[:page])  # 検索なしの場合は全件
     else
       keywords = query.split(',').map(&:strip)  # カンマ区切りで配列化 & 空白除去
 
       query_conditions = keywords.map.with_index do |word, index|
-        "(title LIKE :word#{index} OR COALESCE(keyword1, '') LIKE :word#{index} OR COALESCE(keyword2, '') LIKE :word#{index} OR COALESCE(keyword3, '') LIKE :word#{index})"
+        "(tasks.title LIKE :word#{index} OR COALESCE(tasks.keyword1, '') LIKE :word#{index} OR COALESCE(tasks.keyword2, '') LIKE :word#{index} OR COALESCE(tasks.keyword3, '') LIKE :word#{index} OR users.name LIKE :word#{index})"
       end.join(" AND ")  # 「OR」から「AND」に変更
 
       query_params = keywords.map.with_index { |word, index| ["word#{index}".to_sym, "%#{ActiveRecord::Base.sanitize_sql_like(word)}%"] }.to_h
@@ -56,13 +56,14 @@
       Rails.logger.debug "検索条件: #{query_conditions}"
       Rails.logger.debug "検索パラメータ: #{query_params}"
 
-      @results = Task.where(query_conditions, query_params).page(params[:page])
+      @results = Task.joins(:user).where(query_conditions, query_params).includes(:user).page(params[:page])
 
       Rails.logger.debug "検索結果: #{@results.inspect}"
     end
 
     render :search
   end
+
 
   def update
     @task = Task.find(params[:id])
