@@ -15,10 +15,10 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class="d-flex flex-column vh-100">
+  <body class="d-flex flex-column min-vh-100">
     <header class="shadow-sm">
       <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container flex-grow-1">
+        <div class="container">
           <li class="navbar-brand p-3">
             <%= link_to root_path do %>
               <span class="top-icon">
@@ -75,7 +75,7 @@
 
     <!-- ここからサイドバー -->
     <% if user_signed_in? %>
-      <div class="container flex-grow-1">
+      <div class="container">
         <div class="row">
           <div class="col-lg-4">
             <!-- 検索機能 -->
@@ -83,8 +83,7 @@
               <h4><i class="fa-solid fa-magnifying-glass"></i>検索</h4>
             </div>
             <%= form_with url: search_path, method: :get, local: true do |f| %>
-              <b>タスク・キーワードを検索</b><br>
-              <span class="task-meta">「,」でAND検索</span>
+              <span class="task-meta">タスク/キーワードを検索。","でAND検索</span>
               <%= f.text_field :query, placeholder: "検索条件を入力", class: "form-input" %>
               <%= f.submit "検索", class: "submit-btn" %>
             <% end %>
@@ -131,7 +130,7 @@
     <% end %>
     
     <!-- フッター -->
-    <footer class="footer">
+    <footer class="footer mt-auto">
       <hr>
       Taskun.<br>
       お問い合わせは、<a href="mailto:koguchi.e915@gmail.com"><b><i class="fa-regular fa-envelope"></i>こちら</b></a>まで。
