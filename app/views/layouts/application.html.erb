@@ -83,8 +83,8 @@
               <h4><i class="fa-solid fa-magnifying-glass"></i>検索</h4>
             </div>
             <%= form_with url: search_path, method: :get, local: true do |f| %>
-              <span class="task-meta">タスク/キーワードを検索。","でAND検索</span>
-              <%= f.text_field :query, placeholder: "検索条件を入力", class: "form-input" %>
+              <b>検索条件を入力</b>　<span class="task-meta">","でAND検索</span>
+              <%= f.text_field :query, placeholder: "タスク名,ユーザ名,キーワード", class: "form-input" %>
               <%= f.submit "検索", class: "submit-btn" %>
             <% end %>
             <p></p>
