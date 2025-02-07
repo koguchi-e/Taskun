@@ -1,37 +1,50 @@
-<div class="main-title">
-  <h4><i class="fa-solid fa-magnifying-glass"></i>検索</h4>
-</div>
-<p></p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-12">
+      <div class="main-title">
+        <h4><i class="fa-solid fa-magnifying-glass"></i>検索</h4>
+      </div>
+      <p></p>
 
-<% if @results.present? %>
-  <% @results.each do |result| %>
-    <div class="index-results">
-      <div class="index-card">
-        <div class="index-header">
-          <span class="task-checkbox"><i class="fa-solid fa-circle-check"></i></span>
-          <% if result.user.image.attached? %>
-            <%= image_tag result.user.image, class: "profile-image", alt: "#{result.user.name}のプロフィール画像" %>
-          <% else %>
-            <%= image_tag "no_image.jpg", class: "profile-image", alt: "デフォルトプロフィール画像" %>
-          <% end %>
-          <div class="index-info">
-            <span class="task-meta">
-              <%= result.user.name %> / 
-              <%= result.created_at.in_time_zone('Tokyo').strftime('%m月%d日 %H:%M') %> / 
-              <%= result.comments.count %> コメント
-            </span>
-            <b><%= link_to result.title, task_path(result.id) %></b> 
+      <% if @results.present? %>
+        <% @results.each do |result| %>
+          <div class="index-results">
+            <div class="index-card">
+              <div class="index-header">
+                <span class="task-checkbox"><i class="fa-solid fa-circle-check"></i></span>
+                <% if result.user.image.attached? %>
+                  <%= image_tag result.user.image, class: "profile-image", alt: "#{result.user.name}のプロフィール画像" %>
+                <% else %>
+                  <%= image_tag "no_image.jpg", class: "profile-image", alt: "デフォルトプロフィール画像" %>
+                <% end %>
+                <div class="index-info">
+                  <span class="task-meta">
+                    <%= result.user.name %> / 
+                    <%= result.created_at.in_time_zone('Tokyo').strftime('%m月%d日 %H:%M') %> / 
+                    <i class="fa-regular fa-comment"></i> <%= result.comments.count %>
+                  </span>
+                  <b><%= link_to result.title, task_path(result.id) %></b> 
+                  <span class="task-meta">
+                    ( <%= result.keyword1 %> / 
+                    <%= result.keyword2 %> / 
+                    <%= result.keyword3 %> )
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
-      </div>
-    </div>
-  <% end %>
-<% else %>
-  <div class="index-results">
-    <div class="index-card">
-      <div class="index-header">
-        該当するタスクは見つかりませんでした。
-      </div>
+        <% end %>
+      <% else %>
+        <div class="index-results">
+          <div class="index-card">
+            <div class="index-header">
+              該当するタスクは見つかりませんでした。
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <%= paginate @results %>
     </div>
   </div>
-<% end %>
-<%= paginate @results %>
+</div>

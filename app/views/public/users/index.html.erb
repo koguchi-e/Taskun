@@ -18,7 +18,12 @@
             <%= image_tag "no_image.jpg", class: "profile-image", alt: "デフォルトプロフィール画像" %>
           <% end %>
         <% end %>
-        <b><%= link_to user.name, user_path(user.id) %></b>
+        <div class="index-info">
+          <span class="task-meta">
+            合計投稿件数：<%= user.tasks.count %>
+          </span>
+          <b><%= link_to user.name, user_path(user.id) %></b>
+        </div>
       </div>
     </div>
   </div>
