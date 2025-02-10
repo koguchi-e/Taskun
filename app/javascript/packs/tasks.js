@@ -1,76 +1,112 @@
-document.addEventListener("DOMContentLoaded", () => {
-    console.log("✅ DOMContentLoaded: tasks.js がロードされました！ 🚀");
+function initializeTaskEvents() {
+    console.log("🔄 タスクのイベントを設定中...");
 
+    // **モーダル要素の取得**
     const messageModal = document.getElementById("messageModal");
     const messageText = document.getElementById("messageText");
     const messageCloseBtn = document.querySelector("#messageModal .close");
     const messageOkBtn = document.getElementById("messageOkBtn");
 
-    if (!messageModal || !messageText || !messageCloseBtn || !messageOkBtn) {
-        console.error("⚠️ モーダル要素が正しく取得できていません");
+    if (!messageModal) {
+        console.error("❌ messageModal が見つかりません！HTMLを確認してください");
         return;
     }
 
-    // **タスク完了ボタンをクリックしたときの処理**
-    document.addEventListener("click", async (event) => {
-        const target = event.target.closest(".task-checkbox");
-        if (!target) return;
+    if (messageCloseBtn) {
+        messageCloseBtn.onclick = () => {
+            console.log("🛑 モーダルの × ボタンがクリックされました");
+            messageModal.style.display = "none";
+        };
+    } else {
+        console.error("❌ messageCloseBtn が見つかりません！");
+    }
 
-        const taskId = target.dataset.taskId;
-        if (!taskId) return;
+    if (messageOkBtn) {
+        messageOkBtn.onclick = () => {
+            console.log("🛑 モーダルの OK ボタンがクリックされました");
+            messageModal.style.display = "none";
+        };
+    } else {
+        console.error("❌ messageOkBtn が見つかりません！");
+    }
 
-        console.log("📌 タスク完了ボタンがクリックされました:", taskId);
+    // **タスク完了ボタンのクリックイベントを設定**
+    document.querySelectorAll(".task-checkbox").forEach((taskCheckbox) => {
+        taskCheckbox.replaceWith(taskCheckbox.cloneNode(true));
+        const newTaskCheckbox = document.querySelector(`.task-checkbox[data-task-id='${taskCheckbox.dataset.taskId}']`);
 
-        const taskElement = target.closest(".index-results");
-        const taskTitle = taskElement.querySelector("b");
-        const isCurrentlyCompleted = taskElement.classList.contains("completed-task");
-
-        const confirmMessage = isCurrentlyCompleted ? "未完了に戻しますか？" : "タスクを完了しますか？";
-        if (!confirm(confirmMessage)) return;
-
-        try {
-            const response = await fetch(`/tasks/${taskId}/complete`, { 
-                method: "PATCH",
-                headers: {
-                    "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").content,
-                    "Content-Type": "application/json"
-                },
-                credentials: "same-origin"
-            });
-
-            const data = await response.json();
-            if (data.success) {
-                // **完了・未完了のメッセージをモーダルで表示**
-                messageText.textContent = isCurrentlyCompleted ? "未完了に戻しました" : "タスクは完了しました";
-                messageModal.style.display = "block";
-
-                // **タスクの UI を変更**
-                taskElement.classList.toggle("completed-task", !isCurrentlyCompleted);
-                taskElement.querySelector("i.fa-circle-check").classList.toggle("completed-icon", !isCurrentlyCompleted);
-                taskTitle.classList.toggle("completed-text", !isCurrentlyCompleted);
-            } else {
-                console.error("❌ サーバーエラー:", data.error || data.errors);
-                alert("エラーが発生しました: " + (data.error || data.errors.join(", ")));
-            }
-        } catch (error) {
-            console.error("❌ Fetchエラー:", error);
-            alert("タスクの状態変更に失敗しました。");
+        if (!newTaskCheckbox) {
+            console.error(`❌ タスクのチェックボックスが見つかりません: taskId=${taskCheckbox.dataset.taskId}`);
+            return;
         }
-    });
 
-    // **モーダルを閉じる**
-    messageCloseBtn.addEventListener("click", () => {
-        messageModal.style.display = "none";
-    });
+        newTaskCheckbox.addEventListener("click", async (event) => {
+            event.stopPropagation();
 
-    messageOkBtn.addEventListener("click", () => {
-        messageModal.style.display = "none";
+            const target = event.currentTarget;
+            const taskId = target.dataset.taskId;
+            if (!taskId) return;
+
+            console.log("📌 タスク完了ボタンがクリックされました:", taskId);
+
+            const taskElement = target.closest(".index-results");
+            const taskTitle = taskElement.querySelector("b");
+
+            try {
+                const response = await fetch(`/tasks/${taskId}/complete`, { 
+                    method: "PATCH",
+                    headers: {
+                        "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").content,
+                        "Content-Type": "application/json"
+                    },
+                    credentials: "same-origin"
+                });
+
+                const data = await response.json();
+                console.log("🔄 サーバーレスポンス:", data);
+
+                if (data.success) {
+                    // **サーバーのレスポンスから完了状態を取得**
+                    const isCompleted = data.completed;
+
+                    // **モーダルに正しいメッセージを表示**
+                    messageText.textContent = isCompleted ? "タスクは完了しました" : "未完了に戻しました";
+                    messageModal.style.display = "block";
+
+                    // **タスクの UI を変更**
+                    taskElement.classList.toggle("completed-task", isCompleted);
+                    taskElement.querySelector("i.fa-circle-check").classList.toggle("completed-icon", isCompleted);
+                    taskTitle.classList.toggle("completed-text", isCompleted);
+                } else {
+                    console.error("❌ サーバーエラー:", data.error || data.errors);
+                }
+            } catch (error) {
+                console.error("❌ Fetchエラー:", error);
+            }
+        });
     });
 
     // **モーダル外をクリックで閉じる**
     window.addEventListener("click", (event) => {
         if (event.target === messageModal) {
+            console.log("🛑 モーダル外をクリックしたので閉じる");
             messageModal.style.display = "none";
         }
     });
+}
+
+// **DOMContentLoadedでイベントを適用**
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("✅ DOMContentLoaded: tasks.js がロードされました！ 🚀");
+    initializeTaskEvents();
+});
+
+// **ページネーションでJSを適用し直す**
+document.addEventListener("click", (event) => {
+    if (event.target.closest(".pagination a")) {
+        console.log("📌 ページネーションがクリックされました。JSを適用し直します");
+        setTimeout(() => {
+            initializeTaskEvents();
+        }, 500);
+    }
 });
