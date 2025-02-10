@@ -1,11 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const modal = document.getElementById("commentModal");
-    const closeBtn = document.querySelector(".close");
-    const submitBtn = document.getElementById("submitComment");
-    const commentInput = document.getElementById("commentInput");
-    let currentTaskId = null;
+    console.log("✅ DOMContentLoaded: tasks.js がロードされました！ 🚀");
 
-    // `.task-checkbox` にイベントを委譲して2ページ目でも動作するようにする
+    const messageModal = document.getElementById("messageModal");
+    const messageText = document.getElementById("messageText");
+    const messageCloseBtn = document.querySelector("#messageModal .close");
+    const messageOkBtn = document.getElementById("messageOkBtn");
+
+    if (!messageModal || !messageText || !messageCloseBtn || !messageOkBtn) {
+        console.error("⚠️ モーダル要素が正しく取得できていません");
+        return;
+    }
+
+    // **タスク完了ボタンをクリックしたときの処理**
     document.addEventListener("click", async (event) => {
         const target = event.target.closest(".task-checkbox");
         if (!target) return;
@@ -13,14 +19,17 @@ document.addEventListener("DOMContentLoaded", () => {
         const taskId = target.dataset.taskId;
         if (!taskId) return;
 
-        const taskElement = target.closest(".index-results");
-        const isCompleted = taskElement.classList.contains("completed-task");
+        console.log("📌 タスク完了ボタンがクリックされました:", taskId);
 
-        const confirmMessage = isCompleted ? "未完了に戻しますか？" : "完了報告しますか？";
+        const taskElement = target.closest(".index-results");
+        const taskTitle = taskElement.querySelector("b");
+        const isCurrentlyCompleted = taskElement.classList.contains("completed-task");
+
+        const confirmMessage = isCurrentlyCompleted ? "未完了に戻しますか？" : "タスクを完了しますか？";
         if (!confirm(confirmMessage)) return;
 
         try {
-            const response = await fetch(`/tasks/${taskId}/complete`, {  // `toggle_complete` ではなく `complete` を使う
+            const response = await fetch(`/tasks/${taskId}/complete`, { 
                 method: "PATCH",
                 headers: {
                     "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").content,
@@ -29,81 +38,39 @@ document.addEventListener("DOMContentLoaded", () => {
                 credentials: "same-origin"
             });
 
-            if (!response.ok) {
-                throw new Error(`HTTPエラー! ステータス: ${response.status}`);
-            }
-
             const data = await response.json();
             if (data.success) {
-                console.log(`タスク ${taskId} の状態が更新されました`);
+                // **完了・未完了のメッセージをモーダルで表示**
+                messageText.textContent = isCurrentlyCompleted ? "未完了に戻しました" : "タスクは完了しました";
+                messageModal.style.display = "block";
 
-                taskElement.classList.toggle("completed-task");
-                taskElement.querySelector("i.fa-circle-check").classList.toggle("completed-icon");
-                taskElement.querySelector("b").classList.toggle("completed-text");
-
-                if (!isCompleted) {
-                    currentTaskId = taskId;
-                    modal.style.display = "block";
-                }
+                // **タスクの UI を変更**
+                taskElement.classList.toggle("completed-task", !isCurrentlyCompleted);
+                taskElement.querySelector("i.fa-circle-check").classList.toggle("completed-icon", !isCurrentlyCompleted);
+                taskTitle.classList.toggle("completed-text", !isCurrentlyCompleted);
             } else {
-                console.error("サーバーエラー:", data.error || data.errors);
+                console.error("❌ サーバーエラー:", data.error || data.errors);
                 alert("エラーが発生しました: " + (data.error || data.errors.join(", ")));
             }
         } catch (error) {
-            console.error("Fetchエラー:", error);
+            console.error("❌ Fetchエラー:", error);
             alert("タスクの状態変更に失敗しました。");
         }
     });
 
-    submitBtn.addEventListener("click", async () => {
-        if (!currentTaskId) {
-            console.error("タスクIDがセットされていません");
-            return;
-        }
-
-        const comment = commentInput.value.trim();
-        if (!comment) {
-            alert("コメントを入力してください");
-            return;
-        }
-
-        try {
-            const response = await fetch(`/tasks/${currentTaskId}/comment`, {
-                method: "POST",
-                headers: {
-                    "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").content,
-                    "Content-Type": "application/json"
-                },
-                credentials: "same-origin",
-                body: JSON.stringify({ comment: comment })
-            });
-
-            if (!response.ok) {
-                throw new Error(`HTTPエラー! ステータス: ${response.status}`);
-            }
-
-            const data = await response.json();
-            if (data.success) {
-                alert("コメントが追加されました！");
-                modal.style.display = "none";
-                commentInput.value = "";
-            } else {
-                console.error("コメント送信エラー:", data.errors);
-                alert("エラーが発生しました: " + data.errors.join(", "));
-            }
-        } catch (error) {
-            console.error("Fetchエラー:", error);
-            alert("コメントの送信に失敗しました。");
-        }
+    // **モーダルを閉じる**
+    messageCloseBtn.addEventListener("click", () => {
+        messageModal.style.display = "none";
     });
 
-    closeBtn.addEventListener("click", () => {
-        modal.style.display = "none";
+    messageOkBtn.addEventListener("click", () => {
+        messageModal.style.display = "none";
     });
 
+    // **モーダル外をクリックで閉じる**
     window.addEventListener("click", (event) => {
-        if (event.target === modal) {
-            modal.style.display = "none";
+        if (event.target === messageModal) {
+            messageModal.style.display = "none";
         }
     });
 });
