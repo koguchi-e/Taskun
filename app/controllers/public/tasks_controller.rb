@@ -74,17 +74,22 @@
   end
 
   def complete
-    if @task.user == current_user
-      @task.update(completed :true)
-      respond_to do |format|
-        format.html { redirect_to tasks_path, notice:"タスクが完了しました。" }
-        foramat.json { render json: { sucess:true } }
-      end
+    unless @task
+      render json: { success: false, error: "タスクが見つかりません" }, status: :not_found
+      return
+    end
+
+    unless @task.user == current_user
+      render json: { success: false, error: "権限がありません" }, status: :forbidden
+      return
+    end
+
+    # `completed` をトグルする
+    new_status = !@task.completed
+    if @task.update(completed: new_status)
+      render json: { success: true, completed: new_status }
     else
-      respond_to do |format|
-        format.html { redirect_to tasks_path, alert: "権限がありません。" }
-        format.json { render json: { sucess: false } }
-      end
+      render json: { success: false, errors: @task.errors.full_messages }, status: :unprocessable_entity
     end
   end
 

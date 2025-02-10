@@ -11,7 +11,6 @@
         <div class="index-results">
           <div class="index-card">
             <div class="index-header">
-
               <% if task.user == current_user %>
                 <span class="task-checkbox" data-task-id="<%= task.id %>">
                   <i class="fa-solid fa-circle-check <%= 'completed-icon' if task.completed %>"></i>
@@ -34,7 +33,7 @@
                 <span class="task-meta">
                   <%= task.user.name %> / 
                   <%= task.created_at.in_time_zone('Tokyo').strftime('%m月%d日 %H:%M') %> / 
-                  <i class="fa-regular fa-comment"></i> <%= task.comments.count %> /
+                  <i class="fa-regular fa-comment"></i> <%= task.comments.count %> / 
                   <i class="fa-solid fa-fire"></i> <%= task.favorites.count %> 
                 </span>
                 <b class="<%= 'completed-text' if task.completed %>">
@@ -48,5 +47,14 @@
 
       <%= paginate @tasks %>
     </div>
+  </div>
+</div>
+
+<div id="commentModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>コメントを入力してください:</p>
+    <textarea id="commentInput" rows="4"></textarea>
+    <button id="submitComment">送信</button>
   </div>
 </div>

@@ -437,7 +437,7 @@ li {
 }
 
 .task-checkbox {
-  color: #747caf;
+  color: #E8A638;
 }
 
 // #####################################
@@ -574,8 +574,8 @@ li {
 }
 
 .completed-text {
-  text-decoration: line-through;
-  color: gray;
+  text-decoration: line-through black;
+  text-decoration-thickness: 3px;
 }
 
 .completed-icon {
