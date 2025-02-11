@@ -74,31 +74,37 @@
   end
 
   def complete
-    unless @task
+    # タスクが見つからない場合
+    if @task.nil?
       render json: { success: false, error: "タスクが見つかりません" }, status: :not_found
       return
     end
-
+  
+    # 権限がない場合
     unless @task.user == current_user
       render json: { success: false, error: "権限がありません" }, status: :forbidden
       return
     end
-
+  
     # `completed` をトグルする
     new_status = !@task.completed
+  
+    # エラーハンドリングを強化
     if @task.update(completed: new_status)
       render json: { success: true, completed: new_status }
     else
       render json: { success: false, errors: @task.errors.full_messages }, status: :unprocessable_entity
     end
   end
-
+  
   private
-
-  # DRY原則（Don't Repeat Yourself）の適用
+  
   def set_task
-    @task = Task.find(params[:id])
-  end
+    @task = Task.find_by(id: params[:id])
+    unless @task
+      render json: { success: false, error: "タスクが見つかりません" }, status: :not_found
+    end
+  end  
 
   # ストロングパラメータ
   def task_params

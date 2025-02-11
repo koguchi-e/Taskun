@@ -1,112 +1,65 @@
-function initializeTaskEvents() {
-    console.log("🔄 タスクのイベントを設定中...");
+document.addEventListener("click", async (event) => {
+    const target = event.target.closest(".task-checkbox");
 
-    // **モーダル要素の取得**
-    const messageModal = document.getElementById("messageModal");
-    const messageText = document.getElementById("messageText");
-    const messageCloseBtn = document.querySelector("#messageModal .close");
-    const messageOkBtn = document.getElementById("messageOkBtn");
+    if (!target) return;
 
-    if (!messageModal) {
-        console.error("❌ messageModal が見つかりません！HTMLを確認してください");
+    const taskId = target.dataset.taskId;
+    if (!taskId) {
+        console.error("❌ タスクのIDが見つかりません: taskId=undefined");
         return;
     }
 
-    if (messageCloseBtn) {
-        messageCloseBtn.onclick = () => {
-            console.log("🛑 モーダルの × ボタンがクリックされました");
-            messageModal.style.display = "none";
-        };
-    } else {
-        console.error("❌ messageCloseBtn が見つかりません！");
-    }
+    console.log("📌 タスク完了ボタンがクリックされました:", taskId);
 
-    if (messageOkBtn) {
-        messageOkBtn.onclick = () => {
-            console.log("🛑 モーダルの OK ボタンがクリックされました");
-            messageModal.style.display = "none";
-        };
-    } else {
-        console.error("❌ messageOkBtn が見つかりません！");
-    }
+    try {
+        const response = await fetch(`/tasks/${taskId}/complete`, {
+            method: "PATCH",
+            headers: {
+                "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").content,
+                "Content-Type": "application/json"
+            },
+            credentials: "same-origin"
+        });
 
-    // **タスク完了ボタンのクリックイベントを設定**
-    document.querySelectorAll(".task-checkbox").forEach((taskCheckbox) => {
-        taskCheckbox.replaceWith(taskCheckbox.cloneNode(true));
-        const newTaskCheckbox = document.querySelector(`.task-checkbox[data-task-id='${taskCheckbox.dataset.taskId}']`);
-
-        if (!newTaskCheckbox) {
-            console.error(`❌ タスクのチェックボックスが見つかりません: taskId=${taskCheckbox.dataset.taskId}`);
+        // **レスポンスの Content-Type をチェック**
+        const contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+            console.error("❌ サーバーが JSON を返していません。HTML が返ってきた可能性があります。");
+            const errorText = await response.text();
+            console.error("サーバーレスポンス:", errorText);
             return;
         }
 
-        newTaskCheckbox.addEventListener("click", async (event) => {
-            event.stopPropagation();
+        const data = await response.json();
+        console.log("🔄 サーバーレスポンス:", data);
 
-            const target = event.currentTarget;
-            const taskId = target.dataset.taskId;
-            if (!taskId) return;
+        if (response.ok && data.success) {
+            console.log("✅ タスクが正常に更新されました");
 
-            console.log("📌 タスク完了ボタンがクリックされました:", taskId);
-
+            // **UIを更新**
             const taskElement = target.closest(".index-results");
             const taskTitle = taskElement.querySelector("b");
+            const isCompleted = data.completed;
 
-            try {
-                const response = await fetch(`/tasks/${taskId}/complete`, { 
-                    method: "PATCH",
-                    headers: {
-                        "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").content,
-                        "Content-Type": "application/json"
-                    },
-                    credentials: "same-origin"
-                });
+            taskElement.classList.toggle("completed-task", isCompleted);
+            taskElement.querySelector("i.fa-circle-check").classList.toggle("completed-icon", isCompleted);
+            taskTitle.classList.toggle("completed-text", isCompleted);
 
-                const data = await response.json();
-                console.log("🔄 サーバーレスポンス:", data);
+            // **モーダル表示**
+            document.getElementById("messageText").textContent = isCompleted ? "タスクは完了しました" : "未完了に戻しました";
+            const messageModal = document.getElementById("messageModal");
+            messageModal.style.display = "flex";
+            messageModal.style.justifyContent = "center";
+            messageModal.style.alignItems = "center";
 
-                if (data.success) {
-                    // **サーバーのレスポンスから完了状態を取得**
-                    const isCompleted = data.completed;
-
-                    // **モーダルに正しいメッセージを表示**
-                    messageText.textContent = isCompleted ? "タスクは完了しました" : "未完了に戻しました";
-                    messageModal.style.display = "block";
-
-                    // **タスクの UI を変更**
-                    taskElement.classList.toggle("completed-task", isCompleted);
-                    taskElement.querySelector("i.fa-circle-check").classList.toggle("completed-icon", isCompleted);
-                    taskTitle.classList.toggle("completed-text", isCompleted);
-                } else {
-                    console.error("❌ サーバーエラー:", data.error || data.errors);
-                }
-            } catch (error) {
-                console.error("❌ Fetchエラー:", error);
-            }
-        });
-    });
-
-    // **モーダル外をクリックで閉じる**
-    window.addEventListener("click", (event) => {
-        if (event.target === messageModal) {
-            console.log("🛑 モーダル外をクリックしたので閉じる");
-            messageModal.style.display = "none";
+            // **3秒後にモーダルを自動で閉じる**
+            setTimeout(() => {
+                messageModal.style.display = "none";
+            }, 3000);
+        } else {
+            console.error("❌ タスクの更新に失敗しました:", data.error || data.errors);
         }
-    });
-}
-
-// **DOMContentLoadedでイベントを適用**
-document.addEventListener("DOMContentLoaded", () => {
-    console.log("✅ DOMContentLoaded: tasks.js がロードされました！ 🚀");
-    initializeTaskEvents();
-});
-
-// **ページネーションでJSを適用し直す**
-document.addEventListener("click", (event) => {
-    if (event.target.closest(".pagination a")) {
-        console.log("📌 ページネーションがクリックされました。JSを適用し直します");
-        setTimeout(() => {
-            initializeTaskEvents();
-        }, 500);
+    } catch (error) {
+        console.error("❌ Fetchエラー:", error);
     }
 });

@@ -592,17 +592,16 @@ li {
 
 // #####################################
 
-/* 完了機能・コメント */
+/* 完了機能・モーダル */
 .modal {
-  display: none;
+  display: none; /* 重要！初期状態では非表示 */
   position: fixed;
   z-index: 1000;
   left: 0;
   top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.5);
-  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
   justify-content: center;
   align-items: center;
 }
@@ -613,7 +612,9 @@ li {
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   width: 400px;
+  max-width: 90%;
   text-align: center;
+  position: relative;
 }
 
 .close {

@@ -16,11 +16,10 @@
                   <i class="fa-solid fa-circle-check <%= 'completed-icon' if task.completed %>"></i>
                 </span>
               <% else %>
-                <span class="task-checkbox">
+                <span class="task-checkbox" data-task-id="<%= task.id %>">
                   <i class="fa-solid fa-circle-check"></i>
                 </span>
               <% end %>
-
               <%= link_to user_path(task.user.id) do %>
                 <% if task.user.image.attached? %>
                   <%= image_tag task.user.image, class: "profile-image", alt: "#{task.user.name}のプロフィール画像" %>
