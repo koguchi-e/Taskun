@@ -437,7 +437,11 @@ li {
 }
 
 .task-checkbox {
-  color: #747caf;
+  color: #E8A638;
+}
+
+.task-checkbox:hover {
+  color: #f3d29b;
 }
 
 // #####################################
@@ -565,3 +569,57 @@ li {
   gap: 5px;
   max-width: 100%; /* 画像が親要素の幅を超えないようにする */
 }
+
+// #####################################
+
+/* 完了機能 */
+.completed-task {
+  opacity: 0.7;
+}
+
+.completed-text {
+  text-decoration: line-through black;
+  text-decoration-thickness: 3px;
+}
+
+.completed-icon {
+  color: gray;
+}
+
+.completed-icon:hover {
+  color: #cccccc;
+}
+
+// #####################################
+
+/* 完了機能・モーダル */
+.modal {
+  display: none; /* 重要！初期状態では非表示 */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  max-width: 90%;
+  text-align: center;
+  position: relative;
+}
+
+.close {
+  float: right;
+  font-size: 20px;
+  cursor: pointer;
+}
+

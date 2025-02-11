@@ -41,7 +41,7 @@
                 <% end %>
               </li>
               <li class="nav-item">
-                <%= link_to tasks_path do %>
+                <%= link_to tasks_path, data: { turbo: false }  do %>
                   <i class="fa-solid fa-list-check"></i> タスク一覧
                 <% end %>
               </li>

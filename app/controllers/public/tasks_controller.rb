@@ -1,13 +1,12 @@
 ﻿class Public::TasksController < ApplicationController
   before_action :authenticate_user!,:is_matching_login_user, only: [:edit, :update, :destroy]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :complete]
 
-  # タスクの新規投稿に関するコントローラ
   def new
     @task = Task.new
     @new_task = Task.new
   end
 
-  # 新規投稿の保存機能
   def create
     @task = Task.new(task_params)
     @task.user_id = current_user.id
@@ -18,23 +17,20 @@
     else
       flash.now[:alert] = 'タスクの作成に失敗しました。'
       @new_task = @task  
-      @tasks = Task.page(params[:page])  # ページネーション用
+      @tasks = Task.page(params[:page])
       render :index
     end
   end
 
-  # タスク一覧画面
   def index
     @tasks = Task.page(params[:page])
   end
 
   def show
-    @task = Task.find(params[:id])
     @task_comment = TaskComment.new
   end
 
   def edit
-    @task = Task.find(params[:id])
   end
 
   def search
@@ -64,23 +60,58 @@
     render :search
   end
 
-
   def update
-    @task = Task.find(params[:id])
     if @task.update(task_params)
-      redirect_to task_path(@task.id)
+      redirect_to task_path(@task.id), notice: 'タスクが更新されました。'
     else
       render :edit
     end
   end
 
   def destroy
-    task = Task.find(params[:id])
-    task.destroy
-    redirect_to tasks_path
+    @task.destroy
+    redirect_to tasks_path, notice: 'タスクが削除されました。'
   end
 
+  def complete
+    if @task.nil?
+      render json: { success: false, error: "タスクが見つかりません" }, status: :not_found
+      return
+    end
+  
+    unless @task.user == current_user
+      render json: { success: false, error: "権限がありません" }, status: :forbidden
+      return
+    end
+  
+    begin
+      ActiveRecord::Base.transaction do
+        new_status = !@task.completed
+        completed_at = new_status ? Time.current : nil
+  
+        # `update_columns` を使用し、バリデーションをスキップ
+        @task.update_columns(completed: new_status, completed_at: completed_at, updated_at: Time.current)
+  
+        render json: { success: true, completed: new_status, completed_at: completed_at&.iso8601 }
+      end
+    rescue ActiveRecord::StatementInvalid => e
+      Rails.logger.error "❌ データベースエラー: #{e.message}"
+      render json: { success: false, error: "データベースエラーが発生しました" }, status: :internal_server_error
+    rescue => e
+      Rails.logger.error "❌ 予期しないエラー: #{e.message}"
+      render json: { success: false, error: "サーバーエラーが発生しました" }, status: :internal_server_error
+    end
+  end
+  
+  
   private
+  
+  def set_task
+    @task = Task.find_by(id: params[:id])
+    unless @task
+      render json: { success: false, error: "タスクが見つかりません" }, status: :not_found
+    end
+  end  
 
   # ストロングパラメータ
   def task_params

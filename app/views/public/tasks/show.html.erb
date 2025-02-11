@@ -6,7 +6,14 @@
   <div class="detail-card">
     <div>
       <b>タスク名</b>：
-      <%= @task.title %>
+      <b><%= @task.title %></b>
+      <br>
+      <b>完了状態</b>：
+      <% if @task.completed %>
+        ✅ 完了済み （<%= @task.completed_at.in_time_zone('Tokyo').strftime('%m月%d日 %H:%M') %> 済）
+      <% else %>
+        ❌ 未完了
+      <% end %>
       <span align="right">
         <% if @task.favorited_by?(current_user) %>
           <p>
