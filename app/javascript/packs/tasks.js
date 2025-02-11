@@ -11,6 +11,15 @@ document.addEventListener("click", async (event) => {
 
     console.log("📌 タスク完了ボタンがクリックされました:", taskId);
 
+    const messageModal = document.getElementById("messageModal");
+    const messageText = document.getElementById("messageText");
+
+    // **モーダルを「処理中」にしてすぐ表示**
+    messageText.textContent = "処理中...";
+    messageModal.style.display = "flex";
+    messageModal.style.justifyContent = "center";
+    messageModal.style.alignItems = "center";
+
     try {
         const response = await fetch(`/tasks/${taskId}/complete`, {
             method: "PATCH",
@@ -20,15 +29,6 @@ document.addEventListener("click", async (event) => {
             },
             credentials: "same-origin"
         });
-
-        // **レスポンスの Content-Type をチェック**
-        const contentType = response.headers.get("content-type");
-        if (!contentType || !contentType.includes("application/json")) {
-            console.error("❌ サーバーが JSON を返していません。HTML が返ってきた可能性があります。");
-            const errorText = await response.text();
-            console.error("サーバーレスポンス:", errorText);
-            return;
-        }
 
         const data = await response.json();
         console.log("🔄 サーバーレスポンス:", data);
@@ -40,26 +40,31 @@ document.addEventListener("click", async (event) => {
             const taskElement = target.closest(".index-results");
             const taskTitle = taskElement.querySelector("b");
             const isCompleted = data.completed;
+            const completedAt = data.completed_at ? new Date(data.completed_at).toLocaleString("ja-JP") : "未完了";
 
             taskElement.classList.toggle("completed-task", isCompleted);
             taskElement.querySelector("i.fa-circle-check").classList.toggle("completed-icon", isCompleted);
             taskTitle.classList.toggle("completed-text", isCompleted);
 
-            // **モーダル表示**
-            document.getElementById("messageText").textContent = isCompleted ? "タスクは完了しました" : "未完了に戻しました";
-            const messageModal = document.getElementById("messageModal");
-            messageModal.style.display = "flex";
-            messageModal.style.justifyContent = "center";
-            messageModal.style.alignItems = "center";
+            // **完了日時を表示**
+            const completedAtElement = document.getElementById(`completed-at-${taskId}`);
+            if (completedAtElement) {
+                completedAtElement.textContent = `完了日時: ${completedAt}`;
+            }
+
+            // **モーダルのメッセージを更新**
+            messageText.textContent = isCompleted ? "タスクは完了しました！" : "未完了に戻しました";
 
             // **3秒後にモーダルを自動で閉じる**
             setTimeout(() => {
                 messageModal.style.display = "none";
-            }, 3000);
+            }, 2000);
         } else {
             console.error("❌ タスクの更新に失敗しました:", data.error || data.errors);
+            messageText.textContent = "エラーが発生しました";
         }
     } catch (error) {
         console.error("❌ Fetchエラー:", error);
+        messageText.textContent = "サーバーエラーが発生しました";
     }
 });

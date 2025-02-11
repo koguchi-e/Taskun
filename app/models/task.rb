@@ -19,5 +19,6 @@ class Task < ApplicationRecord
 
   def set_default_completed
     self.completed ||= false
+    self.completed_at ||= nil 
   end
 end
