@@ -84,15 +84,25 @@
       return
     end
   
-    new_status = !@task.completed
-    completed_at = new_status ? Time.current : nil  # 完了したら日時を記録、未完了なら削除
+    begin
+      ActiveRecord::Base.transaction do
+        new_status = !@task.completed
+        completed_at = new_status ? Time.current : nil
   
-    if @task.update(completed: new_status, completed_at: completed_at)
-      render json: { success: true, completed: new_status, completed_at: completed_at }
-    else
-      render json: { success: false, errors: @task.errors.full_messages }, status: :unprocessable_entity
+        # `update_columns` を使用し、バリデーションをスキップ
+        @task.update_columns(completed: new_status, completed_at: completed_at, updated_at: Time.current)
+  
+        render json: { success: true, completed: new_status, completed_at: completed_at&.iso8601 }
+      end
+    rescue ActiveRecord::StatementInvalid => e
+      Rails.logger.error "❌ データベースエラー: #{e.message}"
+      render json: { success: false, error: "データベースエラーが発生しました" }, status: :internal_server_error
+    rescue => e
+      Rails.logger.error "❌ 予期しないエラー: #{e.message}"
+      render json: { success: false, error: "サーバーエラーが発生しました" }, status: :internal_server_error
     end
-  end  
+  end
+  
   
   private
   
