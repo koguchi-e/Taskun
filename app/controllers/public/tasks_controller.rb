@@ -1,5 +1,5 @@
 ﻿class Public::TasksController < ApplicationController
-  before_action :authenticate_user!,:is_matching_login_user, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # タスクの新規投稿に関するコントローラ
   def new
@@ -35,6 +35,9 @@
 
   def edit
     @task = Task.find(params[:id])
+    if @task.user != current_user
+      redirect_to tasks_path, alert: 'このタスクを編集する権限がありません。'
+    end
   end
 
   def search
@@ -77,7 +80,7 @@
   def destroy
     task = Task.find(params[:id])
     task.destroy
-    redirect_to tasks_path
+    redirect_to user_path(current_user)
   end
 
   private

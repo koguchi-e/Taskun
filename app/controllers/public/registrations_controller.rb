@@ -7,7 +7,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
 
     # 新規登録後のリダイレクト先を変更
     def after_sign_up_path_for(resource)
-      tasks_path  # 新規登録後、タスクのインデックスページへリダイレクト
+      user_path(current_user)  
     end
 
   # GET /resource/sign_up

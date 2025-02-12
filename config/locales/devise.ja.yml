@@ -43,8 +43,7 @@ ja:
       models:
         user:
           attributes:
-            name:
-              blank: "名前 を入力してください。"
+            
             email:
               blank: "メールアドレス を入力してください。"
               taken: "入力されたメールアドレスは登録済です。"
