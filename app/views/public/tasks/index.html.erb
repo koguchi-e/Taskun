@@ -35,7 +35,7 @@
                   <i class="fa-regular fa-comment"></i> <%= task.comments.count %> / 
                   <i class="fa-solid fa-fire"></i> <%= task.favorites.count %> 
                 </span>
-                <b class="<%= 'completed-text' if task.completed %>">
+                <b class="task-title <%= 'completed-text' if task.completed %>">
                   <%= link_to task.title, task_path(task.id) %>
                 </b>
               </div>

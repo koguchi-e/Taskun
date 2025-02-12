@@ -38,7 +38,7 @@ document.addEventListener("click", async (event) => {
 
             // **UIを更新**
             const taskElement = target.closest(".index-results");
-            const taskTitle = taskElement.querySelector("b");
+            const taskTitle = taskElement.querySelector(".task-title");
             const isCompleted = data.completed;
             const completedAt = data.completed_at ? new Date(data.completed_at).toLocaleString("ja-JP") : "未完了";
 
