@@ -1,4 +1,6 @@
 class Public::GroupsController < ApplicationController
+  before_action :set_group, only: [:edit,:update,:show,:join,:leave,:destroy]
+
   def new
     @group = Group.new
   end
@@ -17,13 +19,10 @@ class Public::GroupsController < ApplicationController
   end
 
   def edit
-    @group = Group.find(params[:id])
     redirect_to groups_path, alert: "権限がありません" unless @group.owner == current_user
   end
 
   def update
-    @group = Group.find(params[:id])
-    
     if @group.owner == current_user
       if @group.update(group_params)
         flash[:notice] = "グループを更新しました"
@@ -39,11 +38,9 @@ class Public::GroupsController < ApplicationController
   end
 
   def show
-    @group = Group.find(params[:id])
   end
 
   def join
-    @group = Group.find(params[:id])
     unless @group.members.include?(current_user)
       @group.members << current_user
       flash[:notice] = "グループに参加しました！"
@@ -52,7 +49,6 @@ class Public::GroupsController < ApplicationController
   end
 
   def leave
-    @group = Group.find(params[:id])
     if @group.members.include?(current_user)
       @group.members.delete(current_user)
       flash[:notice] = "グループを退会しました！"
@@ -62,7 +58,7 @@ class Public::GroupsController < ApplicationController
 
   def destroy
     if @group.owner == current_user
-      if @group.destroy(group_params)
+      if @group.destroy
         flash[:notice] = "グループを削除しました"
         redirect_to groups_path
       else
@@ -76,6 +72,10 @@ class Public::GroupsController < ApplicationController
   end
 
   private
+
+  def set_group
+    @group = Group.find(params[:id])
+  end
 
   def group_params
     params.require(:group).permit(:name,:image,:summary)
