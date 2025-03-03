@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   }
 
   devise_scope :user do
-    get '/users/sign_out' => 'devise/sessions#destroy'
+    delete '/users/sign_out' => 'users/sessions#destroy'
+    post "users/guest_sign_in", to: "users/sessions#guest_sign_in"
   end
 
   namespace :admin do
@@ -27,12 +28,9 @@ Rails.application.routes.draw do
     get 'search', to: 'tasks#search'
 
     devise_for :users, controllers: {
-      registrations: 'public/registrations'
+      registrations: 'public/registrations',
+      sessions: 'users/sessions'
     }
-
-    devise_scope :user do
-      post "users/guest_sign_in", to: "users/sessions#guest_sign_in"
-    end
 
     resources :tasks, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
       resource :favorite, only: [:create, :destroy]
