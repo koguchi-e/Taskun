@@ -81,12 +81,14 @@
         <%= paginate @tasks %>
       </div>
       <p></p>
-      <div align="right">
-        <% if @user == current_user %>
-          <%= link_to "編集", edit_user_path(@user.id) %> | 
-          <%= link_to "退会", withdraw_user_path(@user), method: :patch, data: { confirm: "本当に退会しますか？" } %>
-        <% end %>
-      </div>
+      <% unless @user.guest_user? %>
+        <div align="right">
+          <% if @user == current_user %>
+            <%= link_to "編集", edit_user_path(@user.id) %> | 
+            <%= link_to "退会", withdraw_user_path(@user), method: :patch, data: { confirm: "本当に退会しますか？" } %>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

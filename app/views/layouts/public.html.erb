@@ -47,7 +47,7 @@
         </div>
       </nav>
     </header>
-      <!-- ナビゲーション終わり  -->
+    <!-- ナビゲーション終わり  -->
 
     <!-- フラッシュメッセージ  -->
     <% if flash[:notice] %>
@@ -58,7 +58,7 @@
     <% end %>
     <p></p>
 
-    <!-- トップ・アバウト・サインイン・ログインページは、サイドバーのメインコンテンツ-->
+    <!-- アバウト以外は、メインコンテンツを真ん中に配置-->
     <% if current_page?(about_path) %>
       <div class="container">
         <div class="row">
@@ -72,6 +72,7 @@
         <%= yield %>
       </div>
     <% end %>
+    
     <!-- フッター -->
     <footer>
       <div class='footer'>

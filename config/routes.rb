@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
 
-  # 管理者権限のルーティング
   devise_for :admin,skip: [:registrations, :password], controllers: {
     sessions: "admin/sessions"
   }
 
   devise_scope :user do
     get '/users/sign_out' => 'devise/sessions#destroy'
+    post "users/guest_sign_in", to: "public/sessions#guest_sign_in"
   end
 
   namespace :admin do
@@ -28,20 +28,17 @@ Rails.application.routes.draw do
     get 'search', to: 'tasks#search'
 
     devise_for :users, controllers: {
-      registrations: 'public/registrations'
+      registrations: 'public/registrations',
     }
 
-    # tasksコントローラのルーティング
     resources :tasks, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
       resource :favorite, only: [:create, :destroy]
       resources :task_comments, only: [:create, :destroy], as: "comments"
     end
 
-    # usersコントローラのルーティング
     resources :users, only: [:index, :show, :edit, :update] do
-      # withdrawアクション（退会処理）
       member do
-        patch :withdraw # PATCHリクエストで退会処理を実行
+        patch :withdraw 
       end
     end
 
