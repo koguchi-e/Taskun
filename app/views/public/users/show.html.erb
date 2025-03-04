@@ -81,7 +81,7 @@
         <%= paginate @tasks %>
       </div>
       <p></p>
-      <% if @user.email != "guest@example.com" %>
+      <% unless @user.guest_user? %>
         <div align="right">
           <% if @user == current_user %>
             <%= link_to "編集", edit_user_path(@user.id) %> | 
@@ -89,6 +89,6 @@
           <% end %>
         </div>
       <% end %>
-      </div>
+    </div>
   </div>
 </div>
