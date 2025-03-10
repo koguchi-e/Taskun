@@ -34,11 +34,6 @@ RSpec.describe "タスクのテスト" do
     let(:user) { FactoryBot.create(:user) }
     let!(:task) { FactoryBot.create(:task, user: user, title: "カリキュラムを5ページ進める", keyword1: "Ruby", keyword2: "テスト", keyword3: "エンジニア") }
 
-    before do
-      sign_in user
-      visit tasks_path
-    end
-
     context "表示の確認" do
       it "投稿されたものが表示されるかどうか" do
         expect(page).to have_content task.title
@@ -52,7 +47,6 @@ RSpec.describe "タスクのテスト" do
     let!(:task) { FactoryBot.create(:task, user: user, title: "カリキュラムを5ページ進める", keyword1: "Ruby", keyword2: "テスト", keyword3: "エンジニア") }
 
     before do
-      sign_in user
       visit task_path(task)
     end
 
@@ -72,9 +66,7 @@ RSpec.describe "タスクのテスト" do
     let!(:task) { FactoryBot.create(:task, user: user, title: "カリキュラムを5ページ進める", keyword1: "Ruby", keyword2: "テスト", keyword3: "エンジニア") }
 
     before do
-      sign_in user
       visit edit_task_path(task)
-      save_and_open_page
     end
 
     context "表示の確認" do
@@ -104,7 +96,3 @@ RSpec.describe "タスクのテスト" do
     end
   end
 end
-
-task = FactoryBot.build(:task)
-puts task.valid?  # `true` or `false`
-puts task.errors.full_messages  # どのバリデーションに失敗しているか
