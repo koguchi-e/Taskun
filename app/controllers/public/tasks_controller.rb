@@ -1,13 +1,11 @@
 ﻿class Public::TasksController < ApplicationController
   before_action :authenticate_user!
 
-  # タスクの新規投稿に関するコントローラ
   def new
     @task = Task.new
     @new_task = Task.new
   end
 
-  # 新規投稿の保存機能
   def create
     @task = Task.new(task_params)
     @task.user_id = current_user.id
@@ -18,12 +16,11 @@
     else
       flash.now[:alert] = 'タスクの作成に失敗しました。'
       @new_task = @task  
-      @tasks = Task.page(params[:page])  # ページネーション用
+      @tasks = Task.page(params[:page])
       render :index
     end
   end
 
-  # タスク一覧画面
   def index
     @tasks = Task.page(params[:page])
   end
@@ -67,7 +64,6 @@
     render :search
   end
 
-
   def update
     @task = Task.find(params[:id])
     if @task.update(task_params)
@@ -84,7 +80,7 @@
   end
 
   private
--
+  
   # ストロングパラメータ
   def task_params
     params.require(:task).permit(:title, :keyword1, :keyword2, :keyword3)
