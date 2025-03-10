@@ -7,24 +7,25 @@ RSpec.describe "タスクのテスト" do
   let!(:task) { FactoryBot.create(:task, user: user, title: "カリキュラムを5ページ進める", keyword1: "Ruby", keyword2: "テスト", keyword3: "エンジニア") }
 
   before do
+    sign_in user
     visit tasks_path
   end
 
   describe "投稿機能のテスト" do
     context "表示の確認" do
       it "投稿ボタンがあるか" do
-        expect(page).to have_selector('button[type="submit-btn"]')
+        expect(page).to have_selector('.submit-btn')
       end
     end
 
     context "投稿処理のテスト" do
       it "投稿後、詳細画面にリダイレクトする" do
-        fill_in "task[title]", with: Faker::Lorem.characters(number: 10)
+        fill_in "task[title]", with: Faker::Lorem.characters(number:10)
         fill_in "task[keyword1]", with: Faker::Lorem.characters(number: 10)
         fill_in "task[keyword2]", with: Faker::Lorem.characters(number: 10)
         fill_in "task[keyword3]", with: Faker::Lorem.characters(number: 10)
-        click_button "投稿"
-        expect(page).to have_current_path task_path(task)
+        find_button("投稿").click
+        expect(page).to have_current_path task_path(Task.last)
       end
     end
   end
@@ -34,6 +35,7 @@ RSpec.describe "タスクのテスト" do
     let!(:task) { FactoryBot.create(:task, user: user, title: "カリキュラムを5ページ進める", keyword1: "Ruby", keyword2: "テスト", keyword3: "エンジニア") }
 
     before do
+      sign_in user
       visit tasks_path
     end
 
@@ -50,12 +52,13 @@ RSpec.describe "タスクのテスト" do
     let!(:task) { FactoryBot.create(:task, user: user, title: "カリキュラムを5ページ進める", keyword1: "Ruby", keyword2: "テスト", keyword3: "エンジニア") }
 
     before do
+      sign_in user
       visit task_path(task)
     end
 
     context "表示の確認" do
       it "削除リンクが存在するか" do
-        expect(page).to have_link "削除", href: task_path(task)
+        expect(page).to have_link("削除", href: task_path(task))
       end
 
       it "編集リンクが存在するか" do
@@ -71,6 +74,7 @@ RSpec.describe "タスクのテスト" do
     before do
       sign_in user
       visit edit_task_path(task)
+      save_and_open_page
     end
 
     context "表示の確認" do
@@ -88,11 +92,13 @@ RSpec.describe "タスクのテスト" do
 
     context "更新処理に関するテスト" do
       it "更新後リダイレクト先は正しいか" do
-        fill_in "task[title]", with: Faker::Lorem.characters(number: 10)
-        fill_in "task[keyword1]", with: Faker::Lorem.characters(number: 10)
-        fill_in "task[keyword2]", with: Faker::Lorem.characters(number: 10)
-        fill_in "task[keyword3]", with: Faker::Lorem.characters(number: 10)
-        click_button "保存"
+        within("form[action='#{task_path(task)}']") do
+          fill_in "task[title]", with: Faker::Lorem.characters(number: 10)
+          fill_in "task[keyword1]", with: Faker::Lorem.characters(number: 10)
+          fill_in "task[keyword2]", with: Faker::Lorem.characters(number: 10)
+          fill_in "task[keyword3]", with: Faker::Lorem.characters(number: 10)
+          click_button "保存"
+        end
         expect(page).to have_current_path task_path(task)
       end
     end
