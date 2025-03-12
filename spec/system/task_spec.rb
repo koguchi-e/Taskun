@@ -55,9 +55,6 @@ RSpec.describe "タスクのテスト" do
   end
 
   describe "編集画面のテスト" do
-    let!(:task) { create(:task) }
-    let!(:user) { task.user }
-
     before do
       visit edit_task_path(task)
     end

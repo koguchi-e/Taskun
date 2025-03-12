@@ -39,16 +39,19 @@ ja:
           other: "%{resource}の保存に失敗しました: %{count}件のエラーがあります。"
           
   activerecord:
+    attributes:  
+      user:
+        name: "名前"
+        email: "メールアドレス"
+        password: "パスワード"
+    
     errors:
-      models:
-        user:
-          attributes:
-            
-            email:
-              blank: "メールアドレス を入力してください。"
-              taken: "入力されたメールアドレスは登録済です。"
-            password:
-              blank: "パスワード を入力してください。"
-              too_short: "パスワード は6文字以上で入力してください。"
-            password_confirmation:
-              confirmation: "パスワードが一致していません。"
+      messages:
+        blank: "%{attribute}を入力してください。"
+        invalid: "が不正です"
+        too_long: "は%{count}文字以内で入力してください。"
+        too_short: "は%{count}文字以上で入力してください。"
+        email:
+          taken: "入力されたメールアドレスは登録済です。"
+        password_confirmation:
+          confirmation: "パスワードが一致していません。"

@@ -2,18 +2,65 @@
 
 require 'rails_helper'
 
-RSpec.describe "ログイン前のテスト" do
-  let(:user){create(:user)}
-  before do
-    visit new_user_session_path
-    fill_in "user_email", with: user.email
-    fill_in "user_password", with: user.password
-    click_button "ログイン"
-    visit root_path
-  end
-  context "表示の確認" do
+RSpec.describe "トップページのテスト" do
+  let(:user_attributes) { attributes_for(:user) }
+
+  context "URLの確認" do
     it "root_pathが/であるか" do
-        expect(current_path).to eq("/")
+      visit root_path
+      expect(current_path).to eq("/")
+    end
+  end
+
+  context "ログイン動作のテスト" do
+    let(:user) { create(:user) } 
+
+    it "ユーザー詳細ページに遷移するか" do
+      visit new_user_session_path
+      fill_in "user_email", with: user.email
+      fill_in "user_password", with: user.password
+      click_button "ログイン"
+
+      expect(page).to have_current_path(user_path(user))
+      expect(page).to have_content 'ログインしました。'
+    end
+  end
+
+  context "新規登録の動作テスト" do
+    context "表示の確認" do
+      it "入力フォームが正しく表示されているか" do
+        visit new_user_registration_path
+        expect(page).to have_field('user[name]')
+        expect(page).to have_field('user[email]')
+        expect(page).to have_field('user[password]')
+        expect(page).to have_field('user[password_confirmation]')
+        expect(page).to have_button('登録')
+      end
+    end
+
+    context "新規登録処理のテスト" do
+      it "正しい情報の場合、新規登録が完了する" do
+        visit new_user_registration_path
+        fill_in 'user_name', with: user_attributes[:name]
+        fill_in 'user_email', with: user_attributes[:email]
+        fill_in 'user_password', with: user_attributes[:password]
+        fill_in 'user_password_confirmation', with: user_attributes[:password]
+        click_button '登録'
+
+        expect(page).to have_content 'アカウント登録が完了しました。'
+      end
+      it "誤った情報の場合、登録が失敗する" do
+        visit new_user_registration_path
+        save_and_open_page 
+        
+        fill_in 'user_name', with: ''
+        fill_in 'user_email', with: ''
+        fill_in 'user_password', with: ''
+        fill_in 'user_password_confirmation', with: ''
+
+        expect { click_button '登録' }.not_to change(User, :count)
+        expect(page).to have_content '件のエラーが発生しました。'
+      end
     end
   end
 end
@@ -21,7 +68,6 @@ end
 describe "ゲストログインのテスト" do
   before do 
     visit root_path
-    save_and_open_page
   end
   
   context "ゲストログインボタンの表示" do
