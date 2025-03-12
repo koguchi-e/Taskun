@@ -8,12 +8,8 @@
     <p></p>
     <ul>
       <% @user.errors.full_messages.each do |message| %>
-        <% if message.include?("名前") %>
-          <li><%= message %></li>
-        <% end %>
-      <% end %>
-      <% if @user.errors[:email].any? %>
-        <li><%= @user.errors[:email].first %></li>
+        <%# byebug %>
+        <li><%= message %></li>
       <% end %>
     </ul>
   </div>

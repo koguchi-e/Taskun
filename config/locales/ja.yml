@@ -17,14 +17,18 @@ ja:
         image: "画像"
         summary: "概要"
     errors:
+      models:
+        user:
+          attributes:
+            name:
+              blank: "名前を入力してください。"
       messages:
-        blank: " を入力してください。"
+        blank: "%{attribute}を入力してください。"
         invalid: "が不正です"
         too_long: "は%{count}文字以内で入力してください。"
         too_short: "は%{count}文字以上で入力してください。"
 
   views:
     pagination:
-      previous: "<<"   # Previous を << に変更
-      next: ">>"       # Next を >> に変更
-  
+      previous: "<<"
+      next: ">>"
