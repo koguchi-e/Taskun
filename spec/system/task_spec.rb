@@ -31,9 +31,6 @@ RSpec.describe "タスクのテスト" do
   end
 
   describe "一覧画面のテスト" do
-    let!(:task) { create(:task) }
-    let(:user) { task.user }
-
     context "表示の確認" do
       it "投稿されたものが表示されるかどうか" do
         expect(page).to have_content task.title
@@ -43,9 +40,6 @@ RSpec.describe "タスクのテスト" do
   end
 
   describe "詳細画面のテスト" do
-    let!(:task) { create(:task) }
-    let(:user) { task.user }
-
     before do
       visit task_path(task)
     end
