@@ -5,7 +5,7 @@
 </div>
 <p></p>
 
-<span class="task-meta"><b>ユーザ検索結果</b></span>
+<span class="task-meta"><b>ユーザー検索結果</b></span>
 <% if @user_results.present? %>
   <div class="index-results">
     <% @user_results.each do |user| %>
@@ -19,7 +19,7 @@
           <% end %>
           <b><%= link_to user.name, user_path(user.id) %></b> 
           <span class="task-meta">( <%= user.email %> )</span>
-          <%= link_to "削除", admin_user_path(user), method: :delete, data: { confirm: "本当にユーザを削除しますか？"} %>
+          <%= link_to "削除", admin_user_path(user), method: :delete, data: { confirm: "本当にユーザーを削除しますか？"} %>
         </div>
       </div>
     <% end %>
@@ -28,7 +28,7 @@
   <div class="index-results">
     <div class="index-card">
       <div class="index-header">
-        該当するユーザは見つかりませんでした。
+        該当するユーザーは見つかりませんでした。
       </div>
     </div>
   </div>

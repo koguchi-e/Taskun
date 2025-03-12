@@ -49,7 +49,7 @@
               
               <li class="nav-item">
                 <%= link_to users_path do %>
-                  <i class="fa-solid fa-users"></i> ユーザ一覧
+                  <i class="fa-solid fa-users"></i> ユーザー一覧
                 <% end %>
               </li>
 
@@ -84,7 +84,7 @@
           </div>
           <%= form_with url: search_path, method: :get, local: true do |f| %>
             <b>検索条件を入力</b>　<span class="task-meta">","でAND検索</span>
-            <%= f.text_field :query, value: @query, placeholder: "タスク名,ユーザ名,キーワード", class: "form-input" %>
+            <%= f.text_field :query, value: @query, placeholder: "タスク名,ユーザー名,キーワード", class: "form-input" %>
             <%= f.submit "検索", class: "submit-btn" %>
           <% end %>
           <p></p>

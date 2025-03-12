@@ -33,7 +33,7 @@
     </div>
     <div>
       <span class="task-meta">
-        <b>投稿したユーザ</b>：
+        <b>投稿したユーザー</b>：
           <%= link_to user_path(@task.user) do %>
             <% if @task.user.image.attached? %>
               <%= image_tag @task.user.image, alt: "#{@task.user.name}のプロフィール画像", class: "profile-image-small" %>

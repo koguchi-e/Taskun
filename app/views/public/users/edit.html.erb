@@ -1,5 +1,5 @@
 <div class="main-title">
-  <h4><i class="fa-solid fa-user"></i>ユーザ編集画面</h4>
+  <h4><i class="fa-solid fa-user"></i>ユーザー編集画面</h4>
 </div>
 
 <% if @user.errors.any? %>
@@ -28,7 +28,7 @@
         <%= f.file_field :image, accept: "image/*" %>
         </p>
         <div class="form-field">
-          <b>ユーザ名</b>
+          <b>ユーザー名</b>
           <%= f.text_field :name, class: "form-input" %>
         </div>
         <div class="form-field">
