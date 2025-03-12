@@ -40,9 +40,6 @@ describe "ゲストログインのテスト" do
 end
 
 describe "ユーザーのテスト" do
-  let(:user) { FactoryBot.create(:user) }
-  let!(:task) { FactoryBot.create(:task, user: user, title: "カリキュラムを5ページ進める", keyword1: "Ruby", keyword2: "テスト", keyword3: "エンジニア") }
-
   before do
     sign_in user
   end
@@ -77,6 +74,32 @@ describe "ユーザーのテスト" do
       end
       it "退会リンクが存在するか" do
         expect(page).to have_link("退会", href: withdraw_user_path(user))
+      end
+    end
+  end
+
+  describe "編集画面のテスト" do
+    before do
+      visit edit_user_path(user)
+    end
+    context "表示の確認" do
+      it "入力欄に編集前のユーザー名とメールアドレスがフォームに表示(セット)されている" do
+        expect(page).to have_field "user[name]", with: user.name
+        expect(page).to have_field "user[email]", with: user.email
+      end
+    end
+    it "保存ボタンが表示される" do
+      expect(page).to have_button "保存"
+    end
+
+    context "更新処理に関するテスト" do
+      it "更新後リダイレクト先は正しいか" do
+        within("form[action='#{user_path(user)}']") do
+          fill_in "user[name]", with: Faker::Lorem.characters(number: 10)
+          fill_in "user[email]", with: Faker::Lorem.characters(number: 10)
+          click_button "保存"
+        end
+        expect(page).to have_current_path user_path(user)
       end
     end
   end
