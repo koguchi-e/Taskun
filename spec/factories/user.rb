@@ -4,5 +4,9 @@ FactoryBot.define do
         email { Faker::Internet.email }
         password { 'password' }
         password_confirmation { 'password' }
+
+        trait :guest do
+            email { "guest@example.com" }
+        end
     end
 end

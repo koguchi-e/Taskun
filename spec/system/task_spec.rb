@@ -3,8 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe "タスクのテスト" do
-  let(:user) { FactoryBot.create(:user) }
-  let!(:task) { FactoryBot.create(:task, user: user, title: "カリキュラムを5ページ進める", keyword1: "Ruby", keyword2: "テスト", keyword3: "エンジニア") }
+  let!(:task) { create(:task) }
+  let(:user) { task.user }
 
   before do
     sign_in user
@@ -31,8 +31,8 @@ RSpec.describe "タスクのテスト" do
   end
 
   describe "一覧画面のテスト" do
-    let(:user) { FactoryBot.create(:user) }
-    let!(:task) { FactoryBot.create(:task, user: user, title: "カリキュラムを5ページ進める", keyword1: "Ruby", keyword2: "テスト", keyword3: "エンジニア") }
+    let!(:task) { create(:task) }
+    let(:user) { task.user }
 
     context "表示の確認" do
       it "投稿されたものが表示されるかどうか" do
@@ -43,27 +43,26 @@ RSpec.describe "タスクのテスト" do
   end
 
   describe "詳細画面のテスト" do
-    let(:user) { FactoryBot.create(:user) }
-    let!(:task) { FactoryBot.create(:task, user: user, title: "カリキュラムを5ページ進める", keyword1: "Ruby", keyword2: "テスト", keyword3: "エンジニア") }
+    let!(:task) { create(:task) }
+    let(:user) { task.user }
 
     before do
       visit task_path(task)
     end
 
     context "表示の確認" do
-      it "削除リンクが存在するか" do
-        expect(page).to have_link("削除", href: task_path(task))
-      end
-
       it "編集リンクが存在するか" do
         expect(page).to have_selector("a[href='/tasks/#{task.id}/edit']")
+      end
+      it "削除リンクが存在するか" do
+        expect(page).to have_link("削除", href: task_path(task))
       end
     end
   end
 
   describe "編集画面のテスト" do
-    let!(:user) { FactoryBot.create(:user) }
-    let!(:task) { FactoryBot.create(:task, user: user, title: "カリキュラムを5ページ進める", keyword1: "Ruby", keyword2: "テスト", keyword3: "エンジニア") }
+    let!(:task) { create(:task) }
+    let!(:user) { task.user }
 
     before do
       visit edit_task_path(task)
