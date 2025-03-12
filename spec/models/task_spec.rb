@@ -4,6 +4,6 @@ require 'rails_helper'
 
 describe "タスクモデルのテスト" do
     it "エラーがなければ保存されているか" do
-        expect(Factory.Bot.build(:task)).to be_valid  
+        expect(FactoryBot.build(:task)).to be_valid  
     end
 end
