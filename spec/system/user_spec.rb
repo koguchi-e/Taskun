@@ -30,11 +30,11 @@ describe "ゲストログインのテスト" do
     end
   end
   context "ゲストログインの動作確認" do
-    let(:user) { create(:user, :guest) } 
     it "ゲストログインボタンをクリックするとログインできるかどうか" do
       click_link "ゲストログイン（閲覧用）"
       expect(page).to have_content "ゲストユーザーでログインしました。"
-      expect(page).to have_link user_path(user)
+      guest_user = User.guest
+      expect(page).to have_current_path users_path(guest_user)
     end
   end
 end
@@ -47,8 +47,10 @@ describe "ユーザーのテスト" do
     sign_in user
   end
 
+  let!(:task) { create(:task) }
+  let(:user) { task.user }
+
   describe "一覧画面のテスト" do
-    let(:user) { FactoryBot.create(:user) }
     before do
       visit users_path
     end
@@ -61,8 +63,6 @@ describe "ユーザーのテスト" do
   end
 
   describe "詳細画面のテスト" do
-    let(:user) { FactoryBot.create(:user) }
-    let!(:task) { FactoryBot.create(:task, user: user, title: "カリキュラムを5ページ進める", keyword1: "Ruby", keyword2: "テスト", keyword3: "エンジニア") }
     before do
       visit user_path(user)
     end
