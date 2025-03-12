@@ -20,17 +20,20 @@ end
 
 describe "ゲストログインのテスト" do
     before do 
-        visit new_user_session_path
+        visit root_path
     end
+    
     context "ゲストログインボタンの表示" do
         it "ログインボタンが表示されているかどうか" do
-            expect(page).to have_link "ゲストログイン（閲覧用）", href: "users/guest_sign_in"
+            expect(page).to have_link "ゲストログイン（閲覧用）"
         end
     end
     context "ゲストログインの動作確認" do
+        let(:user) { create(:user, :guest) } 
         it "ゲストログインボタンをクリックするとログインできるかどうか" do
-            click_link "guest_login_user"
-            expect(pave).to have_link users_path
+            click_link "ゲストログイン（閲覧用）"
+            expect(page).to have_content "ゲストユーザーでログインしました。"
+            expect(page).to have_link user_path(user)
         end
     end
 end
