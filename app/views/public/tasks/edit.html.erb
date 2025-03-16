@@ -2,17 +2,7 @@
   <h4><i class="fa-solid fa-check"></i> タスク編集画面</h4>
 </div>
 
-<% if @task.errors.any? %>
-  <div class="new-error-message">
-    <b class="title"><%= @task.errors.count %>件のエラーが発生しました。</b>
-    <p></p>
-    <ul>
-      <% @task.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+<%= render "public/shared/error_messages", resource: @task %>
 
 <div class="index-results">
   <div class="index-card">

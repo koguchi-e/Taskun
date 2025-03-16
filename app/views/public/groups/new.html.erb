@@ -3,16 +3,7 @@
 </div>
 <p></p>
 
-<% if @group.errors.any? %>
-  <div class="new-error-message">
-    <b class="title"><%= @group.errors.count %>件のエラーが発生しました。</b>
-    <ul>
-      <% @group.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+<%= render "public/shared/error_messages", resource: @group %>
 
 <div class="detail-results">
   <div class="detail-card">

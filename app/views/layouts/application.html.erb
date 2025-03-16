@@ -96,16 +96,7 @@
             </div>
             <p></p>
             <!-- 新規投稿のエラーメッセージ -->
-            <% if @new_task.errors.any? %>
-              <div class="new-error-message">
-                <b><%= @new_task.errors.count %>件のエラーがあります。</b>
-                <ul>
-                  <% @new_task.errors.full_messages.each do |message| %>
-                    <li><%= message %></li>
-                  <% end %>
-                </ul>
-              </div>
-            <% end %>
+            <%= render "public/shared/error_messages", resource: @new_task %>
             <!-- 投稿フォーム -->
             <%= form_with model: @new_task, local: true do |f| %>
               <div class="form-field">

@@ -2,18 +2,7 @@
   <h4><i class="fa-solid fa-user"></i>ユーザー編集画面</h4>
 </div>
 
-<% if @user.errors.any? %>
-  <div class="new-error-message">
-    <b class="title"><%= @user.errors.count %>件のエラーが発生しました。</b>
-    <p></p>
-    <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <%# byebug %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+<%= render "public/shared/error_messages", resource: @user %>
 
 <div class="index-results">
   <div class="index-card">
