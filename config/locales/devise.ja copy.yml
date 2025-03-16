@@ -1,17 +1,17 @@
 ja:
-  activerecord:
-    attributes:  
-      user:
-        name: "名前"
-        email: "メールアドレス"
-        password: "パスワード"
-    models:
-      user: "ユーザー"
+  # activerecord:
+  #   attributes:  
+  #     user:
+  #       name: "名前"
+  #       email: "メールアドレス"
+  #       password: "パスワード"
+  #   models:
+  #     user: "ユーザー"
   devise:
     sessions:
       signed_in: "ログインしました。"
       signed_out: "ログアウトしました。"
-      invalid: "メールアドレスまたはパスワードが違います"
+      invalid: "メールアドレスまたはパスワードが違います。"
 
     registrations:
       signed_up: "アカウント登録が完了しました。"

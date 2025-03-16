@@ -12,16 +12,17 @@ ja:
       user:
         name: "名前"
         email: "メールアドレス"
+        password: "パスワード"
       group:
         name: "グループ名"
         image: "画像"
         summary: "概要"
     errors:
-      models:
-        user:
-        #  attributes:
-        #    name:
-        #      blank: "名前を入力してください。"
+      # models:
+      #   user:
+      #     attributes:
+      #       name:
+      #         blank: "名前を入力してください。"
       messages:
         blank: "を入力してください。"
         invalid: "が不正です"
@@ -32,3 +33,4 @@ ja:
     pagination:
       previous: "<<"
       next: ">>"
+  
