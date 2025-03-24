@@ -51,7 +51,6 @@ RSpec.describe "トップページのテスト" do
       end
       it "誤った情報の場合、登録が失敗する" do
         visit new_user_registration_path
-        save_and_open_page 
         
         fill_in 'user_name', with: ''
         fill_in 'user_email', with: ''
