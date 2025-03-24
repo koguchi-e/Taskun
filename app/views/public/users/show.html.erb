@@ -15,12 +15,32 @@
         <% end %>
         <%= @user.name %>
       </div>
+      <div class="follow-button">
+        <% if current_user != @user %>
+          <% if current_user.following?(@user) %>
+            <%= link_to user_relationships_path(@user.id), method: :delete, class: "submit-btn-group" do %>
+              <i class="fa-solid fa-user-minus"></i> Unfollow
+            <% end %>
+          <% else %>
+            <%= link_to user_relationships_path(@user.id), method: :post, class: "submit-btn-group" do %>
+              <i class="fa-solid fa-user-plus"></i> Follow
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
       <hr>
       <p></p>
       <div>
         <span class="task-meta-detail">
           <b>メールアドレス</b>：
           <%= @user.email %>
+          <p></p>
+
+          <b>フォロー数</b>：
+          <%= @user.followings.count %> 人 / 
+          <b>フォロワー数</b>：
+          <%= @user.followers.count %> 人
+
           <p></p>
           
           <b>所属グループ</b>：<br>

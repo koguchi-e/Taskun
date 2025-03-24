@@ -525,8 +525,9 @@ li {
   color: #666;
 }
 
-.follow-button{
-  align-items: right;
+.follow-button {
+  display: flex;
+  justify-content: flex-end;
 }
 
 // #####################################
