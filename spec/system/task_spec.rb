@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "タスクのテスト" do
   let!(:task) { create(:task) }
@@ -14,13 +14,13 @@ RSpec.describe "タスクのテスト" do
   describe "投稿機能のテスト" do
     context "表示の確認" do
       it "投稿ボタンがあるか" do
-        expect(page).to have_selector('.submit-btn')
+        expect(page).to have_selector(".submit-btn")
       end
     end
 
     context "投稿処理のテスト" do
       it "投稿後、詳細画面にリダイレクトする" do
-        fill_in "task[title]", with: Faker::Lorem.characters(number:10)
+        fill_in "task[title]", with: Faker::Lorem.characters(number: 10)
         fill_in "task[keyword1]", with: Faker::Lorem.characters(number: 10)
         fill_in "task[keyword2]", with: Faker::Lorem.characters(number: 10)
         fill_in "task[keyword3]", with: Faker::Lorem.characters(number: 10)

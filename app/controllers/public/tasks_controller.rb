@@ -11,11 +11,11 @@
     @task.user_id = current_user.id
     # byebug
     if @task.save
-      flash[:notice] = 'タスクが作成されました。'
+      flash[:notice] = "タスクが作成されました。"
       redirect_to task_path(@task.id)
     else
-      flash.now[:alert] = 'タスクの作成に失敗しました。'
-      @new_task = @task  
+      flash.now[:alert] = "タスクの作成に失敗しました。"
+      @new_task = @task
       @tasks = Task.page(params[:page])
       render :index
     end
@@ -33,7 +33,7 @@
   def edit
     @task = Task.find(params[:id])
     if @task.user != current_user
-      redirect_to tasks_path, alert: 'このタスクを編集する権限がありません。'
+      redirect_to tasks_path, alert: "このタスクを編集する権限がありません。"
     end
   end
 
@@ -44,7 +44,7 @@
       flash[:alert] = "検索条件を入力してください。"
       @results = Task.includes(:user).page(params[:page])  # 検索なしの場合は全件
     else
-      keywords = @query.split(',').map(&:strip)  # カンマ区切りで配列化 & 空白除去
+      keywords = @query.split(",").map(&:strip)  # カンマ区切りで配列化 & 空白除去
 
       query_conditions = keywords.map.with_index do |word, index|
         "(tasks.title LIKE :word#{index} OR COALESCE(tasks.keyword1, '') LIKE :word#{index} OR COALESCE(tasks.keyword2, '') LIKE :word#{index} OR COALESCE(tasks.keyword3, '') LIKE :word#{index} OR users.name LIKE :word#{index})"
@@ -80,17 +80,16 @@
   end
 
   private
-  
-  # ストロングパラメータ
-  def task_params
-    params.require(:task).permit(:title, :keyword1, :keyword2, :keyword3)
-  end
-
-  # 投稿者本人以外変更不可
-  def is_matching_login_user
-    task = Task.find(params[:id])
-    unless task.user == current_user
-      redirect_to task_path
+    # ストロングパラメータ
+    def task_params
+      params.require(:task).permit(:title, :keyword1, :keyword2, :keyword3)
     end
-  end
+
+    # 投稿者本人以外変更不可
+    def is_matching_login_user
+      task = Task.find(params[:id])
+      unless task.user == current_user
+        redirect_to task_path
+      end
+    end
 end

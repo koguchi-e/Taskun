@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
-
-  devise_for :admin,skip: [:registrations, :password], controllers: {
+  devise_for :admin, skip: [:registrations, :password], controllers: {
     sessions: "admin/sessions"
   }
 
   devise_scope :user do
-    get '/users/sign_out' => 'devise/sessions#destroy'
+    get "/users/sign_out" => "devise/sessions#destroy"
     post "users/guest_sign_in", to: "public/sessions#guest_sign_in"
   end
 
@@ -24,11 +23,11 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root to: "homes#top"
-    get 'about', to: 'homes#about', as: 'about'
-    get 'search', to: 'tasks#search'
+    get "about", to: "homes#about", as: "about"
+    get "search", to: "tasks#search"
 
     devise_for :users, controllers: {
-      registrations: 'public/registrations',
+      registrations: "public/registrations",
     }
 
     resources :tasks, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
@@ -38,7 +37,7 @@ Rails.application.routes.draw do
 
     resources :users, only: [:index, :show, :edit, :update] do
       member do
-        patch :withdraw 
+        patch :withdraw
       end
     end
 

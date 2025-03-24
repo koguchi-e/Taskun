@@ -1,5 +1,5 @@
 class Public::GroupsController < ApplicationController
-  before_action :set_group, only: [:edit,:update,:show,:join,:leave,:destroy]
+  before_action :set_group, only: [:edit, :update, :show, :join, :leave, :destroy]
 
   def new
     @group = Group.new
@@ -72,12 +72,11 @@ class Public::GroupsController < ApplicationController
   end
 
   private
+    def set_group
+      @group = Group.find(params[:id])
+    end
 
-  def set_group
-    @group = Group.find(params[:id])
-  end
-
-  def group_params
-    params.require(:group).permit(:name,:image,:summary)
-  end
+    def group_params
+      params.require(:group).permit(:name, :image, :summary)
+    end
 end

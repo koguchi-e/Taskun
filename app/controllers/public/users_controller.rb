@@ -43,24 +43,23 @@
   end
 
   private
-
-  # ストロングパラメータ
-  def user_params
-    params.require(:user).permit(:name, :email, :image, :is_active)
-  end
-
-  # 本人以外変更不可
-  def is_matching_login_user
-    user = User.find(params[:id])
-    unless user.id == current_user.id
-      redirect_to user_path(current_user.id)
+    # ストロングパラメータ
+    def user_params
+      params.require(:user).permit(:name, :email, :image, :is_active)
     end
-  end
 
-  def ensure_guest_user
-    @user = User.find(params[:id])
-    if @user.guest_user?
-      redirect_to user_path(current_user) , notice: "ゲストユーザーはプロフィールを編集できません。"
+    # 本人以外変更不可
+    def is_matching_login_user
+      user = User.find(params[:id])
+      unless user.id == current_user.id
+        redirect_to user_path(current_user.id)
+      end
     end
-  end
+
+    def ensure_guest_user
+      @user = User.find(params[:id])
+      if @user.guest_user?
+        redirect_to user_path(current_user), notice: "ゲストユーザーはプロフィールを編集できません。"
+      end
+    end
 end

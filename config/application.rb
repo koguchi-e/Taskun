@@ -5,7 +5,7 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Taskun  
+module Taskun
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
@@ -14,7 +14,7 @@ module Taskun
     # config.i18n.default_locale = :en
     config.i18n.default_locale = :ja
 
-    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
+    config.i18n.load_path += Dir[Rails.root.join("config", "locales", "**", "*.{rb,yml}").to_s]
 
     # `full_messages` の仕様を変更して、二重表示を防ぐ
     # config.active_model.i18n_customize_full_message = true

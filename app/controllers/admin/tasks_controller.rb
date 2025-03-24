@@ -1,5 +1,5 @@
 class Admin::TasksController < ApplicationController
-  layout 'admin'
+  layout "admin"
   before_action :authenticate_admin!
 
   def index
@@ -9,7 +9,6 @@ class Admin::TasksController < ApplicationController
   def destroy
     task = Task.find(params[:id])
     task.destroy
-    redirect_to admin_tasks_path, notice: '投稿を削除しました。'
+    redirect_to admin_tasks_path, notice: "投稿を削除しました。"
   end
-  
 end
