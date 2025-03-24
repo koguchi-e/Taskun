@@ -580,3 +580,10 @@ li {
   gap: 5px;
   max-width: 100%; /* 画像が親要素の幅を超えないようにする */
 }
+
+// ##########################
+
+// 通知プルダウン変更
+.dropdown-menu .dropdown-item.custom-notification {
+  color: #4169e1!important;
+}

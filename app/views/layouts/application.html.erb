@@ -29,7 +29,7 @@
 
           <!-- 通知欄 -->
           <li class="navbar-brand p-3">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownmenuButton"      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownmenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fa-solid fa-bell"></i>
               <span class="badge badge-danger"><%= current_user.notifications.where(read: false).count %></span>
             </button>
