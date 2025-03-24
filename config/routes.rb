@@ -50,5 +50,7 @@ Rails.application.routes.draw do
         delete "leave", to: "groups#leave"
       end
     end
+
+    resources :notifications, only: [:update]
   end
 end

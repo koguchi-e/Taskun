@@ -26,6 +26,25 @@
               </span>
             <% end %>
           </li>
+
+          <!-- 通知欄 -->
+          <li class="navbar-brand p-3">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownmenuButton"      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa-solid fa-bell"></i>
+              <span class="badge badge-danger"><%= current_user.notifications.where(read: false).count %></span>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <% if current_user.notifications.where(read: false).any? %>
+              <small class="dropdown-item disabled text-secondary">直近5件の未読の通知を表示しています</small>
+                <% current_user.notifications.where(read: false).limit(5).order(created_at: :desc).each do |notification| %>
+                  <%= link_to notification.message, notification_path(notification), method: :patch, class: "dropdown-item custom-notification" %>
+                <% end %>
+              <% else %>
+                <span class="dropdown-item disabled text-secondary">未読の通知はありません</span>
+              <% end %>
+            </div>
+          </li>
+
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <!-- ログイン中ナビゲーション  -->
             <ul class="navbar-nav ml-auto">

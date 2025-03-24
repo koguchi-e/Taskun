@@ -30,6 +30,9 @@ class User < ApplicationRecord
   # 中間テーブルを通して、フォローする側テーブルへ
   has_many :followers, through: :reverse_of_relationships, source: :follower
 
+  # 通知機能
+  has_many :notifications, as: :notifiable, dependent: :destroy
+
   # ゲストログイン
   GUSEST_USER_EMAIL = "guest@example.com"
 
