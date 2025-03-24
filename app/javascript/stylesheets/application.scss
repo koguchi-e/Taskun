@@ -170,17 +170,17 @@ footer {
 // ログイン・新規登録・パスワード再設定
 /* 全体を中央寄せする */
 .text-center {
-    display: flex;
-    flex-direction: column;
-    justify-content: center; 
-    align-items: center;     
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 /* フォーム全体のデザイン */
 .login-box {
-    text-align: left; 
-    width: 400px; 
-    padding: 20px;
+  text-align: left; 
+  width: 400px; 
+  padding: 20px;
 }
 
 // #####################################
@@ -441,7 +441,7 @@ li {
 
 // #####################################
 
-// タスク・ユーザ詳細画面
+// タスク・ユーザー詳細画面
 
 .detail-results {
   display: flex;
@@ -459,7 +459,7 @@ li {
   max-width: 100%;
 }
 
-// ユーザ詳細画面内・タスクリスト
+// ユーザー詳細画面内・タスクリスト
 
 .detail-title {
   white-space: nowrap;
@@ -512,6 +512,21 @@ li {
 .task-title-and-meta span {
   word-wrap: break-word; 
   flex-basis: 100%; 
+}
+
+// #####################################
+
+// ユーザー一覧
+
+.user-index-meta{
+  margin-left: 0; 
+  text-align: left; 
+  font-size: 0.7rem;
+  color: #666;
+}
+
+.follow-button{
+  align-items: right;
 }
 
 // #####################################

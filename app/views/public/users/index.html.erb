@@ -19,10 +19,25 @@
           <% end %>
         <% end %>
         <div class="index-info">
-          <span class="task-meta">
-            合計投稿件数：<%= user.tasks.count %>
+          <span class="user-index-meta">
+            合計投稿件数：<%= user.tasks.count %> / 
+            フォロー数：<%= user.followings.count %> / 
+            フォロワー数：<%= user.followers.count %>
           </span>
           <b><%= link_to user.name, user_path(user.id) %></b>
+        </div>
+        <div class="follow-button">
+          <% if current_user != user %>
+            <% if current_user.following?(user) %>
+              <%= link_to user_relationships_path(user.id), method: :delete, class: "submit-btn-group" do %>
+                <i class="fa-solid fa-user-minus"></i> Unfollow
+              <% end %>
+            <% else %>
+              <%= link_to user_relationships_path(user.id), method: :post, class: "submit-btn-group" do %>
+                <i class="fa-solid fa-user-plus"></i> Follow
+              <% end %>
+            <% end %>
+          <% end %>
         </div>
       </div>
     </div>
