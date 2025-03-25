@@ -35,9 +35,18 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <% if current_user.notifications.where(read: false).any? %>
-              <small class="dropdown-item disabled text-secondary">直近5件の未読の通知を表示しています</small>
+                <small class="dropdown-item disabled text-secondary">直近5件の未読の通知を表示しています</small>
                 <% current_user.notifications.where(read: false).limit(5).order(created_at: :desc).each do |notification| %>
-                  <%= link_to notification.message, notification_path(notification), method: :patch, class: "dropdown-item custom-notification" %>
+                  <%= link_to notification_path(notification), method: :patch, class: "dropdown-item custom-notification" do %>
+                    <% notification_user = notification.notifiable.try(:user) || notification.notifiable.try(:follower) %>
+                    <% if notification_user&.image&.attached? %>
+                      <%= image_tag notification_user.image, alt: "#{notification_user.name}のプロフィール画像", class: "profile-image-small mr-2" %>
+                    <% else %>
+                      <%= image_tag "no_image.jpg", alt: "デフォルトプロフィール画像", class: "profile-image-small mr-2" %>
+                    <% end %>
+                    <%= notification.message %>
+                    <small class="text-muted"><%= notification.created_at.in_time_zone('Tokyo').strftime('%m月%d日 %H:%M') %></small>
+                  <% end %>
                 <% end %>
               <% else %>
                 <span class="dropdown-item disabled text-secondary">未読の通知はありません</span>
