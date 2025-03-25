@@ -2,7 +2,7 @@ class Notification < ApplicationRecord
   belongs_to :user
   belongs_to :notifiable, polymorphic: true
 
-   def message
+  def message
     case self.notifiable_type
     when "Task"
       "フォローしている #{self.notifiable.user.name}さん が 「#{self.notifiable.title}」 を投稿しました。"

@@ -40,8 +40,8 @@ Rails.application.routes.draw do
         patch :withdraw
       end
       resource :relationships, only: [:create, :destroy]
-      get 'followings' => 'relationships#followings', as: 'followings'
-      get 'followers' => 'relationships#followers', as: 'followers'
+      get "followings" => "relationships#followings", as: "followings"
+      get "followers" => "relationships#followers", as: "followers"
     end
 
     resources :groups, only: [:new, :create, :index, :edit, :update, :show, :destroy] do

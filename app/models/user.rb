@@ -51,7 +51,7 @@ class User < ApplicationRecord
     if profile_image.attached?
       profile_image.variant(resize_to_limit: [width, height]).processed
     else
-      'default_profile_image.png'
+      "default_profile_image.png"
     end
   end
 
