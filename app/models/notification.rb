@@ -11,7 +11,7 @@ class Notification < ApplicationRecord
     when "Relationship"
       " #{self.notifiable.follower.name}さん にフォローされました。"
     when "TaskComment"
-      " #{self.notifiable.user.name}さん が #{self.notifiable.task.title} にコメントしました。"
+      " #{self.notifiable.user.name}さん が 「#{self.notifiable.task.title}」 にコメントしました。"
     end
   end
 end
