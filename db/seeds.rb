@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-test - User.find_or_create_by!(email: "test-tarou@test.com") do |user|
+test = User.find_or_create_by!(email: "test@test.com") do |user|
   user.name = "テスト太郎"
   user.password = "123456"
   user.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/test-tarou.jpg"), filename: "test-tarou.jpg")
@@ -64,4 +64,12 @@ Task.find_or_create_by!(user: satou, title: "GitHubの勉強する") do |task|
   task.keyword1 = "テスト"
   task.keyword2 = "Ruby"
   task.keyword3 = "勉強"
+end
+
+TaskComment.find_or_create_by!(user: test, comment: "いいね！") do |task_comment|
+  task_comment.task = Task.find_by(title: "Rubyの勉強する")
+end
+
+TaskComment.find_or_create_by!(user: tanaka, comment: "頑張ってますね！") do |task_comment|
+  task_comment.task = Task.find_by(title: "Rubyの勉強する")
 end
