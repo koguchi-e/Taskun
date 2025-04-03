@@ -1,8 +1,9 @@
 class Public::FavoritesController < ApplicationController
   def create
     @task = Task.find(params[:task_id])
-    favorite = current_user.favorites.new(task_id: @task.id)
-    favorite.save
+    unless @task.favorited_by?(current_user)
+      @task.favorites.create(user: current_user)
+    end
 
     respond_to do |format|
       format.js
@@ -12,7 +13,7 @@ class Public::FavoritesController < ApplicationController
   def destroy
     @task = Task.find(params[:task_id])
     favorite = current_user.favorites.find_by(task_id: @task.id)
-    favorite.destroy
+    favorite.destroy if favorite
 
     respond_to do |format|
       format.js

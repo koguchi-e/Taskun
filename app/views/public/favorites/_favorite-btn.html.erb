@@ -1,6 +1,6 @@
 <% if @task.favorited_by?(current_user) %>
     <p>
-    <%= link_to task_favorite_path(@task), method: :delete, local: false do %>
+    <%= link_to task_favorite_path(@task), method: :delete, remote: true do %>
         <span style="color:red">
         <i class="fa-solid fa-fire"></i> 
         <%= @task.favorites.count %>
@@ -10,7 +10,7 @@
     </p>
 <% else %>
     <p>
-    <%= link_to task_favorite_path(@task), method: :post, local: false do %>
+    <%= link_to task_favorite_path(@task), method: :post, remote: true do %>
         <span style="color:gray">
         <i class="fa-solid fa-fire"></i>
         <%= @task.favorites.count %> いいね

@@ -1,2 +1,1 @@
-$(".favorite-btn").html("<%= escape_javascript(render partial:'favorites/favorite-btn', locals: {task: @task}) %>");
-$(".favorite-btn").html("<%= j(render 'favorites/favorite-btn', task: @task) %>");
+$(".favorite-btn-<%= @task.id %>").html("<%= escape_javascript(render partial:'public/favorites/favorite-btn', locals: {task: @task}) %>");

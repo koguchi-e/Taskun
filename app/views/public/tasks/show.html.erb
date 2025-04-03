@@ -7,7 +7,7 @@
     <div>
       <b>タスク名</b>：
       <%= @task.title %>
-      <span align="right">
+      <span class="favorite-btn-<%= @task.id %>" align="right">
         <%= render 'public/favorites/favorite-btn', task: @task %>
       </span>
       <hr size="10">
