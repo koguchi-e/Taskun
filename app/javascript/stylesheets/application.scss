@@ -24,10 +24,12 @@ footer {
 
 .top-icon {
   color: #E8A638!important;
+  text-decoration: none!important;
 }
 
 .top-icon:hover {
   color: #a27427!important;
+  text-decoration: none!important;
 }
 
 // #####################################
@@ -115,18 +117,18 @@ footer {
   color: white !important; 
 }
 
-.navbar {
-  background-color: #45519D;
+.collapse, .collapsing, .collapse.show, .navbar, .container-fluid, .navbar-nav,.dropdown-menu {
+  background-color: #45519D!important; 
 }
 
-.navbar-nav .nav-item .nav-link {
+.dropdown-item, .navbar-toggler {
   display: flex;
   align-items: center;
   color: white !important;
   text-decoration: none !important;
 }
 
-.navbar-brand a {
+.nav-item, .navbar-brand a {
   color: white !important; 
   text-decoration: none !important; 
 }
@@ -153,14 +155,14 @@ footer {
 }
 
 /* ホバー時のリンクの色 */
-.navbar-brand a:hover,
+.nav-item  a:hover, .navbar-brand a:hover,
 .navbar-nav .nav-item a:hover {
   color: gray !important; 
   text-decoration: none !important; 
 }
 
 /* ホバー時のアイコンの色 */
-.navbar-brand a:hover i,
+.nav-item a:hover i, .navbar-brand a:hover i,
 .navbar-nav .nav-item a:hover i {
   color: gray !important; 
 }
@@ -215,15 +217,13 @@ footer {
 
 // #####################################
 
-// 全てのリンク
-a {
-  text-decoration: none; 
+body a {
+  text-decoration: none;
   color: #6376f7;
 }
 
-/* ホバー時の色 */
-a:hover {
-  text-decoration: none; 
+body a:hover {
+  text-decoration: none;
   color: #45519D;
 }
 

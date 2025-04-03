@@ -1,0 +1,27 @@
+<div class="dropdown mb-3">
+  <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="fa-solid fa-bell"></i>
+    <span class="badge bg-danger"><%= current_user.notifications.where(read: false).count %></span>
+  </button>
+  <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
+    <% if current_user.notifications.where(read: false).any? %>
+      <li><small class="dropdown-item text-muted">直近5件の未読通知</small></li>
+      <% current_user.notifications.where(read: false).limit(5).order(created_at: :desc).each do |notification| %>
+        <li>
+          <%= link_to notification_path(notification), method: :patch, class: "dropdown-item" do %>
+            <% notification_user = notification.notifiable.try(:user) || notification.notifiable.try(:follower) %>
+            <% if notification_user&.image&.attached? %>
+              <%= image_tag notification_user.image, class: "profile-image-small me-2" %>
+            <% else %>
+              <%= image_tag "no_image.jpg", class: "profile-image-small me-2" %>
+            <% end %>
+            <%= notification.message %>
+            <small class="text-muted d-block"><%= notification.created_at.in_time_zone('Tokyo').strftime('%m月%d日 %H:%M') %></small>
+          <% end %>
+        </li>
+      <% end %>
+    <% else %>
+      <li><span class="dropdown-item text-muted">未読の通知はありません</span></li>
+    <% end %>
+  </ul>
+</div>
