@@ -1,0 +1,2 @@
+$("#task-comments").html("<%= j render partial: 'public/task_comments/comments', locals: {task: @task, task_comment: TaskComment.new} %>");
+$("#new_task_comment")[0].reset();

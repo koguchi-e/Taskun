@@ -1,0 +1,48 @@
+<div class="index-results">
+  <div class="index-card">
+    <div class="index-header">
+      <ul>
+        <b>コメント件数：<%= @task.comments.count %></b>
+        <hr size="10">
+        <p></p>
+        <!-- コメント表示 -->
+        <% @task.comments.each do |task_comment| %>
+          <li class="comment">
+            <div class="comment-container">
+              <div class="comment-image">
+                <%= link_to user_path(task_comment.user) do %>
+                  <% if task_comment.user.image.attached? %>
+                    <%= image_tag task_comment.user.image, alt: "#{task_comment.user.name}のプロフィール画像", class: "profile-image" %>
+                  <% else %>
+                    <%= image_tag "no_image.jpg", alt: "デフォルトプロフィール画像", class: "profile-image" %>
+                  <% end %>
+                <% end %>
+              </div>
+              <div class="comment-content">
+                <p class="comment-text"><%= task_comment.comment %></p>
+                <span class="task-meta">
+                  <%= task_comment.user.name %>
+                  <%= task_comment.created_at.in_time_zone('Tokyo').strftime('%m月%d日 %H:%M') %>
+                  <% if task_comment.user == current_user %>
+                    <%= link_to "削除", task_task_comment_path(task_comment.task, task_comment), method: :delete, remote: true, "data-confirm" => "本当に削除しますか？" %>
+                  <% end %>
+                </span>
+              </div>
+              <br>
+            </div>
+          </li>
+          <hr size="10">
+        <% end %>
+        <!-- コメント投稿フォーム -->
+        <%= form_with model: [@task, @task_comment], remote: true, data: { turbo: false }, id: "new_task_comment" do |f| %>
+
+            <%= f.text_area :comment, placeholder: "コメントを入力", class: "form-input-comment" %>
+            <%= button_tag(type: 'submit', class: 'submit-btn') do %>
+                <i class="fa-solid fa-paper-plane"></i>
+            <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
+
