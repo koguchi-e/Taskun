@@ -35,7 +35,6 @@
         <% end %>
         <!-- コメント投稿フォーム -->
         <%= form_with model: [@task, @task_comment], remote: true, data: { turbo: false }, id: "new_task_comment" do |f| %>
-
             <%= f.text_area :comment, placeholder: "コメントを入力", class: "form-input-comment" %>
             <%= button_tag(type: 'submit', class: 'submit-btn') do %>
                 <i class="fa-solid fa-paper-plane"></i>

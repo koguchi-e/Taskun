@@ -584,6 +584,16 @@ li {
 // ##########################
 
 // 通知プルダウン変更
-.dropdown-menu .dropdown-item.custom-notification {
-  color: #4169e1!important;
+.btn, .notification {
+  background-color: #45519D!important;
+}
+
+.badge, .visually-hidden{
+  color: white;
+  font-size: 1.5rem;
+}
+
+.dropdown-menu, .notification {
+  background-color: white;
+  color: gray;
 }
