@@ -117,7 +117,7 @@ footer {
   color: white !important; 
 }
 
-.collapse, .collapsing, .collapse.show, .navbar, .container-fluid, .navbar-nav,.dropdown-menu {
+.collapse, .collapsing, .collapse.show, .navbar, .container-fluid, .navbar-nav {
   background-color: #45519D!important; 
 }
 
@@ -584,16 +584,19 @@ li {
 // ##########################
 
 // 通知プルダウン変更
-.btn, .notification {
-  background-color: #45519D!important;
+.dropdown-item, .notification_message {
+  color: gray !important; 
 }
+// .btn, .notification {
+//   background-color: #45519D!important;
+// }
 
-.badge, .visually-hidden{
-  color: white;
-  font-size: 1.5rem;
-}
+// .badge, .visually-hidden{
+//   color: white;
+//   font-size: 1.5rem;
+// }
 
-.dropdown-menu, .notification {
-  background-color: white;
-  color: gray;
-}
+// .dropdown-menu, .notification {
+//   background-color: white;
+//   color: gray;
+// }
