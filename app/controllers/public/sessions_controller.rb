@@ -41,16 +41,7 @@ class Public::SessionsController < Devise::SessionsController
   # end
 
   private
-    def user_state
-      user = User.find_by(email: params[:user][:email])
-      return if user.nil?
-      return unless user.valid_password?(params[:user][:password])
-
-      unless user.is_active
-        redirect_to new_user_registration_path, alert: "退会済みのアカウントです。再度ご登録ください。"
-      end
-    end
-
+  
   protected
     def configure_permitted_parameters
       devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
