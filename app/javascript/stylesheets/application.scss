@@ -117,16 +117,20 @@ footer {
   color: white !important; 
 }
 
-.collapse, .collapsing, .collapse.show, .navbar, .container-fluid, .navbar-nav, .top-icon {
+nav.navbar, .collapse, .collapsing, .collapse.show,.container-fluid {
   background-color: #45519D!important; 
 }
 
-.dropdown-item, .navbar-toggler,
-.navbar-toggler .navbar-toggler-icon {
-  color: white !important;
-  text-decoration: none !important;
+// ハンバーガーメニューアイコン白
+.navbar-toggler {
+  border-color: white !important;
 }
 
+.navbar-toggler .navbar-toggler-icon {
+  filter: invert(1);
+}
+
+// ナビゲーションリンクを白に
 .nav-item, .navbar-brand a {
   color: white !important; 
   text-decoration: none !important; 
