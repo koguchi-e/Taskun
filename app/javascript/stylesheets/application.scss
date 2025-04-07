@@ -117,13 +117,12 @@ footer {
   color: white !important; 
 }
 
-.collapse, .collapsing, .collapse.show, .navbar, .container-fluid, .navbar-nav {
+.collapse, .collapsing, .collapse.show, .navbar, .container-fluid, .navbar-nav, .top-icon {
   background-color: #45519D!important; 
 }
 
-.dropdown-item, .navbar-toggler {
-  display: flex;
-  align-items: center;
+.dropdown-item, .navbar-toggler,
+.navbar-toggler .navbar-toggler-icon {
   color: white !important;
   text-decoration: none !important;
 }
@@ -131,11 +130,6 @@ footer {
 .nav-item, .navbar-brand a {
   color: white !important; 
   text-decoration: none !important; 
-}
-
-/* ログイン前ナビゲーション */
-.navbar-toggler .navbar-toggler-icon{
-  color: white!important; 
 }
 
 /* ナビゲーションのリンク */
