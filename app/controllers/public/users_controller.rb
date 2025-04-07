@@ -4,7 +4,7 @@
 
   # ユーザの一覧画面
   def index
-    @users = User.page(params[:page])
+    @users = User.where(is_active: true).page(params[:page])
   end
 
   def show

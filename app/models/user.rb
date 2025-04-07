@@ -66,4 +66,13 @@ class User < ApplicationRecord
   def following?(user)
     followings.include?(user)
   end
+
+  # 退会処理・退会したユーザーはログインできない
+  def active_for_authentication?
+    super && is_active != false
+  end
+
+  def inactive_message
+    is_active == false ? :inactive_account : super
+  end
 end

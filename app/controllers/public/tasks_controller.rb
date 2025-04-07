@@ -22,7 +22,7 @@
   end
 
   def index
-    @tasks = Task.page(params[:page])
+    @tasks = Task.joins(:user).where(users: { is_active: true }).page(params[:page])
   end
 
   def show
