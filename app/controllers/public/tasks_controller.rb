@@ -22,7 +22,8 @@
   end
 
   def index
-    @tasks = Task.joins(:user).where(users: { is_active: true }).page(params[:page])
+    sort_order = params[:sort] || 'created_at DESC'
+    @tasks = Task.joins(:user).where(users: { is_active: true }).order(sort_order).page(params[:page])
   end
 
   def show
