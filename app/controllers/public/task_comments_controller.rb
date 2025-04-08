@@ -3,13 +3,16 @@ class Public::TaskCommentsController < ApplicationController
     @task = Task.find(params[:task_id])
     @comment = current_user.task_comments.new(task_comment_params)
     @comment.task_id = @task.id
-    @comment.save
-
-    @task_comment = TaskComment.new
     
     respond_to do |format|
-      format.js
-      format.html { redirect_to task_path(@task), notice: "コメントを追加しました" } 
+      if @comment.save
+        @task_comment = TaskComment.new
+        format.js
+        format.html { redirect_to task_path(@task), notice: "コメントを追加しました。" } 
+      else
+        @task_comment = @comment
+        format.html { redirect_to task_path(@task), alert: "コメントを入力してください。" }
+      end
     end
   end
 
