@@ -6,6 +6,12 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+suzuki = User.find_or_create_by!(email: "suzuki@test.com") do |user|
+  user.name = "鈴木"
+  user.password = SecureRandom.hex(6)
+  user.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/suzuki.png"), filename: "suzuki.png")
+end
+
 yamada = User.find_or_create_by!(email: "yamada@test.com") do |user|
   user.name = "山田"
   user.password = SecureRandom.hex(6)
@@ -24,7 +30,7 @@ satou = User.find_or_create_by!(email: "satou@test.com") do |user|
   user.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user3.jpg"), filename: "sample-user3.jpg")
 end
 
-Task.find_or_create_by!(user: satou, title: "Rubyの勉強する") do |task|
+Task.find_or_create_by!(user: suzuki, title: "Rubyの勉強する") do |task|
   task.keyword1 = "エンジニア"
   task.keyword2 = "Ruby"
   task.keyword3 = "勉強"
@@ -82,8 +88,9 @@ end
 
 Group.find_or_create_by!(name: "エンジニア勉強の会（東京）") do |group|
   group.summary =  "東京でエンジニアとして勉強してるメンバーを募集しています。毎週金曜日20時から勉強会を開催しています。"
-  group.owner = User.find_by(name: "テスト太郎")
-  group.members << User.find_by(name: "山田")
+  group.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/group1.png"), filename: "group1.png")
+  group.owner = User.find_by(name: "鈴木")
+  group.members << User.find_by(name: "田中")
   group.members << User.find_by(name: "佐藤")
 end
 
