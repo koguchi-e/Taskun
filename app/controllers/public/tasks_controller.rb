@@ -9,7 +9,6 @@
   def create
     @task = Task.new(task_params)
     @task.user_id = current_user.id
-    # byebug
     if @task.save
       flash[:notice] = "タスクが作成されました。"
       redirect_to task_path(@task.id)
@@ -81,7 +80,6 @@
   end
 
   private
-    # ストロングパラメータ
     def task_params
       params.require(:task).permit(:title, :keyword1, :keyword2, :keyword3)
     end
