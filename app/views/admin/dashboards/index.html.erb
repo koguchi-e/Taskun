@@ -14,7 +14,7 @@
           <% if user.image.attached? %>
             <%= image_tag user.image, class: "profile-image", alt: "#{user.name}のプロフィール画像" %>
           <% else %>
-            <%= image_tag "no_image", class: "profile-image", alt: "デフォルトプロフィール画像" %>
+            <%= image_tag "no_image.jpg", class: "profile-image", alt: "デフォルトプロフィール画像" %>
           <% end %>
           <span class="admin-user-name">
             <%= user.name %>
