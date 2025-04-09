@@ -41,5 +41,3 @@ yarn-debug.log*
 /.env
 /vendor/*
 !/vendor/.keep
-
-/db/seeds.rb
