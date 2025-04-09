@@ -2,7 +2,6 @@
   before_action :is_matching_login_user, only: [:edit, :update]
   before_action :ensure_guest_user, only: [:edit]
 
-  # ユーザの一覧画面
   def index
     @users = User.where(is_active: true).page(params[:page])
   end
@@ -21,7 +20,6 @@
 
   def update
     @user = User.find(params[:id])
-    # byebug
     if @user.update(user_params)
       redirect_to user_path(@user.id)
     else
@@ -43,7 +41,6 @@
   end
 
   private
-    # ストロングパラメータ
     def user_params
       params.require(:user).permit(:name, :email, :image, :is_active)
     end
