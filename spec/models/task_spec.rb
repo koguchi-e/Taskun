@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-describe "タスクモデルのテスト" do
+describe "タスクモデルについて" do
   it "エラーがなければ保存されているか" do
     expect(FactoryBot.build(:task)).to be_valid
   end

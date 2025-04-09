@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-describe "ユーザーモデルのテスト" do
+describe "ユーザーモデルについて" do
   it "エラーがなければ保存されているか" do
     expect(FactoryBot.build(:user)).to be_valid
   end

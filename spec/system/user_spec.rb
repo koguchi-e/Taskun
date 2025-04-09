@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "トップページのテスト" do
+RSpec.describe "トップページについて" do
   let(:user_attributes) { attributes_for(:user) }
 
   context "URLの確認" do
@@ -12,7 +12,7 @@ RSpec.describe "トップページのテスト" do
     end
   end
 
-  context "ログイン動作のテスト" do
+  context "ログインの入力情報が正しい場合" do
     let(:user) { create(:user) }
 
     it "ユーザー詳細ページに遷移するか" do
@@ -26,7 +26,7 @@ RSpec.describe "トップページのテスト" do
     end
   end
 
-  context "新規登録の動作テスト" do
+  context "新規登録の動作について" do
     context "表示の確認" do
       it "入力フォームが正しく表示されているか" do
         visit new_user_registration_path
@@ -38,7 +38,7 @@ RSpec.describe "トップページのテスト" do
       end
     end
 
-    context "新規登録処理のテスト" do
+    context "新規登録処理について" do
       it "正しい情報の場合、新規登録が完了する" do
         visit new_user_registration_path
         fill_in "user_name", with: user_attributes[:name]
@@ -64,7 +64,7 @@ RSpec.describe "トップページのテスト" do
   end
 end
 
-describe "ゲストログインのテスト" do
+describe "ゲストログインについて" do
   before do
     visit root_path
   end
@@ -84,7 +84,7 @@ describe "ゲストログインのテスト" do
   end
 end
 
-describe "ユーザーのテスト" do
+describe "ユーザーについて" do
   before do
     sign_in user
   end
@@ -92,7 +92,7 @@ describe "ユーザーのテスト" do
   let!(:task) { create(:task) }
   let(:user) { task.user }
 
-  describe "一覧画面のテスト" do
+  describe "一覧画面について" do
     before do
       visit users_path
     end
@@ -104,7 +104,7 @@ describe "ユーザーのテスト" do
     end
   end
 
-  describe "詳細画面のテスト" do
+  describe "詳細画面について" do
     before do
       visit user_path(user)
     end
@@ -123,7 +123,7 @@ describe "ユーザーのテスト" do
     end
   end
 
-  describe "編集画面のテスト" do
+  describe "編集画面について" do
     before do
       visit edit_user_path(user)
     end
@@ -137,7 +137,7 @@ describe "ユーザーのテスト" do
       expect(page).to have_button "保存"
     end
 
-    context "更新処理に関するテスト" do
+    context "更新処理に関するについて" do
       it "更新後リダイレクト先は正しいか" do
         within("form[action='#{user_path(user)}']") do
           fill_in "user[name]", with: Faker::Lorem.characters(number: 10)

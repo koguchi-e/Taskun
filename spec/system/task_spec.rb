@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "タスクのテスト" do
+RSpec.describe "タスクについて" do
   let!(:task) { create(:task) }
   let(:user) { task.user }
 
@@ -11,15 +11,15 @@ RSpec.describe "タスクのテスト" do
     visit tasks_path
   end
 
-  describe "投稿機能のテスト" do
+  describe "投稿機能" do
     context "表示の確認" do
       it "投稿ボタンがあるか" do
         expect(page).to have_selector(".submit-btn")
       end
     end
 
-    context "投稿処理のテスト" do
-      it "投稿後、詳細画面にリダイレクトする" do
+    context "投稿処理、投稿完了後" do
+      it "詳細画面にリダイレクトする" do
         fill_in "task[title]", with: Faker::Lorem.characters(number: 10)
         fill_in "task[keyword1]", with: Faker::Lorem.characters(number: 10)
         fill_in "task[keyword2]", with: Faker::Lorem.characters(number: 10)
@@ -30,7 +30,7 @@ RSpec.describe "タスクのテスト" do
     end
   end
 
-  describe "一覧画面のテスト" do
+  describe "一覧画面" do
     context "表示の確認" do
       it "投稿されたものが表示されるかどうか" do
         expect(page).to have_content task.title
@@ -39,7 +39,7 @@ RSpec.describe "タスクのテスト" do
     end
   end
 
-  describe "詳細画面のテスト" do
+  describe "詳細画面" do
     before do
       visit task_path(task)
     end
@@ -54,7 +54,7 @@ RSpec.describe "タスクのテスト" do
     end
   end
 
-  describe "編集画面のテスト" do
+  describe "編集画面" do
     before do
       visit edit_task_path(task)
     end
@@ -72,8 +72,8 @@ RSpec.describe "タスクのテスト" do
       end
     end
 
-    context "更新処理に関するテスト" do
-      it "更新後リダイレクト先は正しいか" do
+    context "更新完了後" do
+      it "リダイレクト先は正しいか" do
         within("form[action='#{task_path(task)}']") do
           fill_in "task[title]", with: Faker::Lorem.characters(number: 10)
           fill_in "task[keyword1]", with: Faker::Lorem.characters(number: 10)
