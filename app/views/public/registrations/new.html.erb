@@ -33,7 +33,9 @@
           </p>
 
           <p>
-            <%= f.submit "登録", class: "submit-btn" %>
+            <%= button_tag(type: 'submit', class: 'submit-btn') do %>
+              <i class="fa-solid fa-user-plus"></i>
+            <% end %>
           </p>
         <% end %>
       </div>
