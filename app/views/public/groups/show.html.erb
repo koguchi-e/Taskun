@@ -1,18 +1,10 @@
 <div class="main-title">
   <h4><i class="fa-solid fa-user-group"></i>グループ詳細画面</h4>
 </div>
-
-<p>
-<% unless @group.owner == current_user || @group.members.include?(current_user) %>
-  <%= link_to 'このグループに参加', join_group_path(@group), method: :post, class: "submit-btn-group" %>
+<%= button_to groups_path, class: "submit-btn-group" do %>
+  <i class="fa-solid fa-list"></i>  
 <% end %>
-
-<% if @group.members.include?(current_user) %>
-  <%= link_to "グループを退会", leave_group_path(@group), method: :delete, class: "submit-btn-group" %>
-<% end %>
-
-<%= link_to 'グループ一覧', groups_path, class: "submit-btn-group" %>
-</p>
+<p></p>
 
 <div class="detail-results">
   <div class="detail-card">
@@ -65,8 +57,23 @@
       </span>
       <div class="edit-delete-button">
         <% if @group.owner == current_user %>
-          <%= button_to "編集", edit_group_path(@group), class: "submit-btn" %>
-          <%= button_to "グループを削除", group_path(@group), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger" %>
+          <%= button_to edit_group_path(@group), class: "submit-btn" do %>
+            <i class="fa-solid fa-pen-to-square"></i>
+          <% end %>
+          <%= button_to group_path(@group), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger" do %>
+            <i class="fa-solid fa-trash"></i>
+          <% end %>
+        <% end %>
+        
+        <% unless @group.owner == current_user || @group.members.include?(current_user) %>
+          <%= button_to join_group_path(@group), method: :post, class: "submit-btn-group" do %>
+            <i class="fa-solid fa-user-plus"></i>
+          <% end %>
+        <% end %>
+        <% if @group.members.include?(current_user) %>
+          <%= button_to leave_group_path(@group), method: :delete, class: "btn btn-danger" do %>
+            <i class="fa-solid fa-user-minus"></i>
+          <% end %>
         <% end %>
       </div>
     </div>

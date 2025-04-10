@@ -295,19 +295,21 @@ li {
 
 // 共通ボタン設定
 .submit-btn {
-  display: flex;
+  display: block;
   margin-left: auto;
-  align-items: center;
-  justify-content: center;
-  border-radius: 5px; 
-  padding: 5px 10px;
-  transition: background-color 0.3s;
-  text-decoration: none; 
-  border: 1px solid #ddd;
+  margin-right: 0;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.375rem;
+  border: 1px solid white;
   color: white;
-  border-color: white;
   background-color: #45519D;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
 }
+
+
 
 .submit-btn-group {
   display: inline-flex;
@@ -321,11 +323,6 @@ li {
   color: white;
   border-color: white;
   background-color: #45519D;
-}
-
-.submit-btn i.fa-solid {
-  margin-left: 8px;
-  margin-right: 10px;
 }
 
 .submit-btn:hover,.submit-btn-group:hover {
@@ -388,7 +385,6 @@ li {
   justify-content: center;
   border-radius: 5px; 
   padding: 5px 10px!important;
-  transition: background-color 0.3s;
   text-decoration: none; 
   border: 1px solid #ddd;
 }

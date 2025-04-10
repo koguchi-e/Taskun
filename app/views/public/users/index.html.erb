@@ -25,11 +25,11 @@
           <% if current_user != user %>
             <% if current_user.following?(user) %>
               <%= link_to user_relationships_path(user.id), method: :delete, class: "submit-btn-group" do %>
-                <i class="fa-solid fa-user-minus"></i> Unfollow
+                <i class="fa-solid fa-user-minus"></i>
               <% end %>
             <% else %>
               <%= link_to user_relationships_path(user.id), method: :post, class: "submit-btn-group" do %>
-                <i class="fa-solid fa-user-plus"></i> Follow
+                <i class="fa-solid fa-user-plus"></i>
               <% end %>
             <% end %>
           <% end %>

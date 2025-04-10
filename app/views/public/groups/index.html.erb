@@ -3,9 +3,10 @@
   <h4><i class="fa-solid fa-user-group"></i>グループ一覧画面</h4>
 </div>
 
-<p>
-<%= link_to 'グループを作成', new_group_path, class: "submit-btn-group" %>
-</p>
+<%= button_to new_group_path, class: "submit-btn-group" do %>
+  <i class="fa-solid fa-user-group"></i> <i class="fa-solid fa-plus"></i>
+<% end %>
+<p></p>
 
 <% @groups.each do |group| %>
   <div class="index-results">
@@ -24,9 +25,6 @@
           </span>
           <b><%= link_to group.name, group_path(group) %></b>
         </div>
-        <% if group.owner == current_user %>
-          <%= link_to "編集", edit_group_path(group), class: "edit-link" %>
-        <% end %>
       </div>
     </div>
   </div>

@@ -47,7 +47,9 @@
           <%= form_with url: search_path, method: :get, local: true do |f| %>
             <b>検索条件を入力</b>　<span class="task-meta">","でAND検索</span>
             <%= f.text_field :query, value: @query, placeholder: "タスク名,ユーザー名,キーワード", class: "form-input" %>
-            <%= f.submit "検索", class: "submit-btn" %>
+            <%= button_tag(type: 'submit', class: 'submit-btn') do %>
+              <i class="fa-solid fa-magnifying-glass"></i>
+            <% end %>
           <% end %>
           <p></p>
           <p></p>
@@ -68,7 +70,9 @@
                 <%= f.text_field :keyword1, placeholder: "キーワードを入力", class: "form-input" %>
                 <%= f.text_field :keyword2, class: "form-input" %>
                 <%= f.text_field :keyword3, class: "form-input" %>
-                <%= f.submit "投稿", class: "submit-btn" %>
+                <%= button_tag(type: 'submit', class: 'submit-btn') do %>
+                  <i class="fa-solid fa-paper-plane"></i>
+                <% end %>
               </div>
             <% end %>
           <% end %>
