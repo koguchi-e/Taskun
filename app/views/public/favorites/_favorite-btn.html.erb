@@ -5,7 +5,7 @@
         <i class="fa-solid fa-fire"></i> 
         <%= @task.favorites.count %>
         </span>
-        <span style="color:gray"> いいね</span>
+        <span style="color:gray"></span>
     <% end %>
     </p>
 <% else %>
@@ -13,7 +13,7 @@
     <%= link_to task_favorite_path(@task), method: :post, remote: true do %>
         <span style="color:gray">
         <i class="fa-solid fa-fire"></i>
-        <%= @task.favorites.count %> いいね
+        <%= @task.favorites.count %>
         </span>
     <% end %>
     </p>

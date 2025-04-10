@@ -30,12 +30,6 @@ satou = User.find_or_create_by!(email: "satou@test.com") do |user|
   user.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user3.jpg"), filename: "sample-user3.jpg")
 end
 
-Task.find_or_create_by!(user: suzuki, title: "Rubyの勉強する") do |task|
-  task.keyword1 = "エンジニア"
-  task.keyword2 = "Ruby"
-  task.keyword3 = "勉強"
-end
-
 Task.find_or_create_by!(user: satou, title: "カリキュラム終わらせる") do |task|
   task.keyword1 = "エンジニア"
   task.keyword2 = "Ruby"
@@ -78,6 +72,12 @@ Task.find_or_create_by!(user: tanaka, title: "ゴミを出す") do |task|
   task.keyword3 = "家庭"
 end
 
+Task.find_or_create_by!(user: suzuki, title: "Rubyの勉強する") do |task|
+  task.keyword1 = "エンジニア"
+  task.keyword2 = "Ruby"
+  task.keyword3 = "勉強"
+end
+
 TaskComment.find_or_create_by!(user: yamada, comment: "いいね！") do |task_comment|
   task_comment.task = Task.find_by(title: "Rubyの勉強する")
 end
@@ -97,5 +97,6 @@ end
 Group.find_or_create_by!(name: "家事やるぞ！") do |group|
   group.summary =  "主婦でも1人暮らしの方でも！みんなで苦手な家事にトライ！"
   group.owner = tanaka
+  group.members << suzuki
   group.members << yamada
 end
