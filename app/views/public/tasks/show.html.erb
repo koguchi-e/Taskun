@@ -38,7 +38,7 @@
     </div>
     <div class="edit-delete-button">
       <% if @task.user == current_user %>
-        <%= button_to edit_task_path(@task.id), class: "submit-btn" do %>
+        <%= button_to edit_task_path(@task.id), method: :get, class: "submit-btn" do %>
           <i class="fa-solid fa-pen-to-square"></i>
         <% end %>
         <%= button_to task_path(@task.id), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger" do %>

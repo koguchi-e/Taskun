@@ -1,0 +1,29 @@
+
+<div class="main-title">
+  <h4><i class="fa-solid fa-question"></i>グループ機能とは</h4>
+</div>
+
+<div class="edit-delete-button">
+  <%= link_to groups_path, class: "submit-btn-group" do %>
+    <i class="fa-solid fa-list"></i>
+  <% end %>
+  <%= link_to  new_group_path, class: "submit-btn-group" do %>
+    <i class="fa-solid fa-user-group"></i> <i class="fa-solid fa-plus"></i>
+  <% end %>
+</div>
+<p></p>
+
+<div class="index-results">
+  <div class="index-card">
+    <div class="index-header">
+      同じ目標を持ってるユーザーとグループを作成して、情報を共有することが可能です。
+
+      <div class="auth-buttons">
+          <%= link_to  new_group_path, class: "submit-btn" do %>
+            さっそくグループを作成してみる
+          <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -21,7 +21,9 @@
           <b>概要</b>：
           <%= f.text_area :summary, placeholder: "グループの概要を入力", class: "form-input-comment" %>
         </div>
-        <%= f.submit "更新", class: "submit-btn" %>
+        <%= button_tag(type: 'submit', class: 'submit-btn') do %>
+          <i class="fa-solid fa-pencil"></i>
+        <% end %>
       <% end %>
     </div>
   </div>

@@ -19,11 +19,11 @@
         <% if current_user != @user %>
           <% if current_user.following?(@user) %>
             <%= link_to user_relationships_path(@user.id), method: :delete, class: "submit-btn-group" do %>
-              <i class="fa-solid fa-user-minus"></i>
+              <i class="fa-solid fa-user-slash"></i>
             <% end %>
           <% else %>
             <%= link_to user_relationships_path(@user.id), method: :post, class: "submit-btn-group" do %>
-              <i class="fa-solid fa-user-plus"></i>
+              <i class="fa-solid fa-user"></i> <i class="fa-solid fa-plus"></i>
             <% end %>
           <% end %>
         <% end %>
@@ -104,7 +104,7 @@
       <% unless @user.guest_user? %>
         <div class="edit-delete-button">
           <% if @user == current_user %>
-            <%= button_to edit_user_path(@user.id), class: "submit-btn" do %>
+            <%= button_to edit_user_path(@user.id), method: :get, class: "submit-btn" do %>
               <i class="fa-solid fa-pen-to-square"></i>
             <% end %>
             <%= button_to withdraw_user_path(@user.id), method: :patch, data: { confirm: '本当に退会しますか？' }, class: "btn btn-danger" do %>

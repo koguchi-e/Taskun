@@ -1,9 +1,15 @@
 <div class="main-title">
   <h4><i class="fa-solid fa-user-group"></i>グループ詳細画面</h4>
 </div>
-<%= button_to groups_path, class: "submit-btn-group" do %>
-  <i class="fa-solid fa-list"></i>  
-<% end %>
+
+<div class="edit-delete-button">
+  <%= link_to about_groups_path, method: :get, class: "submit-btn-group" do %>
+    <i class="fa-solid fa-question"></i>
+  <% end %>
+  <%= link_to groups_path, class: "submit-btn-group" do %>
+    <i class="fa-solid fa-list"></i>
+  <% end %>
+</div>
 <p></p>
 
 <div class="detail-results">
@@ -57,7 +63,7 @@
       </span>
       <div class="edit-delete-button">
         <% if @group.owner == current_user %>
-          <%= button_to edit_group_path(@group), class: "submit-btn" do %>
+          <%= button_to edit_group_path(@group), method: :get, class: "submit-btn" do %>
             <i class="fa-solid fa-pen-to-square"></i>
           <% end %>
           <%= button_to group_path(@group), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger" do %>
@@ -66,7 +72,7 @@
         <% end %>
         
         <% unless @group.owner == current_user || @group.members.include?(current_user) %>
-          <%= button_to join_group_path(@group), method: :post, class: "submit-btn-group" do %>
+          <%= button_to join_group_path(@group), method: :post, class: "submit-btn" do %>
             <i class="fa-solid fa-user-plus"></i>
           <% end %>
         <% end %>

@@ -71,6 +71,9 @@ class Public::GroupsController < ApplicationController
     end
   end
 
+  def about 
+  end
+
   private
     def set_group
       @group = Group.find(params[:id])

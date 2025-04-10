@@ -20,9 +20,9 @@
           <b>メールアドレス</b>
           <%= f.text_field :email, class: "form-input" %>
         </div>
-        <div class="form-field">
-          <%= f.submit "保存", class: "submit-btn" %>
-        </div>
+        <%= button_tag(type: 'submit', class: 'submit-btn') do %>
+          <i class="fa-solid fa-pencil"></i>
+        <% end %>
       <% end %>
     </div>
   </div>

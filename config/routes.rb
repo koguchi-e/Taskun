@@ -45,6 +45,9 @@ Rails.application.routes.draw do
     end
 
     resources :groups, only: [:new, :create, :index, :edit, :update, :show, :destroy] do
+      collection do
+        get "about"
+      end
       member do
         post "join", to: "groups#join"
         delete "leave", to: "groups#leave"
