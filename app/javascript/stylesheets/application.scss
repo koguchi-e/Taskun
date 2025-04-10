@@ -374,6 +374,25 @@ li {
   color: white!important; 
 }
 
+// 編集・削除ボタン
+.edit-delete-button {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.btn .btn-danger {
+  display: flex;
+  margin-left: auto;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px; 
+  padding: 5px 10px!important;
+  transition: background-color 0.3s;
+  text-decoration: none; 
+  border: 1px solid #ddd;
+}
+
 // #####################################
 
 // 一覧画面

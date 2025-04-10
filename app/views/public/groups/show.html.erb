@@ -63,14 +63,12 @@
         </div>
         </p>
       </span>
-      <div align="right">
+      <div class="edit-delete-button">
         <% if @group.owner == current_user %>
-          <%= link_to "編集", edit_group_path(@group), class: "edit-link" %> | 
-          <%= link_to "削除", group_path(@group), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "edit-link" %>
-          <p></p>
+          <%= button_to "編集", edit_group_path(@group), class: "submit-btn" %>
+          <%= button_to "グループを削除", group_path(@group), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger" %>
         <% end %>
       </div>
-      <p></p>
     </div>
   </div>
 </div>

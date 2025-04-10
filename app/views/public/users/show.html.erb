@@ -102,10 +102,10 @@
       </div>
       <p></p>
       <% unless @user.guest_user? %>
-        <div align="right">
+        <div class="edit-delete-button">
           <% if @user == current_user %>
-            <%= link_to "編集", edit_user_path(@user.id) %> | 
-            <%= link_to "退会", withdraw_user_path(@user), method: :patch, data: { confirm: "本当に退会しますか？" } %>
+            <%= button_to "編集", edit_user_path(@user.id), class: "submit-btn" %>
+            <%= button_to "退会", withdraw_user_path(@user.id), method: :patch, data: { confirm: '本当に退会しますか？' }, class: "btn btn-danger" %>
           <% end %>
         </div>
       <% end %>

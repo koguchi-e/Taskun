@@ -36,10 +36,10 @@
         <%= @task.updated_at.in_time_zone('Tokyo').strftime('%m月%d日 %H:%M') %>
       </span>
     </div>
-    <div align="right">
+    <div class="edit-delete-button">
       <% if @task.user == current_user %>
-        <%= link_to "編集", edit_task_path(@task.id) %> | 
-        <%= link_to "削除", task_path(@task.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+        <%= button_to "編集", edit_task_path(@task.id), class: "submit-btn" %>
+        <%= button_to "タスクを削除", task_path(@task.id), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger" %>
       <% end %>
     </div>
   </div>
