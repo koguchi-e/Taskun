@@ -189,17 +189,23 @@ nav.navbar, .collapse, .collapsing, .collapse.show,.container-fluid {
 }
 
 // トップページ・アバウト
-h4.about-title {
-  color: #6376f7;
-  margin-top: 1rem;  
-  margin-bottom: 1rem;  
+.container about{
+  margin-top: 2rem;  
+  margin-bottom: 1rem;
 }
 
 .border-custom-blue {
   border-top: 4px dashed #e6e8ff;
-  margin-top: 2rem;  
+  width: 600px;
+  height: 0;
+}
+
+.about-title {
+  color: #6376f7;
+  margin-top: 1rem;  
   margin-bottom: 1rem;
-  width: 50px;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .about-text {
