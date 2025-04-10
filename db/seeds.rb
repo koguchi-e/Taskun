@@ -7,25 +7,25 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 suzuki = User.find_or_create_by!(email: "suzuki@test.com") do |user|
-  user.name = "鈴木"
+  user.name = "鈴木太郎"
   user.password = SecureRandom.hex(6)
   user.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/suzuki.png"), filename: "suzuki.png")
 end
 
 yamada = User.find_or_create_by!(email: "yamada@test.com") do |user|
-  user.name = "山田"
+  user.name = "山田一郎"
   user.password = SecureRandom.hex(6)
   user.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user1.jpg"), filename: "sample-user1.jpg")
 end
 
 tanaka = User.find_or_create_by!(email: "tanaka@test.com") do |user|
-  user.name = "田中"
+  user.name = "田中花子"
   user.password = SecureRandom.hex(6)
   user.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user2.jpg"), filename: "sample-user2.jpg")
 end
 
 satou = User.find_or_create_by!(email: "satou@test.com") do |user|
-  user.name = "佐藤"
+  user.name = "佐藤次郎"
   user.password = SecureRandom.hex(6)
   user.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user3.jpg"), filename: "sample-user3.jpg")
 end
@@ -89,13 +89,13 @@ end
 Group.find_or_create_by!(name: "エンジニア勉強の会（東京）") do |group|
   group.summary =  "東京でエンジニアとして勉強してるメンバーを募集しています。毎週金曜日20時から勉強会を開催しています。"
   group.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/group1.png"), filename: "group1.png")
-  group.owner = User.find_by(name: "鈴木")
-  group.members << User.find_by(name: "田中")
-  group.members << User.find_by(name: "佐藤")
+  group.owner = suzuki
+  group.members << satou
+  group.members << yamada
 end
 
 Group.find_or_create_by!(name: "家事やるぞ！") do |group|
   group.summary =  "主婦でも1人暮らしの方でも！みんなで苦手な家事にトライ！"
-  group.owner = User.find_by(name: "田中")
-  group.members << User.find_by(name: "山田")
+  group.owner = tanaka
+  group.members << yamada
 end
