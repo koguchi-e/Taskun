@@ -1,0 +1,31 @@
+<div class="container text-center border-custom-blue mt-3 mb-2">
+  <h4 class="about-title">タスクを投稿して可視化！</h4>
+  <%= image_tag "task.png", alt: "タスク", width: 385, height: 156 %>
+  <div class="about-text">
+    タスクを共有してやる気をアップ！<br>
+    何を勉強したらいいか分からない時も、仲間のタスクを見て参考にできます。
+  </div>
+</div>
+
+<div class="container text-center border-custom-blue mt-3 mb-2">
+  <h4 class="about-title">コメントで応援！情報共有！</h4>
+  <%= image_tag "comment.png", alt: "コメント", width: 254, height: 234 %>    
+  <div class="about-text">
+    コメントで応援をもらおう！<br>
+    1人だとなかなかやる気が出ない時も、交流を通して課題を解決！
+  </div>
+</div>
+
+<div class="container text-center border-custom-blue mt-3 mb-2">
+  <div class="row">
+    <h4 class="about-title">今すぐ始めよう！</h4>
+    <div class="auth-buttons">
+      <div class="signup-btn">
+        <%= link_to "新規登録", new_user_registration_path, class: "submit-btn-registrations" %>
+      </div>
+      <div class="login-btn">
+        <%= link_to "ログイン", new_user_session_path, class: "submit-btn-login" %>
+      </div>
+    </div>
+  </div>
+</div>

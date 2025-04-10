@@ -1,7 +1,7 @@
 <%= image_tag "Taskun.png", alt: "サイトバナー", width: 640, height: 130 %>
-<p></p>
-タスクを見える化・共有して、やる気を出すコミュニティサイト。
-<p></p>
+<div class="about-text">
+  タスクを見える化・共有して、やる気を出すコミュニティサイト。
+</div>
 
 <div class="auth-buttons">
   <div class="signup-btn">
@@ -12,10 +12,10 @@
   </div>
 </div>
 
-<p></p>
-
 <div class="auth-buttons">
   <div class="row">
     <%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, class: "btn btn-secondary btn-sm btn-block mb-3 sign_in", method: :post %>
   </div>
 </div>
+
+<%= render 'public/homes/about' %>

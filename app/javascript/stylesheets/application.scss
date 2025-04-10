@@ -188,6 +188,24 @@ nav.navbar, .collapse, .collapsing, .collapse.show,.container-fluid {
   padding: 20px;
 }
 
+// トップページ・アバウト
+h4.about-title {
+  color: #6376f7;
+  margin-top: 1rem;  
+  margin-bottom: 1rem;  
+}
+
+.border-custom-blue {
+  border-top: 4px dashed #e6e8ff;
+  margin-top: 2rem;  
+  margin-bottom: 1rem;
+  width: 50px;
+}
+
+.about-text {
+  margin-top: 1rem;  
+}
+
 // #####################################
 
 // メインページ
@@ -314,7 +332,8 @@ li {
   display: flex; 
   gap: 10px; 
   align-items: center;
-  justify-content: center;  
+  justify-content: center;
+  margin-top: 1rem;
 }
 
 .submit-btn-registrations, .submit-btn-login {
@@ -590,16 +609,3 @@ li {
 .dropdown-item, .notification_message {
   color: gray !important; 
 }
-// .btn, .notification {
-//   background-color: #45519D!important;
-// }
-
-// .badge, .visually-hidden{
-//   color: white;
-//   font-size: 1.5rem;
-// }
-
-// .dropdown-menu, .notification {
-//   background-color: white;
-//   color: gray;
-// }
