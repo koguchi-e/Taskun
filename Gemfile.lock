@@ -93,6 +93,8 @@ GEM
     dotenv-rails (3.1.7)
       dotenv (= 3.1.7)
       railties (>= 6.1)
+    enum_help (0.0.19)
+      activesupport (>= 3.0.0)
     erubi (1.13.1)
     factory_bot (6.5.1)
       activesupport (>= 6.1.0)
@@ -335,6 +337,7 @@ DEPENDENCIES
   capybara (>= 3.26)
   devise
   dotenv-rails
+  enum_help
   factory_bot_rails
   faker
   jbuilder (~> 2.7)
