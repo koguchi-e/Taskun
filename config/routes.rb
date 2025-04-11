@@ -33,6 +33,10 @@ Rails.application.routes.draw do
     resources :tasks, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
       resource :favorite, only: [:create, :destroy]
       resources :task_comments, only: [:create, :destroy]
+      member do
+        patch :complete  
+        patch :incomplete  
+      end
     end
 
     resources :users, only: [:index, :show, :edit, :update] do

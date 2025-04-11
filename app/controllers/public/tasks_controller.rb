@@ -80,6 +80,16 @@
     redirect_to user_path(current_user)
   end
 
+  def complete
+    @task = Task.find(params[:id])
+    if @task.update(status: :complete)
+      flash[:notice] = "タスクが完了しました。"
+    else
+      flash[:alert] = "更新に失敗しました。"
+    end
+    redirect_to task_path(@task)
+  end
+  
   private
     def task_params
       params.require(:task).permit(:title, :keyword1, :keyword2, :keyword3)

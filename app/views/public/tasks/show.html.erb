@@ -34,10 +34,21 @@
         <br>
         <b>更新日時</b>：
         <%= @task.updated_at.in_time_zone('Tokyo').strftime('%m月%d日 %H:%M') %>
+
+        <% if @task.complete? %>
+          <span class="badge bg-success"> <i class="fa-solid fa-circle-check"></i> 完了</span>
+        <% else %>
+          <span class="badge bg-secondary"> <i class="fa-thin fa-circle-check"></i> 未完了</span>
+        <% end %>
       </span>
     </div>
     <div class="edit-delete-button">
       <% if @task.user == current_user %>
+        <% if @task.incomplete? %>
+          <%= button_to complete_task_path(@task), method: :patch, class: "submit-btn" do %>
+            <i class="fa-solid fa-circle-check"></i> 完了にする
+          <% end %>
+        <% end %>
         <%= button_to edit_task_path(@task.id), method: :get, class: "submit-btn" do %>
           <i class="fa-solid fa-pen-to-square"></i>
         <% end %>

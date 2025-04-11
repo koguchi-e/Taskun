@@ -20,4 +20,6 @@ class Task < ApplicationRecord
   validates :keyword1, length: { maximum: 30 }, presence: true
   validates :keyword2, length: { maximum: 30 }, presence: true
   validates :keyword3, length: { maximum: 30 }, presence: true
+
+  enum status: { incomplete: 0, complete: 1 }
 end
