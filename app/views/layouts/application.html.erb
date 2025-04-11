@@ -38,21 +38,6 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-4">
-          <!-- 通知機能 -->
-          <%= render "public/shared/notification_dropdown" %>
-          <!-- 検索機能 -->
-          <div class="main-title">
-            <h4><i class="fa-solid fa-magnifying-glass"></i>検索</h4>
-          </div>
-          <%= form_with url: search_path, method: :get, local: true do |f| %>
-            <b>検索条件を入力</b>　<span class="task-meta">半角空欄でAND検索</span>
-            <%= f.text_field :query, value: @query, placeholder: "タスク名,ユーザー名,キーワード", class: "form-input" %>
-            <%= button_tag(type: 'submit', class: 'submit-btn') do %>
-              <i class="fa-solid fa-magnifying-glass"></i>
-            <% end %>
-          <% end %>
-          <p></p>
-          <p></p>
           <!-- 作成画面 -->
           <% if user_signed_in? && @new_task.present? %>
             <div class="main-title">

@@ -627,6 +627,10 @@ li {
 // ##########################
 
 // 通知プルダウン変更
+.dropdown.notification {
+  margin-left: 1rem !important;
+}
+
 .dropdown-item, .notification_message {
   color: gray !important; 
 }
