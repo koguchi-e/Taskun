@@ -8,7 +8,7 @@
 
   def show
     @user = User.find(params[:id])
-    @tasks = @user.tasks.page(params[:page])
+    @tasks = @user.tasks.order(created_at: :desc).page(params[:page])
 
     @owned_groups = @user.owned_groups
     @joined_groups = @user.groups

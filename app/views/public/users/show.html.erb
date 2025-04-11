@@ -7,7 +7,7 @@
   <div class="detail-card">
     <div class="detail-row">
       <div>
-        <b>ユーザー名</b>：
+        <b>名前</b>：
         <% if @user.image.attached? %>
           <%= image_tag @user.image,  alt: "#{@user.name}のプロフィール画像", class: "profile-image"  %>
         <% else %>

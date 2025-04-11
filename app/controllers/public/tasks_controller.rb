@@ -14,7 +14,6 @@
       flash[:notice] = "タスクが作成されました。"
       redirect_to task_path(@task.id)
     else
-      flash.now[:alert] = "タスクの作成に失敗しました。"
       @new_task = @task
       @tasks = Task.page(params[:page])
       render :index
@@ -34,7 +33,8 @@
   def edit
     @task = Task.find(params[:id])
     if @task.user != current_user
-      redirect_to tasks_path, alert: "このタスクを編集する権限がありません。"
+      flash[:alert] = "このタスクを編集する権限がありません。"
+      redirect_to tasks_path
     end
   end
 
