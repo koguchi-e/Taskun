@@ -41,6 +41,13 @@
         <% end %>
       </li>
     </ul>
+
+    <%= form_with url: search_path, method: :get, local: true, html: { class: "d-flex", role: "search" } do |f| %>
+      <%= f.text_field :query, value: @query, placeholder: "検索ワードを入力", class: "form-input form-control me-2" %>
+      <%= button_tag(type: 'submit', class: 'submit-btn') do %>
+        <i class="fa-solid fa-magnifying-glass"></i>
+      <% end %>
+    <% end %>
   </div>
 </nav>
 
