@@ -45,7 +45,7 @@
       flash[:alert] = "検索条件を入力してください。"
       @results = Task.includes(:user).page(params[:page])  # 検索なしの場合は全件
     else
-      keywords = @query.split(",").map(&:strip)  # カンマ区切りで配列化 & 空白除去
+      keywords = @query.split(" ").map(&:strip)  # 半角空欄で配列化 & 空白除去
 
       query_conditions = keywords.map.with_index do |word, index|
         "(tasks.title LIKE :word#{index} OR COALESCE(tasks.keyword1, '') LIKE :word#{index} OR COALESCE(tasks.keyword2, '') LIKE :word#{index} OR COALESCE(tasks.keyword3, '') LIKE :word#{index} OR users.name LIKE :word#{index})"
