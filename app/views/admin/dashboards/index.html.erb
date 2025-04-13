@@ -16,11 +16,9 @@
           <% else %>
             <%= image_tag "no_image.jpg", class: "profile-image", alt: "デフォルトプロフィール画像" %>
           <% end %>
-          <!--
           <span class="admin-user-name">
             <%= user.name %>
           </span>
-           -->
         <% end %>
        ( <%= user.email %> )
         <%= link_to "削除", admin_user_path(user), method: :delete, data: { confirm: "本当にユーザーを削除しますか？"} %>
