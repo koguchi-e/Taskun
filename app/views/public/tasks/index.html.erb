@@ -10,7 +10,13 @@
           <div class="index-card">
             <div class="index-header">
               <span class="task-checkbox">
-                <i class="fa-solid fa-circle-check"></i>
+                <%= link_to task_path(task.id) do %>
+                  <% if task.complete? %>
+                    <i class="fa-solid fa-circle-check"></i>
+                  <% else %>
+                    <i class="fa-regular fa-circle-check"></i>
+                  <% end %>
+                <% end %>
               </span>
               <%= link_to user_path(task.user.id) do %>
                 <% if task.user.image.attached? %>
