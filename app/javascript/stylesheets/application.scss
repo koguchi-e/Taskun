@@ -635,3 +635,10 @@ li {
 .dropdown-item, .notification_message {
   color: gray !important; 
 }
+
+// ##########################
+
+// タスク完了ボタン
+form button.badge {
+  border: none !important;
+}

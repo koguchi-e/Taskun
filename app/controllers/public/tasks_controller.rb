@@ -89,6 +89,12 @@
     end
     redirect_to task_path(@task)
   end
+
+  def incomplete
+    @task = Task.find(params[:id])
+    @task.update(status: :incomplete)
+    redirect_to @task, notice: "タスクを未完了に戻しました。"
+  end
   
   private
     def task_params
