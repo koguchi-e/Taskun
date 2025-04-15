@@ -636,7 +636,16 @@ li {
   color: gray !important; 
 }
 
+// ##########################
+
 // いいねボタン右寄せ
 .favorite-btn {
   float: right;
+}
+
+// ##########################
+
+// タスク完了ボタン
+form button.badge {
+  border: none !important;
 }

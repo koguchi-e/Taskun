@@ -75,22 +75,35 @@
       <!-- 投稿一覧 -->
       <div class="tasks-section">
         <span class="detail-title">
-          <b>投稿したタスク</b>：
-          <span class="task-meta-detail">計 <%= @tasks.count %> 個</span>
+          <b>タスク投稿数</b>：
+          <span class="task-meta-detail">
+            <%= @tasks.count %> 件 (完了: <%= @tasks.complete.count %> 件)
+          </span>
         </span>
         <li class="tasks-list">
           <div class="task-content">
             <% @tasks.each do |task| %>
               <div class="task-item">
                 <span class="user-show-task-icon">
-                  <i class="fa-solid fa-circle-check"></i>
+                  <% if task.complete? %>
+                    <i class="fa-solid fa-circle-check"></i>
+                  <% else %>
+                    <i class="fa-regular fa-circle-check"></i>
+                  <% end %>
                 </span>
                 <div class="task-title-and-meta">
                   <span class="task-title"><b><%= link_to task.title, task_path(task.id) %></b></span>
                   <span class="task-meta-detail">
                     <%= task.updated_at.in_time_zone('Tokyo').strftime('%m月%d日 %H:%M') %> / 
                     <i class="fa-regular fa-comment"></i><%= task.comments.count %> / 
-                    <i class="fa-solid fa-fire"></i><%= task.favorites.count %> 
+                    <i class="fa-solid fa-fire"></i><%= task.favorites.count %> / 
+                    <% if task.complete? %>
+                      <span class="text-success">
+                      <i class="fa-solid fa-circle-check"></i>完了済
+                      </span>
+                    <% else %>
+                      <span class="text-danger"><b><i class="fa-regular fa-circle-check"></i>未完了</b></span>
+                    <% end %>
                   </span>
                 </div>
               </div>
