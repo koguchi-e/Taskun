@@ -54,12 +54,21 @@ footer {
 
 .form-input-comment {
   height: 100px;
-  width: 500px; 
+  width: 500px;
+  box-sizing: border-box;
   margin-bottom: 5px;
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
   display: block; 
+}
+
+// コメント入力欄スマホ用
+@media screen and (max-width: 600px) {
+  .form-input-comment {
+    width: 100%;
+    max-width: 100%;
+  }
 }
 
 // #####################################
@@ -636,7 +645,6 @@ li {
   color: gray !important; 
 }
 
-// ##########################
 
 // いいねボタン右寄せ
 .favorite-btn {
