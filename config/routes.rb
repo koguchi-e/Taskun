@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'event_notices/new'
+  get 'event_notices/create'
+  get 'event_notices/sent'
   devise_for :admins, skip: [:registrations, :password], controllers: {
     sessions: "admin/sessions"
   }
@@ -56,6 +59,8 @@ Rails.application.routes.draw do
         post "join", to: "groups#join"
         delete "leave", to: "groups#leave"
       end
+      resources :event_notices, only: [:new, :create]
+      get "event_notices" => "event_notices#sent"
     end
 
     resources :notifications, only: [:update]

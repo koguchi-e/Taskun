@@ -1,0 +1,26 @@
+<div class="main-title">
+  <h4><i class="fa-solid fa-envelope"></i>メール送信画面</h4>
+</div>
+
+<div class="detail-results">
+  <div class="detail-card">
+    <div class="detail-row">
+      <p>イベント告知など、メンバーに送信したいメールを入力してください。</p>
+      <%= form_with url: group_event_notices_path(@group), method: :post, local:true do |f| %>
+        <div class="form-field">
+          <b>タイトル</b>
+          <%= f.text_field :title, class: 'form-input' %>
+        </div>
+        <div class="form-field">
+          <b>本文</b>
+          <%= f.text_area :body, class: 'form-input' %>
+        </div>
+        <div class="form-field d-flex justify-content-end">
+          <%= button_tag(type: 'submit', class: 'submit-btn') do %>
+            <i class="fa-solid fa-paper-plane"></i>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
