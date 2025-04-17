@@ -1,16 +1,18 @@
-
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-6">
-      <h1>送信が完了しました</h1>
-      
+<div class="main-title">
+  <h4><i class="fa-solid fa-envelope"></i>送信結果画面</h4>
+</div>
+<div class="detail-results">
+  <div class="detail-card">
+    <div class="detail-row">
+      <h4>送信が完了しました。</h4>
       <p>内容は以下の通りです。</p>
-      
-      <h2>[タイトル]</h2>
+      <hr>
+      <b><i class="fa-solid fa-champagne-glasses"></i> イベント名</b>
       <p><%= @title %></p>
-      
-      
-      <h2>[本文]</h2>
+      <b><i class="fa-solid fa-calendar-days"></i> 開催日時</b>
+      <p><%= @date %></p>
+      <b><i class="fa-solid fa-question"></i> イベント内容</b>
       <p><%= @body %></p>
+    </div>
   </div>
 </div>

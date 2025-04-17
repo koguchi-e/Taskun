@@ -6,11 +6,13 @@ class Public::EventNoticesController < ApplicationController
   def create
     @group = Group.find(params[:group_id])
     @title = params[:title]
+    @date = params[:date]
     @body = params[:body] 
     
     event = { 
       :group => @group, 
       :title => @title, 
+      :date => @date, 
       :body => @body
     }
     

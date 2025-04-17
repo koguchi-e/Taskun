@@ -8,11 +8,15 @@
       <p>イベント告知など、メンバーに送信したいメールを入力してください。</p>
       <%= form_with url: group_event_notices_path(@group), method: :post, local:true do |f| %>
         <div class="form-field">
-          <b>タイトル</b>
+          <b><i class="fa-solid fa-champagne-glasses"></i> イベント名</b>
           <%= f.text_field :title, class: 'form-input' %>
         </div>
         <div class="form-field">
-          <b>本文</b>
+          <b><i class="fa-solid fa-calendar-days"></i> 開催日時</b>
+          <%= f.text_field :date, class: 'form-input' %>
+        </div>
+        <div class="form-field">
+          <b><i class="fa-solid fa-question"></i> イベント内容</b>
           <%= f.text_area :body, class: 'form-input' %>
         </div>
         <div class="form-field d-flex justify-content-end">
