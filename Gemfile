@@ -72,7 +72,8 @@ end
 
 gem "kaminari", "~> 1.2.1"
 
-gem "dotenv-rails"
+gem "dotenv-rails", groups: [:development, :test, :production]
+
 group :production do
   gem "mysql2"
 end
