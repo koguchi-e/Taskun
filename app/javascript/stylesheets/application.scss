@@ -631,7 +631,23 @@ li {
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
-  max-width: 100%; /* 画像が親要素の幅を超えないようにする */
+  max-width: 100%;
+}
+
+// グループとは・メール説明
+.mail-title{
+  margin-bottom: 0.5rem;
+}
+
+.highlight {
+  background-color: #d4d9ff;
+  padding: 0.2em 0.4em;
+  border-radius: 5px;
+}
+
+.mail-image {
+  display: block;
+  margin: 1rem auto 2rem auto;
 }
 
 // ##########################
@@ -644,7 +660,6 @@ li {
 .dropdown-item, .notification_message {
   color: gray !important; 
 }
-
 
 // いいねボタン右寄せ
 .favorite-btn {
