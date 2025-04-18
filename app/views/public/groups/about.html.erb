@@ -6,14 +6,6 @@
 <div class="index-resolts">
   <div class="index-card">
     <p><span class="task-meta">同じ目標を持ってるユーザーとグループを作成して、みんなでタスクを消化しよう！</span></p>
-    <div class="edit-delete-button">
-      <%= link_to groups_path, class: "submit-btn-group" do %>
-        <i class="fa-solid fa-list"></i>
-      <% end %>
-      <%= link_to  new_group_path, class: "submit-btn-group" do %>
-        <i class="fa-solid fa-user-group"></i> <i class="fa-solid fa-plus"></i>
-      <% end %>
-    </div>
     <hr>
     <div class="mail-title">
       <span class="highlight"><b><i class="fa-solid fa-envelope"></i> メール通知機能</b></span>
@@ -43,6 +35,9 @@
     <div class="auth-buttons">
         <%= link_to  new_group_path, class: "submit-btn-registrations" do %>
           さっそくグループを作成してみる
+        <% end %>
+        <%= link_to groups_path, class: "submit-btn-group" do %>
+          グループの一覧を見に行く
         <% end %>
     </div>
     <p></p>
