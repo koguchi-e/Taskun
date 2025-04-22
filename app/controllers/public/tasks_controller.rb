@@ -21,8 +21,17 @@
   end
 
   def index
-    sort_order = params[:sort] || 'created_at DESC'
-    @tasks = Task.joins(:user).where(users: { is_active: true }).order(sort_order).page(params[:page])
+    sort_order = 'tasks.created_at DESC'
+    @tasks = Task
+      .includes(
+        :comments,
+        :favorites,
+        user: { image_attachment: :blob }
+      )
+      .references(:user)
+      .where(users: { is_active: true })
+      .order(sort_order)
+      .page(params[:page])
   end
 
   def show
