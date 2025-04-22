@@ -52,13 +52,17 @@
 
     if @query.blank?
       flash[:alert] = "検索条件を入力してください。"
-      @results = Task.includes(:user).page(params[:page])  # 検索なしの場合は全件
+      @results = Task
+        .joins(:user)
+        .where(query_conditions, query_params)
+        .includes(:comments, user: { image_attachment: :blob })
+        .page(params[:page])
     else
-      keywords = @query.split(" ").map(&:strip)  # 半角空欄で配列化 & 空白除去
+      keywords = @query.split(" ").map(&:strip)
 
       query_conditions = keywords.map.with_index do |word, index|
         "(tasks.title LIKE :word#{index} OR COALESCE(tasks.keyword1, '') LIKE :word#{index} OR COALESCE(tasks.keyword2, '') LIKE :word#{index} OR COALESCE(tasks.keyword3, '') LIKE :word#{index} OR users.name LIKE :word#{index})"
-      end.join(" AND ")  # 「OR」から「AND」に変更
+      end.join(" AND ")
 
       query_params = keywords.map.with_index { |word, index| ["word#{index}".to_sym, "%#{ActiveRecord::Base.sanitize_sql_like(word)}%"] }.to_h
 
@@ -66,7 +70,11 @@
       Rails.logger.debug "検索条件: #{query_conditions}"
       Rails.logger.debug "検索パラメータ: #{query_params}"
 
-      @results = Task.joins(:user).where(query_conditions, query_params).includes(:user).page(params[:page])
+      @results = Task
+        .joins(:user)
+        .where(query_conditions, query_params)
+        .includes(:comments, user: { image_attachment: :blob }) 
+        .page(params[:page])
 
       Rails.logger.debug "検索結果: #{@results.inspect}"
     end

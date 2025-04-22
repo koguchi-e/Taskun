@@ -21,7 +21,7 @@
                   <span class="task-meta">
                     <%= result.user.name %> / 
                     <%= result.created_at.in_time_zone('Tokyo').strftime('%m月%d日 %H:%M') %> / 
-                    <i class="fa-regular fa-comment"></i> <%= result.comments.count %>
+                    <i class="fa-regular fa-comment"></i> <%= result.comments.size %>
                   </span>
                   <b><%= link_to result.title, task_path(result.id) %></b> 
                   <span class="task-meta">
