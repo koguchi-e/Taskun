@@ -3,7 +3,16 @@
   before_action :ensure_guest_user, only: [:edit]
 
   def index
-    @users = User.where(is_active: true).page(params[:page])
+    # @users = User.where(is_active: true).includes(:tasks).page(params[:page])
+    @users = User
+      .includes(
+        { image_attachment: :blob },
+        :tasks,
+        :followers,
+        :followings
+      )
+      .where(is_active: true)
+      .page(params[:page])
   end
 
   def show

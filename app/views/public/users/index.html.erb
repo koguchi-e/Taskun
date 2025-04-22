@@ -15,10 +15,10 @@
         <% end %>
         <div class="index-info">
           <span class="user-index-meta">
-            <i class="fa-regular fa-file"></i> <%= user.tasks.count %> / 
-            <i class="fa-solid fa-circle-check"></i> <%= user.tasks.complete.count %> / 
-            フォロー：<%= user.followings.count %> / 
-            フォロワー：<%= user.followers.count %>
+            <i class="fa-regular fa-file"></i> <%= user.tasks.size %> / 
+            <i class="fa-solid fa-circle-check"></i> <%= user.tasks.complete.size %> / 
+            フォロー：<%= user.followings.size %> / 
+            フォロワー：<%= user.followers.size %>
           </span>
           <b><%= link_to user.name, user_path(user.id) %></b>
         </div>
