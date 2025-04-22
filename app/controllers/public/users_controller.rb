@@ -16,11 +16,14 @@
   end
 
   def show
-    @user = User.find(params[:id])
-    @tasks = @user.tasks.order(created_at: :desc).page(params[:page])
+    @user = User.includes(image_attachment: :blob).find(params[:id])
+    @tasks = @user.tasks
+                .includes(:comments, :favorites) 
+                .order(created_at: :desc)
+                .page(params[:page])
 
-    @owned_groups = @user.owned_groups
-    @joined_groups = @user.groups
+    @owned_groups = @user.owned_groups.includes(image_attachment: :blob)
+    @joined_groups = @user.groups.includes(image_attachment: :blob)
   end
 
   def edit
