@@ -28,7 +28,7 @@
         <% end %>
         <hr>
         <p>
-        <b>メンバー</b>： <b><%= @group.members.count + 1 %> 人</b>
+        <b>メンバー</b>： <b><%= @group.members.size + 1 %> 人</b>
         <div class="group-list">
           <%= link_to user_path(@group.owner.id) do %>
             <% if @group.owner.image.attached? %>

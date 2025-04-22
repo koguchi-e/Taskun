@@ -38,6 +38,12 @@ class Public::GroupsController < ApplicationController
   end
 
   def show
+    @group = Group
+    .includes(
+      :owner => { image_attachment: :blob },
+      :members => { image_attachment: :blob }
+    )
+    .find(params[:id])
   end
 
   def join
