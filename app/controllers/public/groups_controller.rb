@@ -15,7 +15,7 @@ class Public::GroupsController < ApplicationController
   end
 
   def index
-    @groups = Group.page(params[:page])
+    @groups = Group.includes(:members, image_attachment: :blob).page(params[:page])
   end
 
   def edit
