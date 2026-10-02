@@ -78,6 +78,46 @@
 - JS ライブラリ：jQuery
 - IDE：Cloud9
 
+### Dockerによるローカル開発
+
+TaskunはDocker Composeで開発できます。Ruby、Node.js、Gem、JavaScript依存関係をTaskun専用のコンテナとVolumeに分離するため、他の開発環境には影響しません。
+
+#### 前提条件
+
+- Docker Engine と Docker Compose が利用できること
+
+#### 初回セットアップと起動
+
+```sh
+docker compose build
+docker compose run --rm web bundle exec rails db:prepare
+docker compose up
+```
+
+ブラウザで <http://localhost:13000> を開きます。
+
+- Composeプロジェクト名は `taskun_dev` です。
+- Railsコンテナのポート `3000` は、ホストの `127.0.0.1:13000` にのみ公開します。
+- Gemと`node_modules`は `taskun_dev` 専用のnamed volumeへ保存します。
+- 開発DBは既存構成と同じSQLiteで、Git管理外の `db/development.sqlite3` を使用します。
+
+SMTP送信を試す場合は、`.env.example` を参考に、Git管理しない `.env` へ `MAIL_ADDRESS` と `MAIL_PASSWORD` を設定します。
+
+#### テスト
+
+```sh
+docker compose run --rm -e RAILS_ENV=test web bundle exec rails db:prepare
+docker compose run --rm -e RAILS_ENV=test web bundle exec rspec
+```
+
+#### 停止
+
+```sh
+docker compose down
+```
+
+`docker compose down -v` や `docker volume prune` は実行しないでください。Taskun以外のDocker Volumeを削除する可能性を避けるためです。
+
 ---
 
 ## :ribbon: 使用素材
