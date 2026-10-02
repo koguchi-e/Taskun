@@ -19,9 +19,11 @@ RSpec.describe "トップページについて" do
       visit new_user_session_path
       fill_in "user_email", with: user.email
       fill_in "user_password", with: user.password
-      click_button "ログイン"
+      within("form[action='#{user_session_path}']") do
+        find(".submit-btn").click
+      end
 
-      expect(page).to have_current_path(user_path(user))
+      expect(page).to have_current_path(tasks_path)
       expect(page).to have_content "ログインしました。"
     end
   end
@@ -34,7 +36,7 @@ RSpec.describe "トップページについて" do
         expect(page).to have_field("user[email]")
         expect(page).to have_field("user[password]")
         expect(page).to have_field("user[password_confirmation]")
-        expect(page).to have_button("登録")
+        expect(page).to have_selector("form[action='#{user_registration_path}'] .submit-btn")
       end
     end
 
@@ -45,7 +47,9 @@ RSpec.describe "トップページについて" do
         fill_in "user_email", with: user_attributes[:email]
         fill_in "user_password", with: user_attributes[:password]
         fill_in "user_password_confirmation", with: user_attributes[:password]
-        click_button "登録"
+        within("form[action='#{user_registration_path}']") do
+          find(".submit-btn").click
+        end
 
         expect(page).to have_content "アカウント登録が完了しました。"
       end
@@ -57,7 +61,11 @@ RSpec.describe "トップページについて" do
         fill_in "user_password", with: ""
         fill_in "user_password_confirmation", with: ""
 
-        expect { click_button "登録" }.not_to change(User, :count)
+        expect do
+          within("form[action='#{user_registration_path}']") do
+            find(".submit-btn").click
+          end
+        end.not_to change(User, :count)
         expect(page).to have_content "件のエラーが発生しました。"
       end
     end
@@ -115,10 +123,10 @@ describe "ユーザーについて" do
         expect(page).to have_content task.title
       end
       it "編集リンクが存在するか" do
-        expect(page).to have_selector("a[href='/users/#{user.id}/edit']")
+        expect(page).to have_selector("form[action='#{edit_user_path(user)}'][method='get'] .submit-btn")
       end
       it "退会リンクが存在するか" do
-        expect(page).to have_link("退会", href: withdraw_user_path(user))
+        expect(page).to have_selector("form[action='#{withdraw_user_path(user)}'][method='post'] input[name='_method'][value='patch']", visible: :all)
       end
     end
   end
@@ -134,7 +142,7 @@ describe "ユーザーについて" do
       end
     end
     it "保存ボタンが表示される" do
-      expect(page).to have_button "保存"
+      expect(page).to have_selector("form[action='#{user_path(user)}'] .submit-btn")
     end
 
     context "更新処理に関するについて" do
@@ -142,7 +150,7 @@ describe "ユーザーについて" do
         within("form[action='#{user_path(user)}']") do
           fill_in "user[name]", with: Faker::Lorem.characters(number: 10)
           fill_in "user[email]", with: Faker::Lorem.characters(number: 10)
-          click_button "保存"
+          find(".submit-btn").click
         end
         expect(page).to have_current_path user_path(user)
       end
