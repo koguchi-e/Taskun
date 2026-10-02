@@ -24,7 +24,9 @@ RSpec.describe "タスクについて" do
         fill_in "task[keyword1]", with: Faker::Lorem.characters(number: 10)
         fill_in "task[keyword2]", with: Faker::Lorem.characters(number: 10)
         fill_in "task[keyword3]", with: Faker::Lorem.characters(number: 10)
-        find_button("投稿").click
+        within("form[action='#{tasks_path}']") do
+          find(".submit-btn").click
+        end
         expect(page).to have_current_path task_path(Task.last)
       end
     end
@@ -46,10 +48,10 @@ RSpec.describe "タスクについて" do
 
     context "表示の確認" do
       it "編集リンクが存在するか" do
-        expect(page).to have_selector("a[href='/tasks/#{task.id}/edit']")
+        expect(page).to have_selector("form[action='#{edit_task_path(task)}'][method='get'] .submit-btn")
       end
       it "削除リンクが存在するか" do
-        expect(page).to have_link("削除", href: task_path(task))
+        expect(page).to have_selector("form[action='#{task_path(task)}'][method='post'] input[name='_method'][value='delete']", visible: :all)
       end
     end
   end
@@ -68,7 +70,7 @@ RSpec.describe "タスクについて" do
       end
 
       it "保存ボタンが表示される" do
-        expect(page).to have_button "保存"
+        expect(page).to have_selector("form[action='#{task_path(task)}'] .submit-btn")
       end
     end
 
@@ -79,7 +81,7 @@ RSpec.describe "タスクについて" do
           fill_in "task[keyword1]", with: Faker::Lorem.characters(number: 10)
           fill_in "task[keyword2]", with: Faker::Lorem.characters(number: 10)
           fill_in "task[keyword3]", with: Faker::Lorem.characters(number: 10)
-          click_button "保存"
+          find(".submit-btn").click
         end
         expect(page).to have_current_path task_path(task)
       end
