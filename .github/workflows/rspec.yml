@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RAILS_ENV: test
+      RUBYOPT: -rlogger
 
     steps:
       - uses: actions/checkout@v6
