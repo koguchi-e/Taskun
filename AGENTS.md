@@ -15,7 +15,9 @@
 - Issue・Pull Request本文でコマンド・コード・ログを記載する場合は、Markdownのコードブロックを使用する
 - コミットメッセージは日本語で記述する
 - 作業ブランチでコミットした変更は、必ず対応するPull Requestを作成して共有する
-- Pull Request本文には、概要、作業内容、変更理由を記載する
+- Pull Request本文には、Issue、概要、作業内容、変更理由を記載する
+- Pull Request本文の概要の先頭には、対応するIssue番号を`## Issue #番号`の形式で記載する
+- Issue番号がユーザーから明示されていない場合は、Pull Requestを作成する前に必ず確認する
 - 1 Issueにつき1ブランチを基本とする
 - 1 Pull Requestでは1つの目的だけを扱う
 
