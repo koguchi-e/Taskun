@@ -18,7 +18,7 @@
   def show
     @user = User.includes(image_attachment: :blob).find(params[:id])
     @tasks = @user.tasks
-                .includes(:comments, :favorites) 
+                .includes(:comments, :favorites)
                 .order(created_at: :desc)
                 .page(params[:page])
 

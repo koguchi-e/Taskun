@@ -50,6 +50,7 @@ RSpec.describe "タスクについて" do
       it "編集リンクが存在するか" do
         expect(page).to have_selector("form[action='#{edit_task_path(task)}'][method='get'] .submit-btn")
       end
+
       it "削除リンクが存在するか" do
         expect(page).to have_selector("form[action='#{task_path(task)}'][method='post'] input[name='_method'][value='delete']", visible: :all)
       end

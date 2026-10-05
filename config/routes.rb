@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  get 'event_notices/new'
-  get 'event_notices/create'
-  get 'event_notices/sent'
+  get "event_notices/new"
+  get "event_notices/create"
+  get "event_notices/sent"
   devise_for :admins, skip: [:registrations, :password], controllers: {
     sessions: "admin/sessions"
   }
@@ -37,8 +37,8 @@ Rails.application.routes.draw do
       resource :favorite, only: [:create, :destroy]
       resources :task_comments, only: [:create, :destroy]
       member do
-        patch :complete  
-        patch :incomplete  
+        patch :complete
+        patch :incomplete
       end
     end
 

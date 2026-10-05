@@ -240,7 +240,7 @@ GEM
     rubocop-ast (1.44.0)
       parser (>= 3.3.7.2)
       prism (~> 1.4)
-    rubocop-md (2.0.0)
+    rubocop-md (2.0.4)
       lint_roller (~> 1.1)
       rubocop (>= 1.72.1)
     rubocop-minitest (0.38.0)

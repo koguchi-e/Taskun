@@ -87,7 +87,7 @@ TaskComment.find_or_create_by!(user: tanaka, comment: "頑張ってますね！"
 end
 
 Group.find_or_create_by!(name: "エンジニア勉強の会（東京）") do |group|
-  group.summary =  "東京でエンジニアとして勉強してるメンバーを募集しています。毎週金曜日20時から勉強会を開催しています。"
+  group.summary = "東京でエンジニアとして勉強してるメンバーを募集しています。毎週金曜日20時から勉強会を開催しています。"
   group.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/group1.png"), filename: "group1.png")
   group.owner = suzuki
   group.members << satou
