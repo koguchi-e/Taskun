@@ -1,0 +1,42 @@
+name: RSpec
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  rspec:
+    runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: test
+      RUBYOPT: -rlogger
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Rubyをセットアップ
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.1.2"
+          bundler-cache: true
+
+      - name: Node.jsをセットアップ
+        uses: actions/setup-node@v7
+        with:
+          node-version: "16.20.2"
+          cache: yarn
+
+      - name: JavaScript依存関係をインストール
+        run: npm install --global yarn@1.22.22 && yarn install --frozen-lockfile
+
+      - name: テストDBを準備
+        run: bundle exec rails db:prepare
+
+      - name: JavaScriptをコンパイル
+        run: bundle exec rails webpacker:compile
+
+      - name: RSpecを実行
+        run: bundle exec rspec
