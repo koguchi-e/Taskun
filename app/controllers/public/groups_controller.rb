@@ -40,8 +40,8 @@ class Public::GroupsController < ApplicationController
   def show
     @group = Group
     .includes(
-      :owner => { image_attachment: :blob },
-      :members => { image_attachment: :blob }
+      owner: { image_attachment: :blob },
+      members: { image_attachment: :blob }
     )
     .find(params[:id])
   end
@@ -77,7 +77,7 @@ class Public::GroupsController < ApplicationController
     end
   end
 
-  def about 
+  def about
   end
 
   private

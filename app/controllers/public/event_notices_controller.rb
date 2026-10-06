@@ -7,15 +7,15 @@ class Public::EventNoticesController < ApplicationController
     @group = Group.find(params[:group_id])
     @title = params[:title]
     @date = params[:date]
-    @body = params[:body] 
-    
-    event = { 
-      :group => @group, 
-      :title => @title, 
-      :date => @date, 
-      :body => @body
+    @body = params[:body]
+
+    event = {
+      group: @group,
+      title: @title,
+      date: @date,
+      body: @body
     }
-    
+
     EventMailer.send_notifications_to_group(event)
     render :sent
   end

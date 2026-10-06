@@ -1,4 +1,4 @@
-name: RSpec
+name: Rails CI
 
 on:
   pull_request:
@@ -40,3 +40,40 @@ jobs:
 
       - name: RSpecを実行
         run: bundle exec rspec
+
+  rubocop:
+    name: RuboCop
+    runs-on: ubuntu-latest
+    env:
+      RUBYOPT: -rlogger
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Rubyをセットアップ
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.1.2"
+          bundler-cache: true
+
+      - name: RuboCopを実行
+        run: bundle exec rubocop
+
+  zeitwerk:
+    name: Zeitwerkチェック
+    runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: test
+      RUBYOPT: -rlogger
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Rubyをセットアップ
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.1.2"
+          bundler-cache: true
+
+      - name: Zeitwerkチェックを実行
+        run: bundle exec rails zeitwerk:check

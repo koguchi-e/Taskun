@@ -22,7 +22,7 @@ class Admin::DashboardsController < ApplicationController
 
       if @task_query.present?
         @task_results = Task
-          .includes(:user => { image_attachment: :blob }, comments: [])
+          .includes(user: { image_attachment: :blob }, comments: [])
           .where("title LIKE ?", "%#{@task_query}%")
       end
 

@@ -21,7 +21,7 @@
   end
 
   def index
-    sort_order = 'tasks.created_at DESC'
+    sort_order = "tasks.created_at DESC"
     @tasks = Task
       .includes(
         :comments,
@@ -73,7 +73,7 @@
       @results = Task
         .joins(:user)
         .where(query_conditions, query_params)
-        .includes(:comments, user: { image_attachment: :blob }) 
+        .includes(:comments, user: { image_attachment: :blob })
         .page(params[:page])
 
       Rails.logger.debug "検索結果: #{@results.inspect}"
@@ -112,7 +112,7 @@
     @task.update(status: :incomplete)
     redirect_to @task, notice: "タスクを未完了に戻しました。"
   end
-  
+
   private
     def task_params
       params.require(:task).permit(:title, :keyword1, :keyword2, :keyword3)

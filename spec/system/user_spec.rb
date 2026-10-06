@@ -53,6 +53,7 @@ RSpec.describe "トップページについて" do
 
         expect(page).to have_content "アカウント登録が完了しました。"
       end
+
       it "誤った情報の場合、登録が失敗する" do
         visit new_user_registration_path
 
@@ -82,6 +83,7 @@ describe "ゲストログインについて" do
       expect(page).to have_link "ゲストログイン（閲覧用）"
     end
   end
+
   context "ゲストログインの動作確認" do
     it "ゲストログインボタンをクリックするとログインできるかどうか" do
       click_link "ゲストログイン（閲覧用）"
@@ -104,6 +106,7 @@ describe "ユーザーについて" do
     before do
       visit users_path
     end
+
     context "表示の確認" do
       it "ユーザーが表示されるかどうか" do
         expect(page).to have_content user.name
@@ -116,15 +119,18 @@ describe "ユーザーについて" do
     before do
       visit user_path(user)
     end
+
     context "表示の確認" do
       it "ユーザー情報が表示されているかどうか" do
         expect(page).to have_content user.name
         expect(page).to have_content user.email
         expect(page).to have_content task.title
       end
+
       it "編集リンクが存在するか" do
         expect(page).to have_selector("form[action='#{edit_user_path(user)}'][method='get'] .submit-btn")
       end
+
       it "退会リンクが存在するか" do
         expect(page).to have_selector("form[action='#{withdraw_user_path(user)}'][method='post'] input[name='_method'][value='patch']", visible: :all)
       end
@@ -135,12 +141,14 @@ describe "ユーザーについて" do
     before do
       visit edit_user_path(user)
     end
+
     context "表示の確認" do
       it "入力欄に編集前のユーザー名とメールアドレスがフォームに表示(セット)されている" do
         expect(page).to have_field "user[name]", with: user.name
         expect(page).to have_field "user[email]", with: user.email
       end
     end
+
     it "保存ボタンが表示される" do
       expect(page).to have_selector("form[action='#{user_path(user)}'] .submit-btn")
     end
