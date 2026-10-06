@@ -95,7 +95,7 @@ Group.find_or_create_by!(name: "エンジニア勉強の会（東京）") do |gr
 end
 
 Group.find_or_create_by!(name: "家事やるぞ！") do |group|
-  group.summary =  "主婦でも1人暮らしの方でも！みんなで苦手な家事にトライ！"
+  group.summary = "主婦でも1人暮らしの方でも！みんなで苦手な家事にトライ！"
   group.owner = tanaka
   group.members << suzuki
   group.members << yamada
