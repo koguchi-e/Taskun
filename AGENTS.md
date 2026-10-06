@@ -12,11 +12,21 @@
 
 - Issueのタイトル・本文は日本語で記述する
 - Pull Requestのタイトル・本文は日本語で記述する
-- Issue・Pull Request本文でコマンド・コード・ログを記載する場合は、Markdownのコードブロックを使用する
+- Issue本文では、`## 概要` `## 作業内容` `## 完了条件` をMarkdownの見出しとして記載し、各項目はMarkdownのリストで記載する
+  - 概要にはなぜこの作業が必要か、Issueが必要になった経緯を書いてください
+- Pull Request本文では、`## Issue`、`## 概要`、`## 作業内容`、`## 変更理由` をMarkdownの見出しとして記載する
+- Issue・Pull Request本文でコマンド・コード・テストログを記載する場合は、内容全体をMarkdownのコードブロックで囲む。テスト結果を本文に記載する場合も同様とする
 - コミットメッセージは日本語で記述する
 - 作業ブランチでコミットした変更は、必ず対応するPull Requestを作成して共有する
 - Pull Request本文には、Issue、概要、作業内容、変更理由を記載する
-- Pull Request本文の概要の先頭には、対応するIssue番号を`## Issue #番号`の形式で記載する
+- Pull Request本文には、対応するIssue番号を以下の形式で記載する
+
+  ```markdown
+  ## Issue
+
+  - #番号
+  ```
+
 - Issue番号がユーザーから明示されていない場合は、Pull Requestを作成する前に必ず確認する
 - 1 Issueにつき1ブランチを基本とする
 - 1 Pull Requestでは1つの目的だけを扱う
