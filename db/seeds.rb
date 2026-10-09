@@ -1,102 +1,77 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+# Taskunの開発用サンプルデータ
 
-suzuki = User.find_or_create_by!(email: "suzuki@test.com") do |user|
-  user.name = "鈴木太郎"
-  user.password = SecureRandom.hex(6)
-  user.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/suzuki.png"), filename: "suzuki.png")
+def create_sample_image_blob(image_filename)
+  image_path = Rails.root.join("db", "fixtures", image_filename)
+
+  File.open(image_path) do |file|
+    ActiveStorage::Blob.create_and_upload!(
+      io: file,
+      filename: image_filename,
+      content_type: Marcel::MimeType.for(image_path),
+      identify: false,
+      metadata: { analyzed: true }
+    )
+  end
 end
 
-yamada = User.find_or_create_by!(email: "yamada@test.com") do |user|
-  user.name = "山田一郎"
-  user.password = SecureRandom.hex(6)
-  user.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user1.jpg"), filename: "sample-user1.jpg")
+def create_user(email:, name:, image_filename:)
+  User.find_or_create_by!(email: email) do |user|
+    user.name = name
+    user.password = SecureRandom.hex(6)
+    user.image = create_sample_image_blob(image_filename)
+  end
 end
 
-tanaka = User.find_or_create_by!(email: "tanaka@test.com") do |user|
-  user.name = "田中花子"
-  user.password = SecureRandom.hex(6)
-  user.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user2.jpg"), filename: "sample-user2.jpg")
+def create_task(user:, title:, keyword1:, keyword2:, keyword3:)
+  Task.find_or_create_by!(user: user, title: title) do |task|
+    task.keyword1 = keyword1
+    task.keyword2 = keyword2
+    task.keyword3 = keyword3
+  end
 end
 
-satou = User.find_or_create_by!(email: "satou@test.com") do |user|
-  user.name = "佐藤次郎"
-  user.password = SecureRandom.hex(6)
-  user.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user3.jpg"), filename: "sample-user3.jpg")
+# Users
+suzuki = create_user(email: "suzuki@test.com", name: "鈴木太郎", image_filename: "suzuki.png")
+yamada = create_user(email: "yamada@test.com", name: "山田一郎", image_filename: "sample-user1.jpg")
+tanaka = create_user(email: "tanaka@test.com", name: "田中花子", image_filename: "sample-user2.jpg")
+satou = create_user(email: "satou@test.com", name: "佐藤次郎", image_filename: "sample-user3.jpg")
+
+# 旧サンプルデータを置き換える
+Task.where(user: tanaka, title: ["洗濯をする", "ゴミを出す"]).destroy_all
+Group.find_by(name: "家事やるぞ！", owner: tanaka)&.destroy!
+
+# Tasks
+create_task(user: satou, title: "カリキュラム終わらせる", keyword1: "エンジニア", keyword2: "Ruby", keyword3: "勉強")
+create_task(user: satou, title: "フロントの勉強する", keyword1: "エンジニア", keyword2: "転職活動", keyword3: "勉強")
+create_task(user: satou, title: "GitHubの勉強する", keyword1: "エンジニア", keyword2: "転職活動", keyword3: "勉強")
+create_task(user: yamada, title: "テスト勉強三時間する", keyword1: "学生", keyword2: "テスト", keyword3: "勉強")
+create_task(user: yamada, title: "プログラミングスクールに入学", keyword1: "学生", keyword2: "就活", keyword3: "勉強")
+create_task(user: tanaka, title: "ランニングを30分する", keyword1: "スポーツ", keyword2: "ランニング", keyword3: "運動")
+create_task(user: tanaka, title: "次に読む本を決める", keyword1: "趣味", keyword2: "読書", keyword3: "リラックス")
+ruby_task = create_task(user: suzuki, title: "Rubyの勉強する", keyword1: "エンジニア", keyword2: "Ruby", keyword3: "勉強")
+
+# Task comments
+TaskComment.find_or_create_by!(user: yamada, task: ruby_task, comment: "いいね！")
+TaskComment.find_or_create_by!(user: tanaka, task: ruby_task, comment: "頑張ってますね！")
+
+# Groups
+tokyo_group = Group.find_or_initialize_by(name: "エンジニア勉強の会（東京）")
+tokyo_group.summary = "東京でエンジニアとして勉強しているメンバーを募集しています。毎週金曜日20時から勉強会を開催しています。"
+tokyo_group.owner = suzuki
+tokyo_group.save!
+
+unless tokyo_group.image.attached?
+  tokyo_group.image = create_sample_image_blob("group1.png")
+  tokyo_group.save!
 end
 
-Task.find_or_create_by!(user: satou, title: "カリキュラム終わらせる") do |task|
-  task.keyword1 = "エンジニア"
-  task.keyword2 = "Ruby"
-  task.keyword3 = "勉強"
-end
+GroupMembership.find_or_create_by!(group: tokyo_group, user: satou)
+GroupMembership.find_or_create_by!(group: tokyo_group, user: yamada)
 
-Task.find_or_create_by!(user: satou, title: "フロントの勉強する") do |task|
-  task.keyword1 = "エンジニア"
-  task.keyword2 = "転職活動"
-  task.keyword3 = "勉強"
-end
+weekend_sports_group = Group.find_or_initialize_by(name: "週末スポーツの会")
+weekend_sports_group.summary = "ランニングや軽い運動を一緒に楽しむメンバーを募集しています。初心者でも参加しやすいグループです。"
+weekend_sports_group.owner = tanaka
+weekend_sports_group.save!
 
-Task.find_or_create_by!(user: satou, title: "GitHubの勉強する") do |task|
-  task.keyword1 = "エンジニア"
-  task.keyword2 = "転職活動"
-  task.keyword3 = "勉強"
-end
-
-Task.find_or_create_by!(user: yamada, title: "テスト勉強三時間する") do |task|
-  task.keyword1 = "学生"
-  task.keyword2 = "テスト"
-  task.keyword3 = "勉強"
-end
-
-Task.find_or_create_by!(user: yamada, title: "プログラミングスクールに入学") do |task|
-  task.keyword1 = "学生"
-  task.keyword2 = "就活"
-  task.keyword3 = "勉強"
-end
-
-Task.find_or_create_by!(user: tanaka, title: "洗濯をする") do |task|
-  task.keyword1 = "家事"
-  task.keyword2 = "主婦"
-  task.keyword3 = "家庭"
-end
-
-Task.find_or_create_by!(user: tanaka, title: "ゴミを出す") do |task|
-  task.keyword1 = "家事"
-  task.keyword2 = "主婦"
-  task.keyword3 = "家庭"
-end
-
-Task.find_or_create_by!(user: suzuki, title: "Rubyの勉強する") do |task|
-  task.keyword1 = "エンジニア"
-  task.keyword2 = "Ruby"
-  task.keyword3 = "勉強"
-end
-
-TaskComment.find_or_create_by!(user: yamada, comment: "いいね！") do |task_comment|
-  task_comment.task = Task.find_by(title: "Rubyの勉強する")
-end
-
-TaskComment.find_or_create_by!(user: tanaka, comment: "頑張ってますね！") do |task_comment|
-  task_comment.task = Task.find_by(title: "Rubyの勉強する")
-end
-
-Group.find_or_create_by!(name: "エンジニア勉強の会（東京）") do |group|
-  group.summary = "東京でエンジニアとして勉強してるメンバーを募集しています。毎週金曜日20時から勉強会を開催しています。"
-  group.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/group1.png"), filename: "group1.png")
-  group.owner = suzuki
-  group.members << satou
-  group.members << yamada
-end
-
-Group.find_or_create_by!(name: "家事やるぞ！") do |group|
-  group.summary = "主婦でも1人暮らしの方でも！みんなで苦手な家事にトライ！"
-  group.owner = tanaka
-  group.members << suzuki
-  group.members << yamada
-end
+GroupMembership.find_or_create_by!(group: weekend_sports_group, user: suzuki)
+GroupMembership.find_or_create_by!(group: weekend_sports_group, user: yamada)
