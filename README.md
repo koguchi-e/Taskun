@@ -89,6 +89,8 @@ TaskunはDocker Composeで開発できます。Ruby、Node.js、Gem、JavaScript
 #### 初回セットアップと起動
 
 ```sh
+export HOST_UID="$(id -u)"
+export HOST_GID="$(id -g)"
 docker compose build
 docker compose run --rm web bundle exec rails db:prepare
 docker compose up
@@ -106,6 +108,8 @@ SMTP送信を試す場合は、`.env.example` を参考に、Git管理しない 
 #### テスト
 
 ```sh
+export HOST_UID="$(id -u)"
+export HOST_GID="$(id -g)"
 docker compose run --rm -e RAILS_ENV=test web bundle exec rails db:prepare
 docker compose run --rm -e RAILS_ENV=test web bundle exec rspec
 ```
