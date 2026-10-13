@@ -13,6 +13,7 @@ jobs:
     env:
       RAILS_ENV: test
       RUBYOPT: -rlogger
+      NODE_OPTIONS: --openssl-legacy-provider
 
     steps:
       - uses: actions/checkout@v6
