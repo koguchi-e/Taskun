@@ -13,7 +13,6 @@ jobs:
     env:
       RAILS_ENV: test
       RUBYOPT: -rlogger
-      NODE_OPTIONS: --openssl-legacy-provider
 
     steps:
       - uses: actions/checkout@v6
@@ -37,7 +36,7 @@ jobs:
         run: bundle exec rails db:prepare
 
       - name: JavaScriptをコンパイル
-        run: bundle exec rails webpacker:compile
+        run: bundle exec rails shakapacker:compile
 
       - name: RSpecを実行
         run: bundle exec rspec
