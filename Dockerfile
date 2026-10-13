@@ -1,13 +1,14 @@
-FROM node:16.20.2-alpine AS node
+FROM node:24.21.0-alpine AS node
 
-FROM ruby:3.1.2-alpine
+FROM ruby:3.3.12-alpine
 
 ARG BUNDLER_VERSION=2.6.7
 
 ENV BUNDLE_WITHOUT=production \
-    RUBYOPT=-rlogger
+    RUBYOPT=-rlogger \
+    NODE_OPTIONS=--openssl-legacy-provider
 
-RUN apk add --no-cache build-base sqlite-dev tzdata
+RUN apk add --no-cache build-base linux-headers sqlite-dev tzdata
 
 COPY --from=node /usr/local /usr/local
 RUN npm install --global --force yarn@1.22.22
