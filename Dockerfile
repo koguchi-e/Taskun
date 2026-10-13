@@ -4,8 +4,7 @@ FROM ruby:3.3.12-alpine
 
 ARG BUNDLER_VERSION=2.6.7
 
-ENV BUNDLE_WITHOUT=production \
-    RUBYOPT=-rlogger
+ENV BUNDLE_WITHOUT=production
 
 RUN apk add --no-cache build-base linux-headers sqlite-dev tzdata
 

@@ -12,7 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RAILS_ENV: test
-      RUBYOPT: -rlogger
 
     steps:
       - uses: actions/checkout@v6
@@ -44,8 +43,6 @@ jobs:
   rubocop:
     name: RuboCop
     runs-on: ubuntu-latest
-    env:
-      RUBYOPT: -rlogger
 
     steps:
       - uses: actions/checkout@v6
@@ -64,7 +61,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RAILS_ENV: test
-      RUBYOPT: -rlogger
 
     steps:
       - uses: actions/checkout@v6
