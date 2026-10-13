@@ -12,8 +12,8 @@ gem "sqlite3", "~> 1.4"
 gem "puma", "~> 3.11"
 # Use SCSS for stylesheets
 gem "sass-rails", ">= 6"
-# Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem "webpacker", "~> 5.0"
+# Compile app-like JavaScript. Read more: https://github.com/shakacode/shakapacker
+gem "shakapacker", "10.3.2"
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem "turbolinks", "~> 5"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -81,5 +81,4 @@ end
 gem "net-smtp"
 gem "net-pop"
 gem "net-imap"
-gem "net-smtp"
 gem "enum_help"
