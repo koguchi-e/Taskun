@@ -15,7 +15,18 @@
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   config.before(:each, type: :system) do
-    driven_by :rack_test
+    driven_by :selenium, using: :chrome do |options|
+      options.add_argument("--headless=new")
+      options.add_argument("--no-sandbox")
+      options.add_argument("--disable-dev-shm-usage")
+      options.add_argument("--disable-gpu")
+
+      if ENV["CHROME_BIN"]
+        options.binary = ENV["CHROME_BIN"]
+      elsif File.exist?("/usr/bin/chromium")
+        options.binary = "/usr/bin/chromium"
+      end
+    end
   end
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
