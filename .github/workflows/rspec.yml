@@ -28,6 +28,13 @@ jobs:
           node-version: "24.21.0"
           cache: yarn
 
+      - name: ChromeとChromeDriverをセットアップ
+        uses: browser-actions/setup-chrome@v2
+        id: chrome
+        with:
+          chrome-version: stable
+          install-chromedriver: true
+
       - name: JavaScript依存関係をインストール
         run: npm install --global yarn@1.22.22 && yarn install --frozen-lockfile
 
@@ -38,6 +45,8 @@ jobs:
         run: bundle exec rails shakapacker:compile
 
       - name: RSpecを実行
+        env:
+          CHROME_BIN: ${{ steps.chrome.outputs.chrome-path }}
         run: bundle exec rspec
 
   rubocop:
