@@ -100,7 +100,7 @@
 # Only change this value after your application is fully deployed to Rails 7.0
 # and you have no plans to rollback.
 # When you're ready to change format, add this to `config/application.rb` (NOT this file):
-#  config.active_support.cache_format_version = 7.0
+#
 
 
 # Cookie serializer: 2 options

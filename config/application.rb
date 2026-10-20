@@ -8,15 +8,9 @@ Bundler.require(*Rails.groups)
 module Taskun
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.1
+    config.load_defaults 8.0
 
-    # Rails 7.1 では autoload 対象を $LOAD_PATH に追加しない。
-    # 手動 require に依存していないことを確認したうえで有効化する。
-    config.add_autoload_paths_to_load_path = false
     config.autoload_lib(ignore: %w[assets tasks])
-
-    # Rails 7.1 で非推奨となった 6.1 形式から移行する。
-    config.active_support.cache_format_version = 7.0
 
     # デフォルトのロケールを日本語に設定
     # config.i18n.default_locale = :en
