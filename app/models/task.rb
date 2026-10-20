@@ -21,5 +21,5 @@ class Task < ApplicationRecord
   validates :keyword2, length: { maximum: 30 }, presence: true
   validates :keyword3, length: { maximum: 30 }, presence: true
 
-  enum status: { incomplete: 0, complete: 1 }
+  enum :status, { incomplete: 0, complete: 1 }
 end
