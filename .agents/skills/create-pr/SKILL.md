@@ -1,6 +1,6 @@
 ---
 name: create-pr
-description: 作業ブランチの変更を確認し、ユーザー承認後にコミット、originへのpush、GitHub CLIによるPull Request作成を行う。
+description: 各操作の直前に個別のユーザー承認を得て、コミット、originへのpush、GitHub CLIによるPull Request作成を順に行う。
 ---
 
 # Pull Requestの作成
@@ -16,13 +16,12 @@ description: 作業ブランチの変更を確認し、ユーザー承認後に�
 
 ## 承認と実行
 
-コミット、push、Pull Request作成は、それぞれ実行直前にユーザーの明示的な承認を得る。承認を得る際は、対象ブランチ、コミット対象、テスト結果、実行する操作を提示する。
+コミット、push、Pull Request作成は独立した外部変更である。各操作の直前に、その操作だけを対象とするユーザーの明示的な承認を得る。前の操作が成功した場合だけ次の操作に進む。
 
-承認後は次を行う。
+1. コミットが必要な場合は、コミット対象、コミットメッセージ、テスト結果を提示して承認を得てから、日本語のコミットメッセージでコミットする。
+2. コミットが成功した場合は、対象ブランチ、pushするコミット、push先を提示して承認を得てから、作業ブランチだけを `origin` へ通常のpushで送信する。`main` への直接pushとforce pushは禁止する。
+3. pushが成功した場合は、Pull Requestのベースブランチ、タイトル、本文を提示して承認を得てから、GitHub CLIでPull Requestを作成する。タイトル・本文は日本語とし、`AGENTS.md` のPull Request本文ルールに従う。
 
-1. 意図した変更だけを日本語のコミットメッセージでコミットする。
-2. 作業ブランチだけを `origin` へ通常のpushで送信する。`main` への直接pushとforce pushは禁止する。
-3. GitHub CLIでPull Requestを作成する。タイトル・本文は日本語とし、`AGENTS.md` のPull Request本文ルールに従う。
-4. 作成したPull RequestのURL、実行した操作、テスト結果を報告する。
+作成したPull RequestのURL、実行した操作、テスト結果を報告する。
 
 GitHub CLIが利用できない、認証されていない、または権限が不足する場合は、代替の外部変更を行わず、状況を報告する。
