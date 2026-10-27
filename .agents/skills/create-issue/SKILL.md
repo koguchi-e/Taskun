@@ -11,7 +11,7 @@ description: TaskunのGitHub Issueを作成し、承認後にTaskun Projectへ�
 
 1. 現在のGitリポジトリと `AGENTS.md` を確認する。
 2. 依頼内容から検索語を抽出し、既存Issueを検索して類似・重複を確認する。重複の可能性がある場合は、候補を提示してユーザーに確認する。
-3. 指定されたLabel、Status、Projectが存在するか確認する。存在しないLabelやStatusを勝手に作成しない。指定がない場合も推測して設定しない。
+3. 指定されたLabel、Status、Projectが存在するか確認する。存在しない設定がある場合は、ユーザーが有効な値を指定するまでIssue作成を開始しない。存在しないLabelやStatusを勝手に作成しない。指定がない場合も推測して設定しない。
 
 ## Issue案の作成
 
