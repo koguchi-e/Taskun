@@ -5,12 +5,12 @@ description: TaskunのGitHub Issueを作成し、承認後にTaskun Projectへ�
 
 # GitHub Issueの作成
 
-既存の `AGENTS.md` を最優先する。対象リポジトリは `koguchi-e/Taskun`、追加先Projectは `Taskun Project`（Project #3）とする。既存Issueを無断で変更・削除しない。
+既存の `AGENTS.md` を最優先する。対象リポジトリは `koguchi-e/Taskun`、追加先Projectは `koguchi-e` が所有する `Taskun Project`（Project #3）とする。GitHub CLIでProjectを操作する場合は `--owner koguchi-e` を指定する。既存Issueを無断で変更・削除しない。
 
 ## 事前確認
 
-1. 現在のGitリポジトリと `AGENTS.md` を確認する。
-2. 依頼内容から検索語を抽出し、既存Issueを検索して類似・重複を確認する。重複の可能性がある場合は、候補を提示してユーザーに確認する。
+1. 現在のGitリポジトリの `nameWithOwner` が `koguchi-e/Taskun` と一致することと、`AGENTS.md` を確認する。一致しない場合は外部変更を中止する。GitHub CLIを使う場合は、Issueの検索・作成・Label設定に `--repo koguchi-e/Taskun` を指定する。GitHub連携ツールを使う場合も、対象リポジトリを明示する。
+2. 依頼内容から検索語を抽出し、既存Issueを検索して類似・重複を確認する。重複候補がない場合はIssue案の作成へ進む。候補がある場合は候補を提示してユーザーに確認し、既存Issueとの重複と確認された場合は新規Issueを作成せず終了する。重複でないと確認された場合だけIssue案の作成へ進む。
 3. 指定されたLabel、Status、Projectが存在するか確認する。存在しない設定がある場合は、ユーザーが有効な値を指定するまでIssue作成を開始しない。存在しないLabelやStatusを勝手に作成しない。指定がない場合も推測して設定しない。
 
 ## Issue案の作成
